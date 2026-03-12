@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Vocabulary Quiz</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .quiz { max-width: 600px; margin: auto; }
+        .question { margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <div class="quiz">
+        <h1>English Vocabulary Quiz</h1>
+        <form id="quiz-form">
+            <div class="question">
+                <label for="q1">1. What does "benevolent" mean?</label><br>
+                <input type="radio" name="q1" value="a"> a. Malevolent<br>
+                <input type="radio" name="q1" value="b"> b. Kind<br>
+                <input type="radio" name="q1" value="c"> c. Indifferent<br>
+            </div>
+            <div class="question">
+                <label for="q2">2. What does "ephemeral" mean?</label><br>
+                <input type="radio" name="q2" value="a"> a. Lasting for a very short time<br>
+                <input type="radio" name="q2" value="b"> b. Everlasting<br>
+                <input type="radio" name="q2" value="c"> c. Vital<br>
+            </div>
+            <div class="question">
+                <label for="q3">3. What does "quintessential" mean?</label><br>
+                <input type="radio" name="q3" value="a"> a. Most perfect example of a quality or class<br>
+                <input type="radio" name="q3" value="b"> b. Abnormal<br>
+                <input type="radio" name="q3" value="c"> c. Insufficient<br>
+            </div>
+            <button type="button" onclick="calculateScore()">Submit</button>
+        </form>
+        <div id="result"></div>
+    </div>
+    <script>
+        function calculateScore() {
+            let score = 0;
+            const answers = ['b', 'a', 'a'];
+            for (let i = 0; i < answers.length; i++) {
+                const q = document.querySelector(`input[name='q${i + 1}']:checked`);
+                if (q && q.value === answers[i]) {
+                    score++;
+                }
+            }
+            document.getElementById('result').innerText = `Your score: ${score} out of ${answers.length}`;
+        }
+    </script>
+</body>
+</html>
