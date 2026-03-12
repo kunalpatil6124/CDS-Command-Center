@@ -1,0 +1,653 @@
+<!doctype html>
+<html lang="en" class="h-full">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CDS Command Center</title>
+    
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css" />
+    
+  </head>
+  <body class="h-full bg-military-black font-body">
+    <div class="app-wrapper overflow-auto"><!-- Navigation -->
+   <nav class="bg-military-gray border-b border-army-dark sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="flex items-center justify-between h-16"><!-- Logo -->
+      <div class="flex items-center cursor-pointer" onclick="navigateTo('home')">
+       <div class="flex items-center space-x-2">
+        <svg class="w-8 h-8 text-army-light" fill="currentColor" viewbox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.18l6.9 3.45L12 11.09 5.1 7.63 12 4.18zM4 8.91l7 3.5v6.68l-7-3.5V8.91zm9 10.18v-6.68l7-3.5v6.68l-7 3.5z" />
+        </svg><span class="font-military font-bold text-xl text-white tracking-wider">CDS COMMAND CENTER</span>
+       </div>
+      </div><!-- Desktop Navigation -->
+      <div class="hidden md:flex items-center space-x-1"><button onclick="navigateTo('home')" class="nav-link px-4 py-2 text-gray-300 hover:text-white hover:bg-army-dark rounded transition-all duration-200 font-medium">Home</button> <button onclick="navigateTo('current-affairs')" class="nav-link px-4 py-2 text-gray-300 hover:text-white hover:bg-army-dark rounded transition-all duration-200 font-medium">Current Affairs</button> <button onclick="navigateTo('mathematics')" class="nav-link px-4 py-2 text-gray-300 hover:text-white hover:bg-army-dark rounded transition-all duration-200 font-medium">Mathematics</button> <button onclick="navigateTo('general-studies')" class="nav-link px-4 py-2 text-gray-300 hover:text-white hover:bg-army-dark rounded transition-all duration-200 font-medium">General Studies</button> <button onclick="navigateTo('english')" class="nav-link px-4 py-2 text-gray-300 hover:text-white hover:bg-army-dark rounded transition-all duration-200 font-medium">English</button> <button onclick="navigateTo('mock-tests')" class="nav-link px-4 py-2 text-gray-300 hover:text-white hover:bg-army-dark rounded transition-all duration-200 font-medium">Mock Tests</button> <button onclick="navigateTo('about')" class="nav-link px-4 py-2 text-gray-300 hover:text-white hover:bg-army-dark rounded transition-all duration-200 font-medium">About</button>
+      </div><!-- Mobile menu button --> <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="md:hidden p-2 text-gray-300 hover:text-white">
+       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+       </svg></button>
+     </div>
+    </div><!-- Mobile Navigation -->
+    <div id="mobile-menu" class="mobile-menu hidden md:hidden bg-military-gray border-t border-army-dark">
+     <div class="px-4 py-3 space-y-2"><button onclick="navigateTo('home')" class="block w-full text-left px-4 py-2 text-gray-300 hover:text-white hover:bg-army-dark rounded transition-all">Home</button> <button onclick="navigateTo('current-affairs')" class="block w-full text-left px-4 py-2 text-gray-300 hover:text-white hover:bg-army-dark rounded transition-all">Current Affairs</button> <button onclick="navigateTo('mathematics')" class="block w-full text-left px-4 py-2 text-gray-300 hover:text-white hover:bg-army-dark rounded transition-all">Mathematics</button> <button onclick="navigateTo('general-studies')" class="block w-full text-left px-4 py-2 text-gray-300 hover:text-white hover:bg-army-dark rounded transition-all">General Studies</button> <button onclick="navigateTo('english')" class="block w-full text-left px-4 py-2 text-gray-300 hover:text-white hover:bg-army-dark rounded transition-all">English</button> <button onclick="navigateTo('mock-tests')" class="block w-full text-left px-4 py-2 text-gray-300 hover:text-white hover:bg-army-dark rounded transition-all">Mock Tests</button> <button onclick="navigateTo('about')" class="block w-full text-left px-4 py-2 text-gray-300 hover:text-white hover:bg-army-dark rounded transition-all">About</button>
+     </div>
+    </div>
+   </nav><!-- Main Content Container -->
+   <main id="main-content"><!-- Home Page Content -->
+    <div id="page-home" class="page-content"><!-- Hero Section -->
+     <section class="relative overflow-hidden"><!-- Background with overlay -->
+      <div class="absolute inset-0 bg-gradient-to-br from-army-dark via-military-black to-army-olive opacity-90"></div>
+      <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width=\" 60\ height="\&quot;60\&quot;" viewbox="\&quot;0" 0 60 xmlns="\&quot;http://www.w3.org/2000/svg\&quot;%3E%3Cg" fill="\&quot;none\&quot;" fill-rule="\&quot;evenodd\&quot;%3E%3Cg" fill-opacity="\&quot;0.1\&quot;%3E%3Cpath" d="\&quot;M36" 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30v0h-2v4h-4v2h4v4h2v6h4v4h-4zm6 34v-4h4v4h0v2h4v4h2v-4h4v-2h6zm6 4v0h4v4h0v2h4v4h2v6h4v4h6z\ %3e%3c g%3e%3c svg%3e);></div><!-- Soldier silhouettes SVG -->
+      <div class="absolute bottom-0 left-0 right-0 h-32 opacity-20">
+       <svg viewbox="0 0 1200 200" class="w-full h-full" preserveaspectratio="xMidYMax slice"><defs>
+         <lineargradient id="soldierGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" style="stop-color:#4A5D23;stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#2C3E1F;stop-opacity:1" />
+         </lineargradient>
+        </defs> <!-- Soldier silhouettes --> <path fill="url(#soldierGrad)" d="M0,200 L0,180 C50,180 50,120 70,120 L70,100 C70,90 75,85 80,85 C85,85 90,90 90,100 L90,120 C110,120 110,180 160,180 L160,200 Z" /> <path fill="url(#soldierGrad)" d="M200,200 L200,170 C230,170 230,110 250,110 L250,90 C250,80 255,75 260,75 C265,75 270,80 270,90 L270,110 C290,110 290,170 320,170 L320,200 Z" /> <path fill="url(#soldierGrad)" d="M400,200 L400,185 C420,185 420,130 440,130 L440,110 C440,100 445,95 450,95 C455,95 460,100 460,110 L460,130 C480,130 480,185 500,185 L500,200 Z" /> <path fill="url(#soldierGrad)" d="M600,200 L600,175 C630,175 630,115 650,115 L650,95 C650,85 655,80 660,80 C665,80 670,85 670,95 L670,115 C690,115 690,175 720,175 L720,200 Z" /> <path fill="url(#soldierGrad)" d="M800,200 L800,180 C830,180 830,125 850,125 L850,105 C850,95 855,90 860,90 C865,90 870,95 870,105 L870,125 C890,125 890,180 920,180 L920,200 Z" /> <path fill="url(#soldierGrad)" d="M1000,200 L1000,170 C1030,170 1030,110 1050,110 L1050,90 C1050,80 1055,75 1060,75 C1065,75 1070,80 1070,90 L1070,110 C1090,110 1090,170 1120,170 L1120,200 Z" />
+       </svg>
+      </div>
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
+       <div class="text-center"><!-- Military badge icon -->
+        <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-army-dark border-2 border-army-light mb-6">
+         <svg class="w-10 h-10 text-army-light" fill="currentColor" viewbox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+         </svg>
+        </div>
+        <h1 id="hero-title" class="font-military text-4xl md:text-6xl font-bold text-white mb-4 tracking-wide">CDS Preparation Dashboard</h1>
+        <p id="hero-subtitle" class="font-body text-xl md:text-2xl text-sand mb-8 max-w-2xl mx-auto">Train Like an Officer – Practice, Analyze, Improve</p><button onclick="document.getElementById('sections').scrollIntoView({behavior: 'smooth'})" class="btn-military inline-flex items-center px-8 py-4 bg-army-olive hover:bg-army-light text-white font-military font-semibold text-lg rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl">
+         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+         </svg> Start Practicing </button> <!-- Stats bar -->
+        <div class="mt-12 grid grid-cols-3 gap-4 max-w-lg mx-auto">
+         <div class="text-center">
+          <div class="text-2xl md:text-3xl font-bold text-army-light font-military">
+           500+
+          </div>
+          <div class="text-xs md:text-sm text-gray-400">
+           Questions
+          </div>
+         </div>
+         <div class="text-center border-x border-army-dark">
+          <div class="text-2xl md:text-3xl font-bold text-army-light font-military">
+           6
+          </div>
+          <div class="text-xs md:text-sm text-gray-400">
+           Subjects
+          </div>
+         </div>
+         <div class="text-center">
+          <div class="text-2xl md:text-3xl font-bold text-army-light font-military">
+           50+
+          </div>
+          <div class="text-xs md:text-sm text-gray-400">
+           Mock Tests
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </section><!-- Section Cards -->
+     <section id="sections" class="py-16 bg-military-black">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+       <div class="text-center mb-12">
+        <h2 class="font-military text-3xl md:text-4xl font-bold text-white mb-4">Choose Your Training Module</h2>
+        <p class="text-gray-400 max-w-xl mx-auto">Select a subject to begin your preparation. Each module contains carefully curated questions based on previous CDS exam patterns.</p>
+       </div>
+       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"><!-- Current Affairs Card -->
+        <div class="section-card bg-military-gray rounded-xl p-6 border border-tactical-gray cursor-pointer group" onclick="navigateTo('current-affairs')">
+         <div class="flex items-center justify-center w-16 h-16 rounded-full bg-army-dark mb-4 group-hover:bg-army-olive transition-colors">
+          <svg class="w-8 h-8 text-army-light" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+         </div>
+         <h3 class="font-military text-xl font-bold text-white mb-2">Current Affairs</h3>
+         <p class="text-gray-400 text-sm mb-4">Stay updated with national and international events crucial for CDS examination.</p>
+         <div class="flex items-center justify-between"><span class="text-xs text-army-light font-medium">12 Tests Available</span> <span class="inline-flex items-center text-army-light text-sm font-medium group-hover:translate-x-1 transition-transform"> Start Test 
+           <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+           </svg></span>
+         </div>
+        </div><!-- Mathematics Card -->
+        <div class="section-card bg-military-gray rounded-xl p-6 border border-tactical-gray cursor-pointer group" onclick="navigateTo('mathematics')">
+         <div class="flex items-center justify-center w-16 h-16 rounded-full bg-army-dark mb-4 group-hover:bg-army-olive transition-colors">
+          <svg class="w-8 h-8 text-army-light" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+          </svg>
+         </div>
+         <h3 class="font-military text-xl font-bold text-white mb-2">Mathematics</h3>
+         <p class="text-gray-400 text-sm mb-4">Practice CDS level mathematics questions and improve speed and accuracy.</p>
+         <div class="flex items-center justify-between"><span class="text-xs text-army-light font-medium">15 Tests Available</span> <span class="inline-flex items-center text-army-light text-sm font-medium group-hover:translate-x-1 transition-transform"> Start Test 
+           <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+           </svg></span>
+         </div>
+        </div><!-- General Studies Card -->
+        <div class="section-card bg-military-gray rounded-xl p-6 border border-tactical-gray cursor-pointer group" onclick="navigateTo('general-studies')">
+         <div class="flex items-center justify-center w-16 h-16 rounded-full bg-army-dark mb-4 group-hover:bg-army-olive transition-colors">
+          <svg class="w-8 h-8 text-army-light" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+          </svg>
+         </div>
+         <h3 class="font-military text-xl font-bold text-white mb-2">General Studies</h3>
+         <p class="text-gray-400 text-sm mb-4">Comprehensive coverage of History, Geography, Polity, Science &amp; Economy.</p>
+         <div class="flex items-center justify-between"><span class="text-xs text-army-light font-medium">20 Tests Available</span> <span class="inline-flex items-center text-army-light text-sm font-medium group-hover:translate-x-1 transition-transform"> Start Test 
+           <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+           </svg></span>
+         </div>
+        </div><!-- English Card -->
+        <div class="section-card bg-military-gray rounded-xl p-6 border border-tactical-gray cursor-pointer group" onclick="navigateTo('english')">
+         <div class="flex items-center justify-center w-16 h-16 rounded-full bg-army-dark mb-4 group-hover:bg-army-olive transition-colors">
+          <svg class="w-8 h-8 text-army-light" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+          </svg>
+         </div>
+         <h3 class="font-military text-xl font-bold text-white mb-2">English</h3>
+         <p class="text-gray-400 text-sm mb-4">Master grammar, vocabulary, comprehension and verbal ability skills.</p>
+         <div class="flex items-center justify-between"><span class="text-xs text-army-light font-medium">10 Tests Available</span> <span class="inline-flex items-center text-army-light text-sm font-medium group-hover:translate-x-1 transition-transform"> Start Test 
+           <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+           </svg></span>
+         </div>
+        </div><!-- Full Length Mock Tests Card -->
+        <div class="section-card bg-military-gray rounded-xl p-6 border border-tactical-gray cursor-pointer group" onclick="navigateTo('mock-tests')">
+         <div class="flex items-center justify-center w-16 h-16 rounded-full bg-army-dark mb-4 group-hover:bg-army-olive transition-colors">
+          <svg class="w-8 h-8 text-army-light" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+          </svg>
+         </div>
+         <h3 class="font-military text-xl font-bold text-white mb-2">Full Length Mock Tests</h3>
+         <p class="text-gray-400 text-sm mb-4">Simulate real exam conditions with complete CDS mock tests.</p>
+         <div class="flex items-center justify-between"><span class="text-xs text-army-light font-medium">8 Tests Available</span> <span class="inline-flex items-center text-army-light text-sm font-medium group-hover:translate-x-1 transition-transform"> Start Test 
+           <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+           </svg></span>
+         </div>
+        </div><!-- Sectional Tests Card -->
+        <div class="section-card bg-military-gray rounded-xl p-6 border border-tactical-gray cursor-pointer group" onclick="navigateTo('sectional-tests')">
+         <div class="flex items-center justify-center w-16 h-16 rounded-full bg-army-dark mb-4 group-hover:bg-army-olive transition-colors">
+          <svg class="w-8 h-8 text-army-light" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+          </svg>
+         </div>
+         <h3 class="font-military text-xl font-bold text-white mb-2">Sectional Tests</h3>
+         <p class="text-gray-400 text-sm mb-4">Focus on specific topics and strengthen your weak areas.</p>
+         <div class="flex items-center justify-between"><span class="text-xs text-army-light font-medium">25 Tests Available</span> <span class="inline-flex items-center text-army-light text-sm font-medium group-hover:translate-x-1 transition-transform"> Start Test 
+           <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+           </svg></span>
+         </div>
+        </div>
+       </div>
+      </div>
+     </section><!-- Progress Section -->
+     <section class="py-16 bg-military-gray">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+       <div class="bg-tactical-gray rounded-xl p-6 md:p-8 border border-army-dark">
+        <h3 class="font-military text-2xl font-bold text-white mb-6 flex items-center">
+         <svg class="w-6 h-6 mr-2 text-army-light" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+         </svg> Your Progress Overview</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+         <div class="bg-military-black rounded-lg p-4 border border-army-dark">
+          <div class="text-3xl font-bold text-army-light font-military">
+           0
+          </div>
+          <div class="text-sm text-gray-400">
+           Tests Attempted
+          </div>
+         </div>
+         <div class="bg-military-black rounded-lg p-4 border border-army-dark">
+          <div class="text-3xl font-bold text-army-light font-military">
+           0%
+          </div>
+          <div class="text-sm text-gray-400">
+           Average Score
+          </div>
+         </div>
+         <div class="bg-military-black rounded-lg p-4 border border-army-dark">
+          <div class="text-3xl font-bold text-army-light font-military">
+           0
+          </div>
+          <div class="text-sm text-gray-400">
+           Questions Solved
+          </div>
+         </div>
+         <div class="bg-military-black rounded-lg p-4 border border-army-dark">
+          <div class="text-3xl font-bold text-army-light font-military">
+           0h
+          </div>
+          <div class="text-sm text-gray-400">
+           Time Practiced
+          </div>
+         </div>
+        </div>
+        <div class="space-y-4">
+         <div>
+          <div class="flex justify-between text-sm mb-1"><span class="text-gray-300">Mathematics</span> <span class="text-army-light">0%</span>
+          </div>
+          <div class="h-2 bg-military-black rounded-full overflow-hidden">
+           <div class="progress-fill h-full bg-army-olive rounded-full" style="width: 0%"></div>
+          </div>
+         </div>
+         <div>
+          <div class="flex justify-between text-sm mb-1"><span class="text-gray-300">General Studies</span> <span class="text-army-light">0%</span>
+          </div>
+          <div class="h-2 bg-military-black rounded-full overflow-hidden">
+           <div class="progress-fill h-full bg-army-olive rounded-full" style="width: 0%"></div>
+          </div>
+         </div>
+         <div>
+          <div class="flex justify-between text-sm mb-1"><span class="text-gray-300">English</span> <span class="text-army-light">0%</span>
+          </div>
+          <div class="h-2 bg-military-black rounded-full overflow-hidden">
+           <div class="progress-fill h-full bg-army-olive rounded-full" style="width: 0%"></div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </section>
+    </div><!-- Section Pages (Hidden by default) --> <!-- Current Affairs Page -->
+    <div id="page-current-affairs" class="page-content hidden">
+     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12"><button onclick="navigateTo('home')" class="inline-flex items-center text-army-light hover:text-white mb-6 transition-colors">
+       <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+       </svg> Back to Dashboard </button>
+      <div class="bg-military-gray rounded-xl p-6 md:p-8 border border-tactical-gray mb-8">
+       <div class="flex items-center mb-4">
+        <div class="flex items-center justify-center w-12 h-12 rounded-full bg-army-dark mr-4">
+         <svg class="w-6 h-6 text-army-light" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+         </svg>
+        </div>
+        <div>
+         <h1 class="font-military text-2xl md:text-3xl font-bold text-white">Current Affairs</h1>
+         <p class="text-gray-400">National &amp; International Events</p>
+        </div>
+       </div>
+       <p class="text-gray-300">Stay updated with the latest national and international events. These tests cover important events from the past 6 months that are frequently asked in CDS examinations.</p>
+      </div>
+      <div class="space-y-4">
+       <div class="test-item bg-military-gray rounded-lg p-4 border-l-4 border-army-olive border border-tactical-gray flex items-center justify-between">
+        <div>
+         <h3 class="font-military text-lg font-semibold text-white">October Current Affairs Test</h3>
+         <p class="text-sm text-gray-400">OCT CA TEST • 100 Questions</p>
+        </div><a href="test/octcatest.html"><button class="btn-military px-4 py-2 bg-army-olive hover:bg-army-light text-white text-sm font-medium rounded transition-all">Start Test</button></a>
+       </div>
+       <div class="test-item bg-military-gray rounded-lg p-4 border-l-4 border-army-olive border border-tactical-gray flex items-center justify-between">
+        <div>
+         <h3 class="font-military text-lg font-semibold text-white">Current Affairs Test 2</h3>
+         <p class="text-sm text-gray-400">February 2024 Events • 25 Questions</p>
+        </div><button class="btn-military px-4 py-2 bg-army-olive hover:bg-army-light text-white text-sm font-medium rounded transition-all">Start Test</button>
+       </div>
+       <div class="test-item bg-military-gray rounded-lg p-4 border-l-4 border-army-olive border border-tactical-gray flex items-center justify-between">
+        <div>
+         <h3 class="font-military text-lg font-semibold text-white">Current Affairs Test 3</h3>
+         <p class="text-sm text-gray-400">March 2024 Events • 25 Questions</p>
+        </div><button class="btn-military px-4 py-2 bg-army-olive hover:bg-army-light text-white text-sm font-medium rounded transition-all">Start Test</button>
+       </div>
+       <div class="test-item bg-military-gray rounded-lg p-4 border-l-4 border-army-olive border border-tactical-gray flex items-center justify-between">
+        <div>
+         <h3 class="font-military text-lg font-semibold text-white">Current Affairs Test 4</h3>
+         <p class="text-sm text-gray-400">International Affairs • 30 Questions</p>
+        </div><button class="btn-military px-4 py-2 bg-army-olive hover:bg-army-light text-white text-sm font-medium rounded transition-all">Start Test</button>
+       </div>
+       <div class="test-item bg-military-gray rounded-lg p-4 border-l-4 border-army-olive border border-tactical-gray flex items-center justify-between">
+        <div>
+         <h3 class="font-military text-lg font-semibold text-white">Current Affairs Test 5</h3>
+         <p class="text-sm text-gray-400">Sports &amp; Awards • 20 Questions</p>
+        </div><button class="btn-military px-4 py-2 bg-army-olive hover:bg-army-light text-white text-sm font-medium rounded transition-all">Start Test</button>
+       </div>
+      </div>
+     </div>
+    </div><!-- Mathematics Page -->
+    <div id="page-mathematics" class="page-content hidden">
+     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12"><button onclick="navigateTo('home')" class="inline-flex items-center text-army-light hover:text-white mb-6 transition-colors">
+       <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+       </svg> Back to Dashboard </button>
+      <div class="bg-military-gray rounded-xl p-6 md:p-8 border border-tactical-gray mb-8">
+       <div class="flex items-center mb-4">
+        <div class="flex items-center justify-center w-12 h-12 rounded-full bg-army-dark mr-4">
+         <svg class="w-6 h-6 text-army-light" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+         </svg>
+        </div>
+        <div>
+         <h1 class="font-military text-2xl md:text-3xl font-bold text-white">Mathematics</h1>
+         <p class="text-gray-400">Quantitative Aptitude</p>
+        </div>
+       </div>
+       <p class="text-gray-300">Practice CDS level mathematics questions covering Number System, Algebra, Trigonometry, Geometry, Mensuration, and Statistics. Improve your speed and accuracy.</p>
+      </div>
+      <div class="space-y-4">
+       <div class="test-item bg-military-gray rounded-lg p-4 border-l-4 border-army-olive border border-tactical-gray flex items-center justify-between">
+        <div>
+         <h3 class="font-military text-lg font-semibold text-white">Maths Test 1 – Number System</h3>
+         <p class="text-sm text-gray-400">HCF, LCM, Divisibility • 30 Questions</p>
+        </div><button class="btn-military px-4 py-2 bg-army-olive hover:bg-army-light text-white text-sm font-medium rounded transition-all">Start Test</button>
+       </div>
+       <div class="test-item bg-military-gray rounded-lg p-4 border-l-4 border-army-olive border border-tactical-gray flex items-center justify-between">
+        <div>
+         <h3 class="font-military text-lg font-semibold text-white">Maths Test 2 – Algebra</h3>
+         <p class="text-sm text-gray-400">Equations, Polynomials • 30 Questions</p>
+        </div><button class="btn-military px-4 py-2 bg-army-olive hover:bg-army-light text-white text-sm font-medium rounded transition-all">Start Test</button>
+       </div>
+       <div class="test-item bg-military-gray rounded-lg p-4 border-l-4 border-army-olive border border-tactical-gray flex items-center justify-between">
+        <div>
+         <h3 class="font-military text-lg font-semibold text-white">Maths Test 3 – Trigonometry</h3>
+         <p class="text-sm text-gray-400">Ratios, Heights &amp; Distances • 25 Questions</p>
+        </div><button class="btn-military px-4 py-2 bg-army-olive hover:bg-army-light text-white text-sm font-medium rounded transition-all">Start Test</button>
+       </div>
+       <div class="test-item bg-military-gray rounded-lg p-4 border-l-4 border-army-olive border border-tactical-gray flex items-center justify-between">
+        <div>
+         <h3 class="font-military text-lg font-semibold text-white">Maths Test 4 – Geometry</h3>
+         <p class="text-sm text-gray-400">Lines, Angles, Triangles, Circles • 30 Questions</p>
+        </div><button class="btn-military px-4 py-2 bg-army-olive hover:bg-army-light text-white text-sm font-medium rounded transition-all">Start Test</button>
+       </div>
+       <div class="test-item bg-military-gray rounded-lg p-4 border-l-4 border-army-olive border border-tactical-gray flex items-center justify-between">
+        <div>
+         <h3 class="font-military text-lg font-semibold text-white">Maths Test 5 – Full Maths Mock</h3>
+         <p class="text-sm text-gray-400">Complete Mathematics Paper • 100 Questions</p>
+        </div><button class="btn-military px-4 py-2 bg-army-olive hover:bg-army-light text-white text-sm font-medium rounded transition-all">Start Test</button>
+       </div>
+      </div>
+     </div>
+    </div><!-- General Studies Page -->
+    <div id="page-general-studies" class="page-content hidden">
+     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12"><button onclick="navigateTo('home')" class="inline-flex items-center text-army-light hover:text-white mb-6 transition-colors">
+       <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+       </svg> Back to Dashboard </button>
+      <div class="bg-military-gray rounded-xl p-6 md:p-8 border border-tactical-gray mb-8">
+       <div class="flex items-center mb-4">
+        <div class="flex items-center justify-center w-12 h-12 rounded-full bg-army-dark mr-4">
+         <svg class="w-6 h-6 text-army-light" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+         </svg>
+        </div>
+        <div>
+         <h1 class="font-military text-2xl md:text-3xl font-bold text-white">General Studies</h1>
+         <p class="text-gray-400">GK &amp; General Knowledge</p>
+        </div>
+       </div>
+       <p class="text-gray-300">Comprehensive coverage of Indian History, Geography, Indian Polity, Economics, Physics, Chemistry, Biology and more.</p>
+      </div>
+      <div class="space-y-4">
+       <div class="test-item bg-military-gray rounded-lg p-4 border-l-4 border-army-olive border border-tactical-gray flex items-center justify-between">
+        <div>
+         <h3 class="font-military text-lg font-semibold text-white">GS Test 1 – Indian History</h3>
+         <p class="text-sm text-gray-400">Ancient, Medieval, Modern • 40 Questions</p>
+        </div><button class="btn-military px-4 py-2 bg-army-olive hover:bg-army-light text-white text-sm font-medium rounded transition-all">Start Test</button>
+       </div>
+       <div class="test-item bg-military-gray rounded-lg p-4 border-l-4 border-army-olive border border-tactical-gray flex items-center justify-between">
+        <div>
+         <h3 class="font-military text-lg font-semibold text-white">GS Test 2 – Geography</h3>
+         <p class="text-sm text-gray-400">Physical, Indian &amp; World • 35 Questions</p>
+        </div><button class="btn-military px-4 py-2 bg-army-olive hover:bg-army-light text-white text-sm font-medium rounded transition-all">Start Test</button>
+       </div>
+       <div class="test-item bg-military-gray rounded-lg p-4 border-l-4 border-army-olive border border-tactical-gray flex items-center justify-between">
+        <div>
+         <h3 class="font-military text-lg font-semibold text-white">GS Test 3 – Indian Polity</h3>
+         <p class="text-sm text-gray-400">Constitution, Governance • 30 Questions</p>
+        </div><button class="btn-military px-4 py-2 bg-army-olive hover:bg-army-light text-white text-sm font-medium rounded transition-all">Start Test</button>
+       </div>
+       <div class="test-item bg-military-gray rounded-lg p-4 border-l-4 border-army-olive border border-tactical-gray flex items-center justify-between">
+        <div>
+         <h3 class="font-military text-lg font-semibold text-white">GS Test 4 – Economics</h3>
+         <p class="text-sm text-gray-400">Indian Economy, Banking • 25 Questions</p>
+        </div><button class="btn-military px-4 py-2 bg-army-olive hover:bg-army-light text-white text-sm font-medium rounded transition-all">Start Test</button>
+       </div>
+       <div class="test-item bg-military-gray rounded-lg p-4 border-l-4 border-army-olive border border-tactical-gray flex items-center justify-between">
+        <div>
+         <h3 class="font-military text-lg font-semibold text-white">GS Test 5 – Science</h3>
+         <p class="text-sm text-gray-400">Physics, Chemistry, Biology • 40 Questions</p>
+        </div><button class="btn-military px-4 py-2 bg-army-olive hover:bg-army-light text-white text-sm font-medium rounded transition-all">Start Test</button>
+       </div>
+       <div class="test-item bg-military-gray rounded-lg p-4 border-l-4 border-army-olive border border-tactical-gray flex items-center justify-between">
+        <div>
+         <h3 class="font-military text-lg font-semibold text-white">GS Test 6 – Full GK Mock</h3>
+         <p class="text-sm text-gray-400">Complete GK Paper • 120 Questions</p>
+        </div><button class="btn-military px-4 py-2 bg-army-olive hover:bg-army-light text-white text-sm font-medium rounded transition-all">Start Test</button>
+       </div>
+      </div>
+     </div>
+    </div><!-- English Page -->
+    <div id="page-english" class="page-content hidden">
+     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12"><button onclick="navigateTo('home')" class="inline-flex items-center text-army-light hover:text-white mb-6 transition-colors">
+       <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+       </svg> Back to Dashboard </button>
+      <div class="bg-military-gray rounded-xl p-6 md:p-8 border border-tactical-gray mb-8">
+       <div class="flex items-center mb-4">
+        <div class="flex items-center justify-center w-12 h-12 rounded-full bg-army-dark mr-4">
+         <svg class="w-6 h-6 text-army-light" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+         </svg>
+        </div>
+        <div>
+         <h1 class="font-military text-2xl md:text-3xl font-bold text-white">English</h1>
+         <p class="text-gray-400">Language &amp; Comprehension</p>
+        </div>
+       </div>
+       <p class="text-gray-300">Master English grammar, vocabulary, reading comprehension, sentence correction, and verbal ability for CDS English paper.</p>
+      </div>
+      <div class="space-y-4">
+       <div class="test-item bg-military-gray rounded-lg p-4 border-l-4 border-army-olive border border-tactical-gray flex items-center justify-between">
+        <div>
+         <h3 class="font-military text-lg font-semibold text-white">English Test 1 – Grammar</h3>
+         <p class="text-sm text-gray-400">Parts of Speech, Tenses • 30 Questions</p>
+        </div><button class="btn-military px-4 py-2 bg-army-olive hover:bg-army-light text-white text-sm font-medium rounded transition-all">Start Test</button>
+       </div>
+       <div class="test-item bg-military-gray rounded-lg p-4 border-l-4 border-army-olive border border-tactical-gray flex items-center justify-between">
+        <div>
+         <h3 class="font-military text-lg font-semibold text-white">English Test 2 – Vocabulary</h3>
+         <p class="text-sm text-gray-400">Synonyms, Antonyms, Idioms • 35 Questions</p>
+        </div><a href="test/Vocab-Quiz.html"><button class="btn-military px-4 py-2 bg-army-olive hover:bg-army-light text-white text-sm font-medium rounded transition-all">Start Test</button></a>
+       </div>
+       <div class="test-item bg-military-gray rounded-lg p-4 border-l-4 border-army-olive border border-tactical-gray flex items-center justify-between">
+        <div>
+         <h3 class="font-military text-lg font-semibold text-white">English Test 3 – Comprehension</h3>
+         <p class="text-sm text-gray-400">Reading Passages • 25 Questions</p>
+        </div><button class="btn-military px-4 py-2 bg-army-olive hover:bg-army-light text-white text-sm font-medium rounded transition-all">Start Test</button>
+       </div>
+       <div class="test-item bg-military-gray rounded-lg p-4 border-l-4 border-army-olive border border-tactical-gray flex items-center justify-between">
+        <div>
+         <h3 class="font-military text-lg font-semibold text-white">English Test 4 – Error Spotting</h3>
+         <p class="text-sm text-gray-400">Sentence Correction • 30 Questions</p>
+        </div><button class="btn-military px-4 py-2 bg-army-olive hover:bg-army-light text-white text-sm font-medium rounded transition-all">Start Test</button>
+       </div>
+       <div class="test-item bg-military-gray rounded-lg p-4 border-l-4 border-army-olive border border-tactical-gray flex items-center justify-between">
+        <div>
+         <h3 class="font-military text-lg font-semibold text-white">English Test 5 – Full English Mock</h3>
+         <p class="text-sm text-gray-400">Complete English Paper • 120 Questions</p>
+        </div><button class="btn-military px-4 py-2 bg-army-olive hover:bg-army-light text-white text-sm font-medium rounded transition-all">Start Test</button>
+       </div>
+      </div>
+     </div>
+    </div><!-- Mock Tests Page -->
+    <div id="page-mock-tests" class="page-content hidden">
+     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12"><button onclick="navigateTo('home')" class="inline-flex items-center text-army-light hover:text-white mb-6 transition-colors">
+       <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+       </svg> Back to Dashboard </button>
+      <div class="bg-military-gray rounded-xl p-6 md:p-8 border border-tactical-gray mb-8">
+       <div class="flex items-center mb-4">
+        <div class="flex items-center justify-center w-12 h-12 rounded-full bg-army-dark mr-4">
+         <svg class="w-6 h-6 text-army-light" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+         </svg>
+        </div>
+        <div>
+         <h1 class="font-military text-2xl md:text-3xl font-bold text-white">Full Length Mock Tests</h1>
+         <p class="text-gray-400">Complete CDS Exam Simulation</p>
+        </div>
+       </div>
+       <p class="text-gray-300">Experience the real CDS exam with full-length mock tests. Timed tests with exact exam pattern to evaluate your preparation level.</p>
+      </div>
+      <div class="space-y-4">
+       <div class="test-item bg-military-gray rounded-lg p-4 border-l-4 border-army-olive border border-tactical-gray flex items-center justify-between">
+        <div>
+         <h3 class="font-military text-lg font-semibold text-white">CDS Mock Test 1</h3>
+         <p class="text-sm text-gray-400">Full Paper • 340 Questions • 3 Hours</p>
+        </div><button class="btn-military px-4 py-2 bg-army-olive hover:bg-army-light text-white text-sm font-medium rounded transition-all">Start Test</button>
+       </div>
+       <div class="test-item bg-military-gray rounded-lg p-4 border-l-4 border-army-olive border border-tactical-gray flex items-center justify-between">
+        <div>
+         <h3 class="font-military text-lg font-semibold text-white">CDS Mock Test 2</h3>
+         <p class="text-sm text-gray-400">Full Paper • 340 Questions • 3 Hours</p>
+        </div><button class="btn-military px-4 py-2 bg-army-olive hover:bg-army-light text-white text-sm font-medium rounded transition-all">Start Test</button>
+       </div>
+       <div class="test-item bg-military-gray rounded-lg p-4 border-l-4 border-army-olive border border-tactical-gray flex items-center justify-between">
+        <div>
+         <h3 class="font-military text-lg font-semibold text-white">CDS Mock Test 3</h3>
+         <p class="text-sm text-gray-400">Full Paper • 340 Questions • 3 Hours</p>
+        </div><button class="btn-military px-4 py-2 bg-army-olive hover:bg-army-light text-white text-sm font-medium rounded transition-all">Start Test</button>
+       </div>
+       <div class="test-item bg-military-gray rounded-lg p-4 border-l-4 border-army-olive border border-tactical-gray flex items-center justify-between">
+        <div>
+         <h3 class="font-military text-lg font-semibold text-white">CDS Mock Test 4</h3>
+         <p class="text-sm text-gray-400">Full Paper • 340 Questions • 3 Hours</p>
+        </div><button class="btn-military px-4 py-2 bg-army-olive hover:bg-army-light text-white text-sm font-medium rounded transition-all">Start Test</button>
+       </div>
+       <div class="test-item bg-military-gray rounded-lg p-4 border-l-4 border-army-olive border border-tactical-gray flex items-center justify-between">
+        <div>
+         <h3 class="font-military text-lg font-semibold text-white">CDS Previous Year 2023 (I)</h3>
+         <p class="text-sm text-gray-400">Previous Year Paper • 340 Questions</p>
+        </div><button class="btn-military px-4 py-2 bg-army-olive hover:bg-army-light text-white text-sm font-medium rounded transition-all">Start Test</button>
+       </div>
+       <div class="test-item bg-military-gray rounded-lg p-4 border-l-4 border-army-olive border border-tactical-gray flex items-center justify-between">
+        <div>
+         <h3 class="font-military text-lg font-semibold text-white">CDS Previous Year 2023 (II)</h3>
+         <p class="text-sm text-gray-400">Previous Year Paper • 340 Questions</p>
+        </div><button class="btn-military px-4 py-2 bg-army-olive hover:bg-army-light text-white text-sm font-medium rounded transition-all">Start Test</button>
+       </div>
+      </div>
+     </div>
+    </div><!-- Sectional Tests Page -->
+    <div id="page-sectional-tests" class="page-content hidden">
+     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12"><button onclick="navigateTo('home')" class="inline-flex items-center text-army-light hover:text-white mb-6 transition-colors">
+       <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+       </svg> Back to Dashboard </button>
+      <div class="bg-military-gray rounded-xl p-6 md:p-8 border border-tactical-gray mb-8">
+       <div class="flex items-center mb-4">
+        <div class="flex items-center justify-center w-12 h-12 rounded-full bg-army-dark mr-4">
+         <svg class="w-6 h-6 text-army-light" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+         </svg>
+        </div>
+        <div>
+         <h1 class="font-military text-2xl md:text-3xl font-bold text-white">Sectional Tests</h1>
+         <p class="text-gray-400">Topic-wise Practice</p>
+        </div>
+       </div>
+       <p class="text-gray-300">Focus on specific topics and strengthen your weak areas with targeted sectional tests.</p>
+      </div>
+      <div class="space-y-4">
+       <div class="test-item bg-military-gray rounded-lg p-4 border-l-4 border-army-olive border border-tactical-gray flex items-center justify-between">
+        <div>
+         <h3 class="font-military text-lg font-semibold text-white">Percentage &amp; Profit Loss</h3>
+         <p class="text-sm text-gray-400">Mathematics • 20 Questions</p>
+        </div><button class="btn-military px-4 py-2 bg-army-olive hover:bg-army-light text-white text-sm font-medium rounded transition-all">Start Test</button>
+       </div>
+       <div class="test-item bg-military-gray rounded-lg p-4 border-l-4 border-army-olive border border-tactical-gray flex items-center justify-between">
+        <div>
+         <h3 class="font-military text-lg font-semibold text-white">Time &amp; Work</h3>
+         <p class="text-sm text-gray-400">Mathematics • 20 Questions</p>
+        </div><button class="btn-military px-4 py-2 bg-army-olive hover:bg-army-light text-white text-sm font-medium rounded transition-all">Start Test</button>
+       </div>
+       <div class="test-item bg-military-gray rounded-lg p-4 border-l-4 border-army-olive border border-tactical-gray flex items-center justify-between">
+        <div>
+         <h3 class="font-military text-lg font-semibold text-white">Indian Freedom Movement</h3>
+         <p class="text-sm text-gray-400">History • 25 Questions</p>
+        </div><button class="btn-military px-4 py-2 bg-army-olive hover:bg-army-light text-white text-sm font-medium rounded transition-all">Start Test</button>
+       </div>
+       <div class="test-item bg-military-gray rounded-lg p-4 border-l-4 border-army-olive border border-tactical-gray flex items-center justify-between">
+        <div>
+         <h3 class="font-military text-lg font-semibold text-white">Indian Rivers &amp; Lakes</h3>
+         <p class="text-sm text-gray-400">Geography • 20 Questions</p>
+        </div><button class="btn-military px-4 py-2 bg-army-olive hover:bg-army-light text-white text-sm font-medium rounded transition-all">Start Test</button>
+       </div>
+       <div class="test-item bg-military-gray rounded-lg p-4 border-l-4 border-army-olive border border-tactical-gray flex items-center justify-between">
+        <div>
+         <h3 class="font-military text-lg font-semibold text-white">Active &amp; Passive Voice</h3>
+         <p class="text-sm text-gray-400">English • 20 Questions</p>
+        </div><button class="btn-military px-4 py-2 bg-army-olive hover:bg-army-light text-white text-sm font-medium rounded transition-all">Start Test</button>
+       </div>
+      </div>
+     </div>
+    </div><!-- About Page -->
+    <div id="page-about" class="page-content hidden">
+     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12"><button onclick="navigateTo('home')" class="inline-flex items-center text-army-light hover:text-white mb-6 transition-colors">
+       <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+       </svg> Back to Dashboard </button>
+      <div class="bg-military-gray rounded-xl p-6 md:p-8 border border-tactical-gray">
+       <div class="text-center mb-8">
+        <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-army-dark mb-4">
+         <svg class="w-10 h-10 text-army-light" fill="currentColor" viewbox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.18l6.9 3.45L12 11.09 5.1 7.63 12 4.18zM4 8.91l7 3.5v6.68l-7-3.5V8.91zm9 10.18v-6.68l7-3.5v6.68l-7 3.5z" />
+         </svg>
+        </div>
+        <h1 class="font-military text-3xl md:text-4xl font-bold text-white mb-2">About CDS Command Center</h1>
+        <p class="text-army-light font-medium">Your Mission Control for Defence Exam Success</p>
+       </div>
+       <div class="space-y-6 text-gray-300">
+        <p>CDS Command Center is a comprehensive preparation platform designed specifically for aspirants preparing for the Combined Defence Services (CDS) examination conducted by UPSC.</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+         <div class="bg-military-black rounded-lg p-4 border border-army-dark">
+          <h3 class="font-military text-lg font-semibold text-white mb-2">Our Mission</h3>
+          <p class="text-sm">To provide quality practice material that mirrors the actual CDS exam pattern and difficulty level.</p>
+         </div>
+         <div class="bg-military-black rounded-lg p-4 border border-army-dark">
+          <h3 class="font-military text-lg font-semibold text-white mb-2">Our Vision</h3>
+          <p class="text-sm">To help every aspiring officer achieve their dream of serving the nation through armed forces.</p>
+         </div>
+        </div>
+        <div class="bg-army-dark rounded-lg p-6 mt-6">
+         <h3 class="font-military text-xl font-semibold text-white mb-4">What We Offer</h3>
+         <ul class="space-y-2 text-gray-300">
+          <li class="flex items-center"><span class="text-army-light mr-2">✓</span> 500+ Practice Questions</li>
+          <li class="flex items-center"><span class="text-army-light mr-2">✓</span> Full Length Mock Tests</li>
+          <li class="flex items-center"><span class="text-army-light mr-2">✓</span> Topic-wise Sectional Tests</li>
+          <li class="flex items-center"><span class="text-army-light mr-2">✓</span> Previous Year Papers</li>
+          <li class="flex items-center"><span class="text-army-light mr-2">✓</span> Detailed Performance Analytics</li>
+         </ul>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </main><!-- Footer -->
+   <footer class="bg-military-gray border-t border-army-dark mt-auto">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+     <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div class="md:col-span-2">
+       <div class="flex items-center space-x-2 mb-4">
+        <svg class="w-8 h-8 text-army-light" fill="currentColor" viewbox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.18l6.9 3.45L12 11.09 5.1 7.63 12 4.18zM4 8.91l7 3.5v6.68l-7-3.5V8.91zm9 10.18v-6.68l7-3.5v6.68l-7 3.5z" />
+        </svg><span class="font-military font-bold text-xl text-white">CDS COMMAND CENTER</span>
+       </div>
+       <p id="footer-tagline" class="text-gray-400 mb-4">Prepare Smart. Serve the Nation.</p>
+       <p class="text-sm text-gray-500">Your comprehensive platform for CDS exam preparation.</p>
+      </div>
+      <div>
+       <h4 class="font-military font-semibold text-white mb-4">Quick Links</h4>
+       <ul class="space-y-2">
+        <li><button onclick="navigateTo('home')" class="text-gray-400 hover:text-army-light transition-colors">Home</button></li>
+        <li><button onclick="navigateTo('mock-tests')" class="text-gray-400 hover:text-army-light transition-colors">Practice Tests</button></li>
+        <li><button onclick="navigateTo('about')" class="text-gray-400 hover:text-army-light transition-colors">About</button></li>
+       </ul>
+      </div>
+      <div>
+       <h4 class="font-military font-semibold text-white mb-4">Subjects</h4>
+       <ul class="space-y-2">
+        <li><button onclick="navigateTo('mathematics')" class="text-gray-400 hover:text-army-light transition-colors">Mathematics</button></li>
+        <li><button onclick="navigateTo('general-studies')" class="text-gray-400 hover:text-army-light transition-colors">General Studies</button></li>
+        <li><button onclick="navigateTo('english')" class="text-gray-400 hover:text-army-light transition-colors">English</button></li>
+       </ul>
+      </div>
+     </div>
+     <div class="border-t border-army-dark mt-8 pt-8 text-center">
+      <p class="text-sm text-gray-500">© 2024 CDS Command Center. All rights reserved.</p>
+     </div>
+    </div>
+   </footer>
+  </div>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'army-olive': '#4A5D23',
+              'army-dark': '#2C3E1F',
+              'army-light': '#6B8E23',
+              'military-black': '#1A1A1A',
+              'military-gray': '#2D2D2D',
+              'tactical-gray': '#3D3D3D',
+              'sand': '#C4B896'
+            },
+            fontFamily: {
+              'military': ['Rajdhani', 'sans-serif'],
+              'body': ['Roboto', 'sans-serif']
+            }
+          }
+        }
+      }
+    </script>
+  <script src="script.js"></script>
+  </body>
+</html>
