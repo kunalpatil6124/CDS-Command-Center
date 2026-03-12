@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>October Current Affairs Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .test { max-width: 600px; margin: auto; padding: 20px; }
+        .question { margin-bottom: 20px; }
+        button { padding: 10px 20px; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <div class="test">
+        <h1>October Current Affairs Test</h1>
+        <form id="test-form">
+            <div class="question">
+                <label>1. Who is the current Chief of Defence Staff (CDS) of India?</label><br>
+                <input type="radio" name="q1" value="a"> a. General Anil Chauhan<br>
+                <input type="radio" name="q1" value="b"> b. General Bipin Rawat<br>
+                <input type="radio" name="q1" value="c"> c. Admiral R. Hari Kumar<br>
+                <input type="radio" name="q1" value="d"> d. Air Chief Marshal V. R. Chaudhari<br>
+            </div>
+            <div class="question">
+                <label>2. In October 2025, which country hosted the BRICS summit?</label><br>
+                <input type="radio" name="q2" value="a"> a. India<br>
+                <input type="radio" name="q2" value="b"> b. Russia<br>
+                <input type="radio" name="q2" value="c"> c. South Africa<br>
+                <input type="radio" name="q2" value="d"> d. Brazil<br>
+            </div>
+            <div class="question">
+                <label>3. Which missile was test-fired successfully by DRDO in October 2025?</label><br>
+                <input type="radio" name="q3" value="a"> a. Agni-V<br>
+                <input type="radio" name="q3" value="b"> b. Prithvi-II<br>
+                <input type="radio" name="q3" value="c"> c. BrahMos<br>
+                <input type="radio" name="q3" value="d"> d. Akash-NG<br>
+            </div>
+            <button type="button" onclick="calculateScore()">Submit</button>
+            <button type="button" onclick="history.back()">Back</button>
+        </form>
+        <div id="result"></div>
+    </div>
+    <script>
+        function calculateScore() {
+            let score = 0;
+            const answers = ['a', 'c', 'd'];
+            for (let i = 0; i < answers.length; i++) {
+                const q = document.querySelector(`input[name='q${i + 1}']:checked`);
+                if (q && q.value === answers[i]) {
+                    score++;
+                }
+            }
+            document.getElementById('result').innerText = `Your score: ${score} out of ${answers.length}`;
+        }
+    </script>
+</body>
+</html>
