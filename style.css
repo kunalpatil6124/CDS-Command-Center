@@ -282,7 +282,7 @@ align-items:center;
 
 text-align:center;
 
-padding:120px 20px 80px 20px;
+padding:70px 20px 30px 20px;
 }
 
 /* GLOWING EFFECT */
@@ -356,8 +356,8 @@ justify-content:center;
 
 gap:60px;
 
-margin-top:02px;
-margin-bottom:02px;
+margin-top:-20px;
+margin-bottom:-20px;
 }
 
 .stat{
