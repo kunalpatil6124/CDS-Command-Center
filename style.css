@@ -378,7 +378,9 @@ PAGE HEADER
 
 .page-header{
 display:flex;
+flex-direction:column;   /* IMPORTANT */
 justify-content:center;
+align-items:center;      /* centers horizontally */
 
 text-align:center;
 
@@ -398,6 +400,8 @@ backdrop-filter:blur(12px);
 border:1px solid rgba(255,255,255,0.08);
 
 max-width:700px;
+margin:auto;   /* ensures perfect centering */
+text-align:center;
 }
 
 .page-header h1{
