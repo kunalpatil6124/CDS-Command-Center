@@ -773,7 +773,7 @@ SLIDE MENU
   .menu {
     position: fixed;
     top: 0;
-    left: -100%;   /* hidden */
+    right: -100%;   /* hidden */
     height: 100vh;
     width: 260px;
 
@@ -789,7 +789,7 @@ SLIDE MENU
   }
 
   .menu.active {
-    left: 0;   /* slide in */
+    right: 0;   /* slide in */
   }
 
   .hamburger {
