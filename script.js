@@ -1,11 +1,16 @@
-
 // =========================
-// BETTER MENU TOGGLE
+// SAFE MENU TOGGLE
 // =========================
 
-const hamburger = document.getElementById("hamburger");
-const menu = document.getElementById("menu");
+document.addEventListener("DOMContentLoaded", function () {
 
-hamburger.addEventListener("click", () => {
-  menu.classList.toggle("active");
+  const hamburger = document.getElementById("hamburger");
+  const menu = document.getElementById("menu");
+
+  if (hamburger && menu) {
+    hamburger.addEventListener("click", () => {
+      menu.classList.toggle("active");
+    });
+  }
+
 });
