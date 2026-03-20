@@ -1,0 +1,1345 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CDS Current Affairs Mock Test</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      width: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #333;
+    }
+
+    .app-wrapper {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Landing Page */
+    .landing-page {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .landing-card {
+      background: white;
+      border-radius: 16px;
+      padding: 60px 40px;
+      max-width: 500px;
+      width: 100%;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      text-align: center;
+    }
+
+    .landing-card h1 {
+      font-size: 2.5rem;
+      color: #667eea;
+      margin-bottom: 30px;
+      font-weight: 700;
+    }
+
+    .test-details {
+      margin: 30px 0;
+      text-align: left;
+      background: #f8f9ff;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .detail-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      font-size: 1.1rem;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .detail-item:last-child {
+      border-bottom: none;
+    }
+
+    .detail-label {
+      font-weight: 600;
+      color: #667eea;
+    }
+
+    .start-btn {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 18px 50px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 30px;
+      font-weight: 700;
+      transition: transform 0.3s, box-shadow 0.3s;
+      width: 100%;
+    }
+
+    .start-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+    }
+
+    /* Test Interface */
+    .test-interface {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header-top {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .timer {
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 10px 20px;
+      border-radius: 8px;
+      min-width: 120px;
+      text-align: center;
+    }
+
+    .timer.warning {
+      background: #ff6b6b;
+      animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+
+    .test-body {
+      display: flex;
+      flex: 1;
+      gap: 0;
+      overflow: hidden;
+    }
+
+    .question-panel {
+      flex: 1;
+      overflow-y: auto;
+      padding: 30px;
+      background: white;
+    }
+
+    .question-block {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .question-number {
+      color: #667eea;
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+    }
+
+    .question-text {
+      color: #333;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 25px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    .options-container {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .option-label {
+      display: flex;
+      align-items: flex-start;
+      padding: 15px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+      background: #fafafa;
+    }
+
+    .option-label:hover {
+      background: #f0f0f0;
+      border-color: #667eea;
+    }
+
+    .option-label input[type="radio"] {
+      margin-right: 15px;
+      margin-top: 2px;
+      cursor: pointer;
+      width: 18px;
+      height: 18px;
+    }
+
+    .option-label.selected {
+      background: #e8ecff;
+      border-color: #667eea;
+    }
+
+    .option-text {
+      flex: 1;
+      line-height: 1.5;
+    }
+
+    .controls {
+      display: flex;
+      gap: 10px;
+      margin-top: 30px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s;
+    }
+
+    .btn-primary {
+      background: #667eea;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #5568d3;
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: #f0f0f0;
+      color: #333;
+      border: 2px solid #ddd;
+    }
+
+    .btn-secondary:hover {
+      background: #e8e8e8;
+    }
+
+    .btn-danger {
+      background: #ff6b6b;
+      color: white;
+    }
+
+    .btn-danger:hover {
+      background: #ee5a52;
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .right-panel {
+      width: 280px;
+      background: white;
+      border-left: 1px solid #e0e0e0;
+      padding: 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .palette-title {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #333;
+    }
+
+    .question-palette {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .palette-btn {
+      width: 100%;
+      aspect-ratio: 1;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.3s;
+    }
+
+    .palette-btn.not-visited {
+      background: #f0f0f0;
+      color: #999;
+    }
+
+    .palette-btn.visited {
+      background: #ffcccc;
+      color: #d32f2f;
+    }
+
+    .palette-btn.answered {
+      background: #c8e6c9;
+      color: #2e7d32;
+    }
+
+    .palette-btn.marked {
+      background: #f3e5f5;
+      color: #7b1fa2;
+    }
+
+    .palette-btn.current {
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
+      border-color: #667eea;
+    }
+
+    /* Modal */
+    .submit-confirmation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .submit-confirmation.active {
+      display: flex;
+    }
+
+    .confirmation-modal {
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      text-align: center;
+      max-width: 400px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .confirmation-modal h2 {
+      color: #333;
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+    }
+
+    .confirmation-modal p {
+      color: #666;
+      margin-bottom: 30px;
+      font-size: 1rem;
+    }
+
+    .confirmation-buttons {
+      display: flex;
+      gap: 15px;
+    }
+
+    .confirmation-buttons button {
+      flex: 1;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s;
+    }
+
+    .btn-submit {
+      background: #667eea;
+      color: white;
+    }
+
+    .btn-submit:hover {
+      background: #5568d3;
+    }
+
+    .btn-cancel {
+      background: #f0f0f0;
+      color: #333;
+    }
+
+    .btn-cancel:hover {
+      background: #e0e0e0;
+    }
+
+    /* Result Page */
+    .result-page {
+      width: 100%;
+      height: 100%;
+      overflow-y: auto;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 40px 20px;
+    }
+
+    .result-container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .result-header {
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      text-align: center;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .result-header h1 {
+      font-size: 2.5rem;
+      color: #667eea;
+      margin-bottom: 10px;
+    }
+
+    .result-score {
+      font-size: 3rem;
+      color: #2e7d32;
+      font-weight: 700;
+      margin: 20px 0;
+    }
+
+    .result-percentage {
+      font-size: 1.5rem;
+      color: #666;
+    }
+
+    .result-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+      margin: 30px 0;
+    }
+
+    .stat-card {
+      background: #f8f9ff;
+      padding: 20px;
+      border-radius: 10px;
+      border-left: 5px solid #667eea;
+      text-align: center;
+    }
+
+    .stat-card h3 {
+      color: #667eea;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .stat-card .value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #333;
+    }
+
+    .stat-card.correct .value {
+      color: #2e7d32;
+    }
+
+    .stat-card.correct {
+      border-left-color: #2e7d32;
+    }
+
+    .stat-card.wrong .value {
+      color: #d32f2f;
+    }
+
+    .stat-card.wrong {
+      border-left-color: #d32f2f;
+    }
+
+    .detailed-report {
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+      margin-bottom: 30px;
+    }
+
+    .detailed-report h2 {
+      color: #333;
+      margin-bottom: 30px;
+      font-size: 1.8rem;
+    }
+
+    .answer-review {
+      margin-bottom: 25px;
+      padding: 20px;
+      border-left: 5px solid #e0e0e0;
+      background: #fafafa;
+      border-radius: 8px;
+    }
+
+    .answer-review.correct {
+      border-left-color: #2e7d32;
+      background: #f1f8f4;
+    }
+
+    .answer-review.wrong {
+      border-left-color: #d32f2f;
+      background: #fde7e7;
+    }
+
+    .answer-q-number {
+      color: #667eea;
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 8px;
+    }
+
+    .answer-q-text {
+      color: #333;
+      margin-bottom: 15px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    .answer-comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-top: 12px;
+    }
+
+    .answer-item {
+      padding: 12px;
+      background: white;
+      border-radius: 6px;
+      border: 1px solid #e0e0e0;
+    }
+
+    .answer-item.correct {
+      border-color: #2e7d32;
+      background: #f1f8f4;
+    }
+
+    .answer-item.wrong {
+      border-color: #d32f2f;
+      background: #fde7e7;
+    }
+
+    .answer-item-label {
+      font-size: 0.85rem;
+      color: #666;
+      font-weight: 600;
+      margin-bottom: 5px;
+      text-transform: uppercase;
+    }
+
+    .answer-item-value {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #333;
+    }
+
+    .answer-item.correct .answer-item-value {
+      color: #2e7d32;
+    }
+
+    .answer-item.wrong .answer-item-value {
+      color: #d32f2f;
+    }
+
+    .review-btn {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      margin-top: 20px;
+      transition: all 0.3s;
+    }
+
+    .review-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .download-section {
+      display: flex;
+      gap: 15px;
+      margin-top: 30px;
+      flex-wrap: wrap;
+    }
+
+    .download-btn {
+      background: #2e7d32;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s;
+    }
+
+    .download-btn:hover {
+      background: #1b5e20;
+      transform: translateY(-2px);
+    }
+
+    .download-btn i {
+      width: 18px;
+      height: 18px;
+    }
+
+    @media (max-width: 768px) {
+      .test-body {
+        flex-direction: column;
+      }
+
+      .right-panel {
+        width: 100%;
+        border-left: none;
+        max-height: 200px;
+      }
+
+      .answer-comparison {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body>
+  <div class="app-wrapper" id="app">
+   <!-- Landing Page -->
+   <div class="landing-page" id="landingPage">
+    <div class="landing-card">
+     <h1>CDS Current Affairs Mock Test</h1>
+     <div class="test-details">
+      <div class="detail-item">
+       <span class="detail-label">Questions:</span> <span>100</span>
+      </div>
+      <div class="detail-item">
+       <span class="detail-label">Time:</span> <span>100 Minutes</span>
+      </div>
+      <div class="detail-item">
+       <span class="detail-label">Correct Answer:</span> <span>0.833 marks</span>
+      </div>
+      <div class="detail-item">
+       <span class="detail-label">Negative Marking:</span> <span>-0.33 marks</span>
+      </div>
+     </div><button class="start-btn" onclick="app.startTest()">START TEST</button>
+    </div>
+   </div><!-- Test Interface -->
+   <div class="test-interface" id="testInterface" style="display: none;">
+    <div class="header-top">
+     <div style="font-size: 1.2rem; font-weight: 700;">
+      Question <span id="currentQuestionNum">1</span>/100
+     </div>
+     <div class="timer" id="timer">
+      100:00
+     </div>
+    </div>
+    <div class="test-body">
+     <div class="question-panel">
+      <div class="question-block">
+       <div class="question-number" id="questionNum">
+        Q1
+       </div>
+       <div class="question-text" id="questionText"></div>
+       <div class="options-container" id="optionsContainer"></div>
+       <div class="controls">
+        <button class="btn btn-secondary" onclick="app.previousQuestion()" id="prevBtn" disabled>Previous</button> <button class="btn btn-secondary" onclick="app.toggleMark()">Mark for Review</button> <button class="btn btn-secondary" onclick="app.clearResponse()">Clear</button> <button class="btn btn-primary" onclick="app.nextQuestion()" id="nextBtn">Next</button> <button class="btn btn-danger" onclick="app.openSubmitModal()">Submit</button>
+       </div>
+      </div>
+     </div>
+     <div class="right-panel">
+      <div class="palette-title">
+       Question Palette
+      </div>
+      <div class="question-palette" id="palette"></div>
+     </div>
+    </div>
+   </div><!-- Result Page -->
+   <div class="result-page" id="resultPage" style="display: none;">
+    <div class="result-container">
+     <div class="result-header">
+      <h1>Test Completed!</h1>
+      <div class="result-score" id="resultScore">
+       0
+      </div>
+      <div class="result-percentage" id="resultPercentage">
+       0%
+      </div>
+      <div class="result-stats">
+       <div class="stat-card">
+        <h3>Total</h3>
+        <div class="value">
+         100
+        </div>
+       </div>
+       <div class="stat-card">
+        <h3>Attempted</h3>
+        <div class="value" id="statAttempted">
+         0
+        </div>
+       </div>
+       <div class="stat-card correct">
+        <h3>Correct</h3>
+        <div class="value" id="statCorrect">
+         0
+        </div>
+       </div>
+       <div class="stat-card wrong">
+        <h3>Wrong</h3>
+        <div class="value" id="statWrong">
+         0
+        </div>
+       </div>
+       <div class="stat-card">
+        <h3>Unanswered</h3>
+        <div class="value" id="statUnanswered">
+         0
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="detailed-report">
+      <h2>Answer Review</h2>
+      <div id="detailedAnswers"></div>
+      <div class="download-section">
+       <button class="download-btn" onclick="app.downloadReportPDF()"> <i data-lucide="download"></i> Download Report (PDF) </button> <button class="download-btn" onclick="app.downloadAnswerKeyJSON()"> <i data-lucide="download"></i> Download Answer Key (JSON) </button>
+      </div><button class="review-btn" onclick="app.restartTest()">Take Test Again</button>
+     </div>
+    </div>
+   </div>
+  </div><!-- Submit Modal -->
+  <div class="submit-confirmation" id="submitModal">
+   <div class="confirmation-modal">
+    <h2>Submit Test?</h2>
+    <p>Are you sure? You cannot change answers after submission.</p>
+    <div class="confirmation-buttons">
+     <button class="btn-submit" onclick="app.submitTest()">Submit</button> <button class="btn-cancel" onclick="app.closeSubmitModal()">Cancel</button>
+    </div>
+   </div>
+  </div>
+  <script>
+    const questions = [
+      { number: 1, text: "Consider the following statements regarding the Emerging Science & Technology Innovation Conclave (ESTIC-2025):\n1.\tIt is being hosted in New Delhi.\n2.\tIt brings together scientists, innovators and policymakers.\n3.\tIt is organised annually by the United Nations.\nWhich of the statements given above is/are correct?", options: ["1 only", "1 and 2 only", "2 and 3 only", "1, 2 and 3"], correct: "B" },
+      { number: 2, text: "Uttarakhand celebrates its Foundation Day on:", options: ["1 November", "5 November", "9 November", "12 November"], correct: "C" },
+      { number: 3, text: "Consider the following statements regarding the International Big Cat Alliance (IBCA):\n1.\tIt is an India-led initiative.\n2.\tIt focuses on conservation of big cat species.\n3.\tIndia will host the Global Big Cats Summit in 2026.\nWhich of the statements given above is/are correct?", options: ["1 only", "1 and 2 only", "2 and 3 only", "1, 2 and 3"], correct: "D" },
+      { number: 4, text: "The Telangana Artificial Intelligence Innovation Hub (TAIH) has been launched in:", options: ["Warangal", "Hyderabad", "Karimnagar", "Nizamabad"], correct: "B" },
+      { number: 5, text: "Consider the following statements regarding the National One Health Mission Assembly 2025:\n1.\tIt promotes integrated health systems.\n2.\tIts theme is \"One Earth, One Health, One Future.\"\n3.\tIt is organised by the WHO alone.\nWhich of the statements given above is/are correct?", options: ["1 only", "1 and 2 only", "2 and 3 only", "1, 2 and 3"], correct: "B" },
+      { number: 6, text: "Which lake in Bihar became India's 94th Ramsar Site?", options: ["Loktak Lake", "Wular Lake", "Gogabeel Lake", "Pulicat Lake"], correct: "C" },
+      { number: 7, text: "Consider the following statements regarding the Sangai Festival:\n1.\tIt is celebrated in Manipur.\n2.\tIt is named after the Sangai deer.\n3.\tThe deer is found in Keibul Lamjao National Park.\nWhich of the statements given above is/are correct?", options: ["1 only", "1 and 2 only", "2 and 3 only", "1, 2 and 3"], correct: "D" },
+      { number: 8, text: "Which state signed an agreement with Starlink to provide satellite internet services in remote areas?", options: ["Gujarat", "Maharashtra", "Karnataka", "Andhra Pradesh"], correct: "B" },
+      { number: 9, text: "Nitish Kumar became Chief Minister of Bihar for the 10th time after which elections?", options: ["2023", "2024", "2025", "2026"], correct: "C" },
+      { number: 10, text: "The 56th International Film Festival of India (IFFI) was held in:", options: ["Mumbai", "Goa", "Delhi", "Bengaluru"], correct: "B" },
+      { number: 11, text: "Consider the following statements regarding the India Internet Governance Forum (IIGF) 2025:\n1.\tIt was held in New Delhi.\n2.\tThe theme focused on advancing internet governance for a Viksit Bharat.\n3.\tIt was organised by the World Bank.\nWhich of the statements given above is/are correct?", options: ["1 only", "1 and 2 only", "2 and 3 only", "1, 2 and 3"], correct: "B" },
+      { number: 12, text: "Justice Surya Kant is set to become the 53rd Chief Justice of India after the retirement of:", options: ["DY Chandrachud", "NV Ramana", "BR Gavai", "UU Lalit"], correct: "C" },
+      { number: 13, text: "India secured which position globally in the clean industrial project pipeline?", options: ["First", "Second", "Third", "Fourth"], correct: "C" },
+      { number: 14, text: "The SITAA scheme is associated with:", options: ["UIDAI", "NITI Aayog", "DRDO", "ISRO"], correct: "A" },
+      { number: 15, text: "India's largest Vanadium Redox Flow Battery (VRFB) system has a capacity of:", options: ["1 MWh", "2 MWh", "3 MWh", "5 MWh"], correct: "C" },
+      { number: 16, text: "Which state launched the Rythanna Meekosam initiative to support farmers?", options: ["Telangana", "Andhra Pradesh", "Karnataka", "Tamil Nadu"], correct: "B" },
+      { number: 17, text: "Consider the following statements regarding India's Tribal Genome Sequencing Project:\n1.\tIt aims to map the genetic profile of tribal populations.\n2.\tIt helps identify diseases like sickle cell anemia.\n3.\tIt was launched by the Government of Gujarat.\nWhich of the statements given above is/are correct?", options: ["1 only", "1 and 2 only", "2 and 3 only", "1, 2 and 3"], correct: "D" },
+      { number: 18, text: "The Bastar Olympics is organised in which state?", options: ["Odisha", "Jharkhand", "Chhattisgarh", "Madhya Pradesh"], correct: "C" },
+      { number: 19, text: "The Saranda Forest, recently declared a wildlife sanctuary area, is located in:", options: ["Odisha", "Jharkhand", "Chhattisgarh", "West Bengal"], correct: "B" },
+      { number: 20, text: "Saranda Forest is famous for being:", options: ["Asia's largest teak forest", "Asia's largest sal forest", "India's largest bamboo forest", "A mangrove ecosystem"], correct: "B" },
+      { number: 21, text: "The 18th Urban Mobility India Conference 2025 was held in:", options: ["Pune", "Gurugram", "Jaipur", "Ahmedabad"], correct: "B" },
+      { number: 22, text: "Which city won the award for Best Public Transport System at the UMI Conference?", options: ["Chennai", "Mumbai", "Bengaluru", "Delhi"], correct: "A" },
+      { number: 23, text: "India's first Digital Museum of Tribal Freedom Fighters was inaugurated in:", options: ["Ranchi", "Raipur", "Nava Raipur", "Bilaspur"], correct: "C" },
+      { number: 24, text: "The Shenzhou-21 mission was launched by:", options: ["USA", "Russia", "China", "Japan"], correct: "C" },
+      { number: 25, text: "Consider the following statements regarding Thorium Molten Salt Reactor (TMSR):\n1.\tChina successfully converted thorium into uranium fuel.\n2.\tIt marks a major milestone in nuclear technology.\n3.\tThorium reactors are considered safer nuclear alternatives.\nWhich of the statements given above is/are correct?", options: ["1 only", "1 and 2 only", "2 and 3 only", "1, 2 and 3"], correct: "D" },
+      { number: 26, text: "Samia Suluhu Hassan was re-elected as the President of:", options: ["Kenya", "Tanzania", "Ethiopia", "Uganda"], correct: "B" },
+      { number: 27, text: "Ethiopia will host which future climate summit?", options: ["COP30", "COP31", "COP32", "COP33"], correct: "C" },
+      { number: 28, text: "Which country introduced the world's first generational smoking ban?", options: ["New Zealand", "Maldives", "Singapore", "Australia"], correct: "B" },
+      { number: 29, text: "India exported fortified rice kernels (FRK) to which country?", options: ["Mexico", "Brazil", "Costa Rica", "Chile"], correct: "C" },
+      { number: 30, text: "The European Union aims to reduce greenhouse gas emissions by 90% by:", options: ["2030", "2035", "2040", "2050"], correct: "C" },
+      { number: 31, text: "Botswana contributed cheetahs to India under which programme?", options: ["Project Tiger", "Project Lion", "Project Cheetah", "Project Leopard"], correct: "C" },
+      { number: 32, text: "Which country executed its first government transaction using the Digital Dirham?", options: ["Qatar", "UAE", "Oman", "Kuwait"], correct: "B" },
+      { number: 33, text: "Bangladesh joined which international treaty in 2025?", options: ["Ramsar Convention", "UN Water Convention", "Kyoto Protocol", "Paris Agreement"], correct: "B" },
+      { number: 34, text: "India linked UPI with Bahrain's EFTS through which system?", options: ["Fawri+", "SwiftPay", "GulfPay", "BharatPay"], correct: "A" },
+      { number: 35, text: "The Colombo Security Conclave was initially formed by which three countries?", options: ["India, Sri Lanka, Maldives", "India, Nepal, Bhutan", "Sri Lanka, Bangladesh, India", "Maldives, Bangladesh, India"], correct: "A" },
+      { number: 36, text: "South Africa assumed the G20 Presidency for 2025 with the theme:", options: ["Inclusive Growth", "Sustainability and Innovation", "Solidarity, Equality, Sustainability", "Climate Justice"], correct: "C" },
+      { number: 37, text: "The BIMSTEC-India Marine Research Network (BIMREN) conference was hosted in:", options: ["Chennai", "Kochi", "Visakhapatnam", "Colombo"], correct: "B" },
+      { number: 38, text: "Which country will host COP31 (2026)?", options: ["Australia", "Turkey", "Brazil", "Canada"], correct: "B" },
+      { number: 39, text: "Which country banned social media for children below 16 years?", options: ["UK", "Canada", "Australia", "USA"], correct: "C" },
+      { number: 40, text: "India was re-elected to the Codex Executive Committee representing which region?", options: ["Europe", "Asia", "Africa", "Americas"], correct: "B" },
+      { number: 41, text: "India won the ICC Women's ODI World Cup 2025 by defeating:", options: ["Australia", "England", "South Africa", "New Zealand"], correct: "C" },
+      { number: 42, text: "The FIDE Chess World Cup trophy has been renamed the:", options: ["Anand Trophy", "Viswanathan Anand Cup", "Magnus Cup", "Kasparov Cup"], correct: "B" },
+      { number: 43, text: "India won how many total medals at the Asian Youth Games 2025?", options: ["32", "40", "48", "56"], correct: "C" },
+      { number: 44, text: "Lakshya Sen won the Australian Open Super 500 defeating:", options: ["Viktor Axelsen", "Lee Zii Jia", "Yushi Tanaka", "Kento Momota"], correct: "C" },
+      { number: 45, text: "India's women's kabaddi team won the 2025 Women's Kabaddi World Cup defeating:", options: ["Iran", "South Korea", "Chinese Taipei", "Bangladesh"], correct: "C" },
+      { number: 46, text: "Raahul VS became India's which chess Grandmaster?", options: ["89th", "90th", "91st", "92nd"], correct: "C" },
+      { number: 47, text: "Aishwary Pratap Singh Tomar won a medal at the ISSF World Championships held in:", options: ["Doha", "Cairo", "Tokyo", "Paris"], correct: "B" },
+      { number: 48, text: "The Commonwealth Games 2030 will be hosted in:", options: ["Mumbai", "Ahmedabad", "Delhi", "Bengaluru"], correct: "B" },
+      { number: 49, text: "Sheetal Devi became the first Indian para-archer to join:", options: ["Olympic archery team", "Able-bodied national archery team", "Asian Games team", "Paralympic coaching team"], correct: "B" },
+      { number: 50, text: "Rohan Bopanna became the oldest World No.1 doubles tennis player at the age of:", options: ["40", "41", "42", "43"], correct: "D" },
+      { number: 51, text: "Consider the following statements regarding the SITAA (Scheme for Innovation & Technology Association with Aadhaar):\n1.\tIt was launched by the Unique Identification Authority of India (UIDAI).\n2.\tIt aims to strengthen Aadhaar's technological ecosystem through research and innovation.\n3.\tIt focuses on areas such as biometric authentication, artificial intelligence and data security.\nWhich of the statements given above is/are correct?", options: ["1 only", "1 and 2 only", "2 and 3 only", "1, 2 and 3"], correct: "D" },
+      { number: 52, text: "Which of the following correctly describes the Vanadium Redox Flow Battery (VRFB) technology?\n1.\tIt stores electrical energy in liquid electrolytes containing vanadium ions.\n2.\tIt is a type of rechargeable flow battery system.\n3.\tIt is primarily used for large-scale energy storage.\nSelect the correct answer using the code below:", options: ["1 only", "1 and 2 only", "1 and 3 only", "1, 2 and 3"], correct: "D" },
+      { number: 53, text: "With reference to the Abujhmadiya tribe, consider the following statements:\n1.\tIt is a sub-group of the Gond tribe.\n2.\tIt is classified as a Particularly Vulnerable Tribal Group (PVTG).\n3.\tIt primarily resides in the Abujmarh region of Chhattisgarh.\nWhich of the statements given above is/are correct?", options: ["1 only", "1 and 2 only", "2 and 3 only", "1, 2 and 3"], correct: "D" },
+      { number: 54, text: "Consider the following statements regarding Saranda Forest:\n1.\tIt is located in Jharkhand.\n2.\tIt is considered the largest Sal forest in Asia.\n3.\tThe name \"Saranda\" means \"land of seven hundred hills\".\nWhich of the statements given above is/are correct?", options: ["1 and 2 only", "2 and 3 only", "1 and 3 only", "1, 2 and 3"], correct: "D" },
+      { number: 55, text: "Match the following:\nCity\tRecognition\n1. Chennai\tA. Best Non-Motorized Transport System\n2. Udaipur\tB. Best Public Transport System\n3. Aizawl\tC. Special Award for Traffic Management\nSelect the correct code:", options: ["1-B, 2-A, 3-C", "1-A, 2-B, 3-C", "1-C, 2-B, 3-A", "1-B, 2-C, 3-A"], correct: "A" },
+      { number: 56, text: "Consider the following statements regarding the Shenzhou-21 mission:\n1.\tIt was launched by China.\n2.\tIt was sent to the Tiangong Space Station.\n3.\tThe mission included the country's youngest astronaut.\nWhich of the statements given above is/are correct?", options: ["1 only", "1 and 2 only", "2 and 3 only", "1, 2 and 3"], correct: "D" },
+      { number: 57, text: "With reference to Thorium Molten Salt Reactors (TMSR), consider the following statements:\n1.\tThey use thorium as nuclear fuel.\n2.\tThorium can be converted into uranium-233 in such reactors.\n3.\tThese reactors are being explored as an alternative nuclear energy technology.\nWhich of the statements given above is/are correct?", options: ["1 only", "2 and 3 only", "1 and 3 only", "1, 2 and 3"], correct: "D" },
+      { number: 58, text: "Consider the following statements regarding the Generational Smoking Ban introduced in the Maldives:\n1.\tIt prohibits tobacco purchases by people born after January 1, 2007.\n2.\tIt applies to both citizens and tourists.\n3.\tThe ban includes vaping devices and e-cigarettes.\nWhich of the statements given above is/are correct?", options: ["1 and 2 only", "2 and 3 only", "1 and 3 only", "1, 2 and 3"], correct: "D" },
+      { number: 59, text: "Which of the following organisations operates under the Ministry of Commerce and Industry and promotes export of agricultural products from India?", options: ["NABARD", "APEDA", "SEBI", "EXIM Bank"], correct: "B" },
+      { number: 60, text: "Consider the following statements regarding the Colombo Security Conclave (CSC):\n1.\tIt was established in 2020.\n2.\tIts founding members included India, Sri Lanka and the Maldives.\n3.\tBangladesh recently joined the grouping.\nWhich of the statements given above is/are correct?", options: ["1 only", "1 and 2 only", "2 and 3 only", "1, 2 and 3"], correct: "D" },
+      { number: 61, text: "Which of the following countries received the Major Non-NATO Ally (MNNA) status from the United States?", options: ["Qatar", "Saudi Arabia", "UAE", "Kuwait"], correct: "B" },
+      { number: 62, text: "Consider the following statements regarding the Abraham Accords:\n1.\tThey aim to normalise diplomatic relations between Israel and certain Muslim-majority countries.\n2.\tUAE and Bahrain were among the early signatories.\n3.\tThe accords were initiated by the United Nations.\nWhich of the statements given above is/are correct?", options: ["1 and 2 only", "2 and 3 only", "1 and 3 only", "1, 2 and 3"], correct: "A" },
+      { number: 63, text: "The Hayli Gubbi volcano, which recently erupted after nearly 10,000 years, is located in:", options: ["Kenya", "Ethiopia", "Tanzania", "Uganda"], correct: "B" },
+      { number: 64, text: "Consider the following statements regarding the ACITI Partnership:\n1.\tIt involves India, Australia and Canada.\n2.\tIt focuses on emerging technologies and resilient supply chains.\n3.\tIt also promotes cooperation in green innovation.\nWhich of the statements given above is/are correct?", options: ["1 only", "1 and 2 only", "2 and 3 only", "1, 2 and 3"], correct: "D" },
+      { number: 65, text: "The UN Convention against Cybercrime recently signed by several countries aims primarily to:", options: ["regulate social media companies", "strengthen global law-enforcement cooperation against cybercrime", "create international cryptocurrency regulations", "control digital advertising"], correct: "B" },
+      { number: 66, text: "Consider the following statements regarding South Africa's G20 Presidency 2025:\n1.\tIt is the first time a G20 Summit has been hosted in Africa.\n2.\tThe summit was held in Johannesburg.\n3.\tThe presidency theme is \"Solidarity, Equality, Sustainability\".\nWhich of the statements given above is/are correct?", options: ["1 and 2 only", "2 and 3 only", "1 and 3 only", "1, 2 and 3"], correct: "D" },
+      { number: 67, text: "Match the following regarding Kunming Biodiversity Fund beneficiary countries:\nCountry\tRegion\n1. Madagascar\tA. Africa\n2. Nepal\tB. Asia\n3. Mexico\tC. North America\nSelect the correct code:", options: ["1-A, 2-B, 3-C", "1-B, 2-A, 3-C", "1-A, 2-C, 3-B", "1-C, 2-B, 3-A"], correct: "A" },
+      { number: 68, text: "Consider the following statements regarding the BIMSTEC-India Marine Research Network (BIMREN):\n1.\tIt promotes joint marine research among BIMSTEC countries.\n2.\tIt focuses on sustainable fisheries and blue economy initiatives.\n3.\tIts inaugural conference was held in Kochi.\nWhich of the statements given above is/are correct?", options: ["1 only", "1 and 2 only", "2 and 3 only", "1, 2 and 3"], correct: "D" },
+      { number: 69, text: "Which of the following exercises is a joint military exercise between India and the United Kingdom?", options: ["Garuda", "Ajeya Warrior", "Mitra Shakti", "Yudh Abhyas"], correct: "B" },
+      { number: 70, text: "Consider the following statements regarding Exercise Mitra Shakti:\n1.\tIt is conducted between India and Sri Lanka.\n2.\tIt focuses on counter-terrorism and jungle warfare training.\n3.\tIt is conducted annually.\nWhich of the statements given above is/are correct?", options: ["1 only", "1 and 2 only", "2 and 3 only", "1, 2 and 3"], correct: "B" },
+      { number: 71, text: "The Nyoma Airbase, recently inaugurated by India, is located in:", options: ["Sikkim", "Arunachal Pradesh", "Ladakh", "Himachal Pradesh"], correct: "C" },
+      { number: 72, text: "Consider the following statements regarding Operation Akhand Prahar:\n1.\tIt was conducted in Jaisalmer.\n2.\tIt involved both the Indian Army and Indian Air Force.\n3.\tIt demonstrated multi-domain warfare coordination.\nWhich of the statements given above is/are correct?", options: ["1 only", "1 and 2 only", "2 and 3 only", "1, 2 and 3"], correct: "D" },
+      { number: 73, text: "INS Mahe belongs to which class of vessels?", options: ["Missile corvette", "Aircraft carrier", "Anti-Submarine Warfare Shallow Water Craft", "Destroyer"], correct: "C" },
+      { number: 74, text: "Consider the following statements regarding Exercise AUSINDEX:\n1.\tIt is a bilateral naval exercise between India and Australia.\n2.\tIt began in 2015.\n3.\tIt focuses on maritime cooperation and interoperability.\nWhich of the statements given above is/are correct?", options: ["1 only", "1 and 2 only", "2 and 3 only", "1, 2 and 3"], correct: "D" },
+      { number: 75, text: "The HAMMER precision-guided weapon system was developed by which country?", options: ["USA", "France", "Israel", "Germany"], correct: "B" },
+      { number: 76, text: "Consider the following statements regarding Operation Pawan:\n1.\tIt was launched in 1987.\n2.\tIt was related to the India Peace Keeping Force (IPKF) mission in Sri Lanka.\n3.\tIts primary objective was to disarm the LTTE.\nWhich of the statements given above is/are correct?", options: ["1 only", "1 and 2 only", "2 and 3 only", "1, 2 and 3"], correct: "D" },
+      { number: 77, text: "Which company developed VEER, India's first indigenous electric vehicle designed for defence applications?", options: ["Tata Motors", "Pravaig", "Mahindra Defence", "DRDO"], correct: "B" },
+      { number: 78, text: "Consider the following statements regarding Exercise Suryakiran:\n1.\tIt is conducted between India and Nepal.\n2.\tIt focuses on counter-terrorism and mountain warfare training.\n3.\tThe 19th edition was held in Uttarakhand.\nWhich of the statements given above is/are correct?", options: ["1 only", "1 and 2 only", "2 and 3 only", "1, 2 and 3"], correct: "D" },
+      { number: 79, text: "Which novel won the 2025 Booker Prize?", options: ["The Covenant", "Flesh", "The Last Empire", "Silent Earth"], correct: "B" },
+      { number: 80, text: "Consider the following statements regarding Shaikha Nasser Al Nowais:\n1.\tShe belongs to the United Arab Emirates.\n2.\tShe became the first woman to head UN Tourism.\n3.\tShe previously served as a diplomat to the United Nations.\nWhich of the statements given above is/are correct?", options: ["1 only", "1 and 2 only", "2 and 3 only", "1, 2 and 3"], correct: "B" },
+      { number: 81, text: "The Indira Gandhi Peace Prize 2024 was awarded to:", options: ["Angela Merkel", "Michelle Bachelet", "António Guterres", "Jacinda Ardern"], correct: "B" },
+      { number: 82, text: "Consider the following statements regarding the National Gopal Ratna Awards:\n1.\tThey recognise excellence in dairy and livestock sectors.\n2.\tThey include a cash prize of ₹5 lakh.\n3.\tThey are administered by the Ministry of Fisheries, Animal Husbandry and Dairying.\nWhich of the statements given above is/are correct?", options: ["1 and 2 only", "2 and 3 only", "1 and 3 only", "1, 2 and 3"], correct: "D" },
+      { number: 83, text: "Which port hosts India's first port-based Green Hydrogen Pilot Project?", options: ["Mumbai Port", "V.O. Chidambaranar Port", "Kandla Port", "Paradip Port"], correct: "B" },
+      { number: 84, text: "Consider the following statements regarding Green Hydrogen:\n1.\tIt is produced through electrolysis of water using renewable energy.\n2.\tIt has very low carbon emissions.\n3.\tIt is considered a clean alternative fuel.\nWhich of the statements given above is/are correct?", options: ["1 only", "1 and 2 only", "2 and 3 only", "1, 2 and 3"], correct: "D" },
+      { number: 85, text: "Which mineral is widely used in EV battery anodes?", options: ["Zirconium", "Graphite", "Rubidium", "Caesium"], correct: "B" },
+      { number: 86, text: "Consider the following statements regarding the Credit Guarantee Scheme for Exporters (CGSE):\n1.\tIt provides collateral-free credit support to exporters.\n2.\tIt offers 100% credit guarantee coverage.\n3.\tIt is implemented by the Department of Financial Services.\nWhich of the statements given above is/are correct?", options: ["1 only", "1 and 2 only", "2 and 3 only", "1, 2 and 3"], correct: "D" },
+      { number: 87, text: "Which ministry is organising the \"Vision for Sujalam Bharat\" Summit 2025?", options: ["Ministry of Agriculture", "Ministry of Jal Shakti", "Ministry of Environment", "Ministry of Rural Development"], correct: "B" },
+      { number: 88, text: "Consider the following statements regarding PM-KISAN scheme:\n1.\tIt was launched in 2019.\n2.\tIt provides ₹6,000 annually to farmer families.\n3.\tThe benefit is transferred via Direct Benefit Transfer.\nWhich of the statements given above is/are correct?", options: ["1 only", "1 and 2 only", "2 and 3 only", "1, 2 and 3"], correct: "D" },
+      { number: 89, text: "Which mission focuses on quantum technologies in India?", options: ["National Quantum Mission", "Digital India Mission", "National AI Mission", "Innovation India Mission"], correct: "A" },
+      { number: 90, text: "Consider the following statements regarding the IndiaAI Mission:\n1.\tIt aims to strengthen India's AI infrastructure.\n2.\tIt includes large-scale GPU computing capacity.\n3.\tIt supports AI research and development.\nWhich of the statements given above is/are correct?", options: ["1 only", "1 and 2 only", "2 and 3 only", "1, 2 and 3"], correct: "D" },
+      { number: 91, text: "India recently crossed which milestone in total installed electricity capacity?", options: ["400 GW", "450 GW", "500 GW", "550 GW"], correct: "C" },
+      { number: 92, text: "Consider the following statements regarding the National Beekeeping and Honey Mission (NBHM):\n1.\tIt was launched in 2020.\n2.\tIt is implemented by the National Bee Board.\n3.\tIt aims to promote scientific beekeeping and increase honey production.\nWhich of the statements given above is/are correct?", options: ["1 only", "1 and 2 only", "2 and 3 only", "1, 2 and 3"], correct: "D" },
+      { number: 93, text: "Which state is the largest honey producer in India?", options: ["Punjab", "Uttar Pradesh", "West Bengal", "Haryana"], correct: "B" },
+      { number: 94, text: "Consider the following statements regarding Digital Public Infrastructure (DPI) in India:\n1.\tAadhaar provides a digital identity platform.\n2.\tDigiLocker allows digital document storage.\n3.\tCoWIN supported large-scale vaccination management.\nWhich of the statements given above is/are correct?", options: ["1 only", "1 and 2 only", "2 and 3 only", "1, 2 and 3"], correct: "D" },
+      { number: 95, text: "The Research Development and Innovation (RDI) Scheme launched by the Government of India has an outlay of:", options: ["₹50,000 crore", "₹75,000 crore", "₹1 lakh crore", "₹1.5 lakh crore"], correct: "C" },
+      { number: 96, text: "Consider the following statements regarding India Semiconductor Mission:\n1.\tIt aims to build semiconductor manufacturing capacity.\n2.\tIt supports domestic chip fabrication and design.\n3.\tIt is part of India's technology self-reliance strategy.\nWhich of the statements given above is/are correct?", options: ["1 only", "1 and 2 only", "2 and 3 only", "1, 2 and 3"], correct: "D" },
+      { number: 97, text: "Which initiative promotes research and innovation in cyber-physical systems like AI, robotics and IoT?", options: ["NM-ICPS", "Digital India Mission", "Startup India", "Skill India"], correct: "A" },
+      { number: 98, text: "Which mission aims to achieve high-performance computing self-reliance in India?", options: ["National Quantum Mission", "National Supercomputing Mission", "Digital India Mission", "BharatNet Mission"], correct: "B" },
+      { number: 99, text: "Which mission is associated with deep-sea exploration and ocean resources?", options: ["Blue Economy Mission", "Deep Ocean Mission", "Sagarmala Mission", "Samudrayaan Mission"], correct: "B" },
+      { number: 100, text: "India's global ranking in Science & Engineering PhD graduates is:", options: ["1st", "2nd", "3rd", "4th"], correct: "C" }
+    ];
+
+    const answerKey = ["B", "C", "D", "B", "B", "C", "D", "B", "C", "B", "B", "C", "C", "A", "C", "B", "D", "C", "B", "B", "B", "A", "C", "C", "D", "B", "C", "B", "C", "C", "C", "B", "B", "A", "A", "C", "B", "B", "C", "B", "C", "B", "C", "C", "C", "C", "B", "B", "B", "D", "D", "D", "D", "D", "A", "D", "D", "D", "B", "D", "B", "A", "B", "D", "B", "D", "A", "D", "B", "B", "C", "D", "C", "D", "B", "D", "B", "D", "B", "B", "B", "D", "B", "B", "D", "C", "D", "B", "A", "D", "C", "D", "D", "C", "D", "A", "B", "B", "C"];
+
+    const app = {
+      current: 0,
+      answers: new Array(100).fill(null),
+      marked: new Array(100).fill(false),
+      visited: new Array(100).fill(false),
+      timerInterval: null,
+      totalSeconds: 6000,
+
+      startTest() {
+        document.getElementById('landingPage').style.display = 'none';
+        document.getElementById('testInterface').style.display = 'flex';
+        this.createPalette();
+        this.loadQuestion(0);
+        this.startTimer();
+        lucide.createIcons();
+      },
+
+      startTimer() {
+        this.timerInterval = setInterval(() => {
+          this.totalSeconds--;
+          this.updateTimer();
+          if (this.totalSeconds <= 0) {
+            clearInterval(this.timerInterval);
+            this.submitTest();
+          }
+        }, 1000);
+      },
+
+      updateTimer() {
+        const mins = Math.floor(this.totalSeconds / 60);
+        const secs = this.totalSeconds % 60;
+        const timerEl = document.getElementById('timer');
+        timerEl.textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
+        if (this.totalSeconds <= 300) timerEl.classList.add('warning');
+      },
+
+      createPalette() {
+        const palette = document.getElementById('palette');
+        palette.innerHTML = '';
+        for (let i = 0; i < 100; i++) {
+          const btn = document.createElement('button');
+          btn.className = 'palette-btn not-visited';
+          btn.textContent = i + 1;
+          btn.onclick = () => this.loadQuestion(i);
+          palette.appendChild(btn);
+        }
+      },
+
+      loadQuestion(idx) {
+        this.current = idx;
+        this.visited[idx] = true;
+        const q = questions[idx];
+
+        document.getElementById('currentQuestionNum').textContent = idx + 1;
+        document.getElementById('questionNum').textContent = `Q${idx + 1}`;
+        document.getElementById('questionText').textContent = q.text;
+
+        const container = document.getElementById('optionsContainer');
+        container.innerHTML = '';
+        q.options.forEach((opt, i) => {
+          const label = document.createElement('label');
+          label.className = 'option-label';
+          const letter = String.fromCharCode(65 + i);
+
+          const radio = document.createElement('input');
+          radio.type = 'radio';
+          radio.name = `q${idx}`;
+          radio.value = letter;
+          radio.onchange = () => {
+            this.answers[idx] = letter;
+            this.updatePalette();
+          };
+
+          const span = document.createElement('span');
+          span.className = 'option-text';
+          span.textContent = `${letter}. ${opt}`;
+
+          if (this.answers[idx] === letter) {
+            radio.checked = true;
+            label.classList.add('selected');
+          }
+
+          label.appendChild(radio);
+          label.appendChild(span);
+          container.appendChild(label);
+        });
+
+        document.getElementById('prevBtn').disabled = idx === 0;
+        document.getElementById('nextBtn').textContent = idx === 99 ? 'Finish' : 'Next';
+        this.updatePalette();
+      },
+
+      updatePalette() {
+        const btns = document.querySelectorAll('.palette-btn');
+        btns.forEach((btn, i) => {
+          btn.className = 'palette-btn';
+          if (i === this.current) btn.classList.add('current');
+          if (!this.visited[i]) btn.classList.add('not-visited');
+          else if (this.marked[i]) btn.classList.add('marked');
+          else if (this.answers[i]) btn.classList.add('answered');
+          else btn.classList.add('visited');
+        });
+      },
+
+      toggleMark() {
+        this.marked[this.current] = !this.marked[this.current];
+        this.updatePalette();
+      },
+
+      clearResponse() {
+        this.answers[this.current] = null;
+        this.loadQuestion(this.current);
+      },
+
+      previousQuestion() {
+        if (this.current > 0) this.loadQuestion(this.current - 1);
+      },
+
+      nextQuestion() {
+        if (this.current < 99) this.loadQuestion(this.current + 1);
+        else this.openSubmitModal();
+      },
+
+      openSubmitModal() {
+        document.getElementById('submitModal').classList.add('active');
+      },
+
+      closeSubmitModal() {
+        document.getElementById('submitModal').classList.remove('active');
+      },
+
+      submitTest() {
+        clearInterval(this.timerInterval);
+        document.getElementById('submitModal').classList.remove('active');
+        document.getElementById('testInterface').style.display = 'none';
+        document.getElementById('resultPage').style.display = 'block';
+
+        // Calculate statistics with marking scheme
+        let correct = 0;
+        let wrong = 0;
+        let attempted = 0;
+        let totalScore = 0;
+        const correctMarks = 0.833;
+        const negativeMarks = -0.33;
+
+        for (let i = 0; i < 100; i++) {
+          if (this.answers[i] !== null && this.answers[i] !== undefined) {
+            attempted++;
+            if (this.answers[i] === answerKey[i]) {
+              correct++;
+              totalScore += correctMarks;
+            } else {
+              wrong++;
+              totalScore += negativeMarks;
+            }
+          }
+        }
+
+        const unanswered = 100 - attempted;
+        const maxScore = 100 * correctMarks;
+        const percentage = Math.round((totalScore / maxScore) * 100);
+
+        // Update result header
+        document.getElementById('resultScore').textContent = totalScore.toFixed(2);
+        document.getElementById('resultPercentage').textContent = percentage + '%';
+        document.getElementById('statAttempted').textContent = attempted;
+        document.getElementById('statCorrect').textContent = correct;
+        document.getElementById('statWrong').textContent = wrong;
+        document.getElementById('statUnanswered').textContent = unanswered;
+
+        // Generate detailed report - ONLY for answered questions
+        let reportHTML = '';
+        for (let i = 0; i < 100; i++) {
+          const question = questions[i];
+          const userAnswer = this.answers[i];
+          const correctAnswer = answerKey[i];
+          const isAnswered = userAnswer !== null && userAnswer !== undefined;
+          const isCorrect = isAnswered && userAnswer === correctAnswer;
+
+          // Skip unanswered questions
+          if (!isAnswered) {
+            continue;
+          }
+
+          // Determine answer review class
+          let reviewClass = isCorrect ? 'correct' : 'wrong';
+
+          // Get user answer display
+          const userOptionIndex = userAnswer.charCodeAt(0) - 65;
+          let userAnswerDisplay = userAnswer;
+          if (userOptionIndex >= 0 && userOptionIndex < question.options.length) {
+            userAnswerDisplay = `${userAnswer}. ${question.options[userOptionIndex]}`;
+          }
+
+          // Get correct answer display
+          const correctOptionIndex = correctAnswer.charCodeAt(0) - 65;
+          let correctAnswerDisplay = correctAnswer;
+          if (correctOptionIndex >= 0 && correctOptionIndex < question.options.length) {
+            correctAnswerDisplay = `${correctAnswer}. ${question.options[correctOptionIndex]}`;
+          }
+
+          // Build report HTML
+          reportHTML += `
+            <div class="answer-review ${reviewClass}">
+              <div class="answer-q-number">Q${i + 1}</div>
+              <div class="answer-q-text">${question.text}</div>
+              <div class="answer-comparison">
+                <div class="answer-item ${isCorrect ? 'correct' : 'wrong'}">
+                  <div class="answer-item-label">Your Answer</div>
+                  <div class="answer-item-value">${userAnswerDisplay}</div>
+                </div>
+                <div class="answer-item correct">
+                  <div class="answer-item-label">Correct Answer</div>
+                  <div class="answer-item-value">${correctAnswerDisplay}</div>
+                </div>
+              </div>
+            </div>
+          `;
+        }
+
+        document.getElementById('detailedAnswers').innerHTML = reportHTML;
+      },
+
+      restartTest() {
+        this.current = 0;
+        this.answers = new Array(100).fill(null);
+        this.marked = new Array(100).fill(false);
+        this.visited = new Array(100).fill(false);
+        this.totalSeconds = 6000;
+
+        document.getElementById('resultPage').style.display = 'none';
+        document.getElementById('testInterface').style.display = 'flex';
+        this.createPalette();
+        this.loadQuestion(0);
+        this.startTimer();
+      },
+
+      downloadReportPDF() {
+        let correct = 0;
+        let wrong = 0;
+        let attempted = 0;
+        let totalScore = 0;
+        const correctMarks = 0.833;
+        const negativeMarks = -0.33;
+
+        for (let i = 0; i < 100; i++) {
+          if (this.answers[i] !== null && this.answers[i] !== undefined) {
+            attempted++;
+            if (this.answers[i] === answerKey[i]) {
+              correct++;
+              totalScore += correctMarks;
+            } else {
+              wrong++;
+              totalScore += negativeMarks;
+            }
+          }
+        }
+
+        const unanswered = 100 - attempted;
+        const maxScore = 100 * correctMarks;
+        const percentage = Math.round((totalScore / maxScore) * 100);
+
+        // Create HTML content for PDF
+        let htmlContent = `
+          <div style="font-family: Arial, sans-serif; padding: 40px; color: #333;">
+            <h1 style="text-align: center; color: #667eea; margin-bottom: 30px; border-bottom: 3px solid #667eea; padding-bottom: 15px;">
+              CDS CURRENT AFFAIRS MOCK TEST - DETAILED REPORT
+            </h1>
+            
+            <div style="background: #f8f9ff; padding: 20px; border-radius: 8px; margin-bottom: 30px;">
+              <h2 style="color: #667eea; margin-bottom: 15px; font-size: 18px;">SCORE SUMMARY</h2>
+              <table style="width: 100%; border-collapse: collapse;">
+                <tr>
+                  <td style="padding: 8px; border-bottom: 1px solid #ddd;"><strong>Total Score:</strong></td>
+                  <td style="padding: 8px; border-bottom: 1px solid #ddd; text-align: right; color: #2e7d32; font-weight: bold;">${totalScore.toFixed(2)} / ${maxScore.toFixed(2)}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px; border-bottom: 1px solid #ddd;"><strong>Percentage:</strong></td>
+                  <td style="padding: 8px; border-bottom: 1px solid #ddd; text-align: right; color: #2e7d32; font-weight: bold;">${percentage}%</td>
+                </tr>
+              </table>
+            </div>
+
+            <div style="background: #f8f9ff; padding: 20px; border-radius: 8px; margin-bottom: 30px;">
+              <h2 style="color: #667eea; margin-bottom: 15px; font-size: 18px;">STATISTICS</h2>
+              <table style="width: 100%; border-collapse: collapse;">
+                <tr>
+                  <td style="padding: 8px; border-bottom: 1px solid #ddd;"><strong>Total Questions:</strong></td>
+                  <td style="padding: 8px; border-bottom: 1px solid #ddd; text-align: right;">100</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px; border-bottom: 1px solid #ddd;"><strong>Attempted:</strong></td>
+                  <td style="padding: 8px; border-bottom: 1px solid #ddd; text-align: right;">${attempted}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px; border-bottom: 1px solid #ddd;"><strong>Correct Answers:</strong></td>
+                  <td style="padding: 8px; border-bottom: 1px solid #ddd; text-align: right; color: #2e7d32; font-weight: bold;">${correct}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px; border-bottom: 1px solid #ddd;"><strong>Wrong Answers:</strong></td>
+                  <td style="padding: 8px; border-bottom: 1px solid #ddd; text-align: right; color: #d32f2f; font-weight: bold;">${wrong}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px;"><strong>Unanswered:</strong></td>
+                  <td style="padding: 8px; text-align: right;">${unanswered}</td>
+                </tr>
+              </table>
+            </div>
+
+            <div style="background: #f8f9ff; padding: 20px; border-radius: 8px; margin-bottom: 30px;">
+              <h2 style="color: #667eea; margin-bottom: 15px; font-size: 18px;">MARKING SCHEME</h2>
+              <table style="width: 100%; border-collapse: collapse;">
+                <tr>
+                  <td style="padding: 8px; border-bottom: 1px solid #ddd;"><strong>Correct Answer:</strong></td>
+                  <td style="padding: 8px; border-bottom: 1px solid #ddd; text-align: right;">+${correctMarks} marks</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px; border-bottom: 1px solid #ddd;"><strong>Wrong Answer:</strong></td>
+                  <td style="padding: 8px; border-bottom: 1px solid #ddd; text-align: right;">${negativeMarks} marks</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px;"><strong>Unanswered:</strong></td>
+                  <td style="padding: 8px; text-align: right;">0 marks</td>
+                </tr>
+              </table>
+            </div>
+
+            <div style="page-break-before: always; margin-top: 40px;">
+              <h2 style="color: #667eea; margin-bottom: 20px; font-size: 18px; border-bottom: 3px solid #667eea; padding-bottom: 10px;">DETAILED ANSWER REVIEW</h2>
+        `;
+
+        // Add detailed answers
+        for (let i = 0; i < 100; i++) {
+          const question = questions[i];
+          const userAnswer = this.answers[i];
+          const correctAnswer = answerKey[i];
+          const isAnswered = userAnswer !== null && userAnswer !== undefined;
+          const isCorrect = isAnswered && userAnswer === correctAnswer;
+
+          if (!isAnswered) continue;
+
+          const userOptionIndex = userAnswer.charCodeAt(0) - 65;
+          const correctOptionIndex = correctAnswer.charCodeAt(0) - 65;
+
+          const borderColor = isCorrect ? '#2e7d32' : '#d32f2f';
+          const bgColor = isCorrect ? '#f1f8f4' : '#fde7e7';
+          const textColor = isCorrect ? '#2e7d32' : '#d32f2f';
+
+          htmlContent += `
+            <div style="background: ${bgColor}; border-left: 5px solid ${borderColor}; padding: 15px; margin-bottom: 20px; border-radius: 4px;">
+              <div style="color: #667eea; font-weight: bold; margin-bottom: 8px; font-size: 14px;">Q${i + 1}</div>
+              <div style="margin-bottom: 15px; line-height: 1.6; font-size: 13px;">${question.text}</div>
+              <table style="width: 100%; border-collapse: collapse;">
+                <tr>
+                  <td style="padding: 10px; background: white; border: 1px solid #ddd; width: 50%; vertical-align: top;">
+                    <div style="font-weight: bold; color: #666; font-size: 12px; margin-bottom: 5px;">YOUR ANSWER</div>
+                    <div style="color: ${textColor}; font-weight: bold; font-size: 13px;">${userAnswer}. ${question.options[userOptionIndex]}</div>
+                  </td>
+                  <td style="padding: 10px; background: #f1f8f4; border: 1px solid #2e7d32; width: 50%; vertical-align: top;">
+                    <div style="font-weight: bold; color: #2e7d32; font-size: 12px; margin-bottom: 5px;">CORRECT ANSWER</div>
+                    <div style="color: #2e7d32; font-weight: bold; font-size: 13px;">${correctAnswer}. ${question.options[correctOptionIndex]}</div>
+                  </td>
+                </tr>
+              </table>
+              <div style="margin-top: 8px; text-align: right; font-weight: bold; color: ${textColor}; font-size: 12px;">
+                ${isCorrect ? '✓ CORRECT (+' + correctMarks + ')' : '✗ WRONG (' + negativeMarks + ')'}
+              </div>
+            </div>
+          `;
+        }
+
+        htmlContent += `
+            </div>
+            <div style="margin-top: 30px; text-align: center; font-size: 11px; color: #999; border-top: 1px solid #ddd; padding-top: 20px;">
+              Generated on ${new Date().toLocaleString()}
+            </div>
+          </div>
+        `;
+
+        // Create PDF using html2pdf
+        const element = document.createElement('div');
+        element.innerHTML = htmlContent;
+
+        const options = {
+          margin: 5,
+          filename: `CDS_Test_Report_${new Date().getTime()}.pdf`,
+          image: { type: 'jpeg', quality: 0.98 },
+          html2canvas: { scale: 2 },
+          jsPDF: { orientation: 'portrait', unit: 'mm', format: 'a4' }
+        };
+
+        html2pdf().set(options).from(element).save();
+      },
+
+      downloadAnswerKeyJSON() {
+        let correct = 0;
+        let wrong = 0;
+        let attempted = 0;
+        let totalScore = 0;
+        const correctMarks = 0.833;
+        const negativeMarks = -0.33;
+
+        for (let i = 0; i < 100; i++) {
+          if (this.answers[i] !== null && this.answers[i] !== undefined) {
+            attempted++;
+            if (this.answers[i] === answerKey[i]) {
+              correct++;
+              totalScore += correctMarks;
+            } else {
+              wrong++;
+              totalScore += negativeMarks;
+            }
+          }
+        }
+
+        const unanswered = 100 - attempted;
+        const maxScore = 100 * correctMarks;
+        const percentage = Math.round((totalScore / maxScore) * 100);
+
+        const report = {
+          test_name: "CDS Current Affairs Mock Test",
+          date_taken: new Date().toLocaleString(),
+          score_summary: {
+            total_score: parseFloat(totalScore.toFixed(2)),
+            max_score: parseFloat(maxScore.toFixed(2)),
+            percentage: percentage
+          },
+          statistics: {
+            total_questions: 100,
+            attempted: attempted,
+            correct_answers: correct,
+            wrong_answers: wrong,
+            unanswered: unanswered
+          },
+          marking_scheme: {
+            correct_marks: correctMarks,
+            negative_marks: negativeMarks,
+            unanswered_marks: 0
+          },
+          detailed_answers: []
+        };
+
+        for (let i = 0; i < 100; i++) {
+          const question = questions[i];
+          const userAnswer = this.answers[i];
+          const correctAnswer = answerKey[i];
+          const isAnswered = userAnswer !== null && userAnswer !== undefined;
+          const isCorrect = isAnswered && userAnswer === correctAnswer;
+
+          if (!isAnswered) continue;
+
+          const userOptionIndex = userAnswer.charCodeAt(0) - 65;
+          const correctOptionIndex = correctAnswer.charCodeAt(0) - 65;
+
+          report.detailed_answers.push({
+            question_number: i + 1,
+            question_text: question.text,
+            user_answer: userAnswer,
+            user_answer_text: question.options[userOptionIndex],
+            correct_answer: correctAnswer,
+            correct_answer_text: question.options[correctOptionIndex],
+            is_correct: isCorrect,
+            marks_obtained: isCorrect ? correctMarks : negativeMarks
+          });
+        }
+
+        const element = document.createElement('a');
+        element.setAttribute('href', 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(report, null, 2)));
+        element.setAttribute('download', 'CDS_Test_AnswerKey_' + new Date().getTime() + '.json');
+        element.style.display = 'none';
+        document.body.appendChild(element);
+        element.click();
+        document.body.removeChild(element);
+      }
+    };
+
+    lucide.createIcons();
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9dc4d102d1a76ed7',t:'MTc3MzUwNzQzNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

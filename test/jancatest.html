@@ -1,0 +1,1372 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CDS Current Affairs Mock Test</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      width: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #333;
+    }
+
+    .app-wrapper {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Landing Page */
+    .landing-page {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .landing-card {
+      background: white;
+      border-radius: 16px;
+      padding: 60px 40px;
+      max-width: 500px;
+      width: 100%;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      text-align: center;
+    }
+
+    .landing-card h1 {
+      font-size: 2.5rem;
+      color: #667eea;
+      margin-bottom: 30px;
+      font-weight: 700;
+    }
+
+    .test-details {
+      margin: 30px 0;
+      text-align: left;
+      background: #f8f9ff;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .detail-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      font-size: 1.1rem;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .detail-item:last-child {
+      border-bottom: none;
+    }
+
+    .detail-label {
+      font-weight: 600;
+      color: #667eea;
+    }
+
+    .start-btn {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 18px 50px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 30px;
+      font-weight: 700;
+      transition: transform 0.3s, box-shadow 0.3s;
+      width: 100%;
+    }
+
+    .start-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+    }
+
+    /* Test Interface */
+    .test-interface {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header-top {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .timer {
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 10px 20px;
+      border-radius: 8px;
+      min-width: 120px;
+      text-align: center;
+    }
+
+    .timer.warning {
+      background: #ff6b6b;
+      animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+
+    .test-body {
+      display: flex;
+      flex: 1;
+      gap: 0;
+      overflow: hidden;
+    }
+
+    .question-panel {
+      flex: 1;
+      overflow-y: auto;
+      padding: 30px;
+      background: white;
+    }
+
+    .question-block {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .question-number {
+      color: #667eea;
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+    }
+
+    .question-text {
+      color: #333;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 25px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    .options-container {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .option-label {
+      display: flex;
+      align-items: flex-start;
+      padding: 15px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+      background: #fafafa;
+    }
+
+    .option-label:hover {
+      background: #f0f0f0;
+      border-color: #667eea;
+    }
+
+    .option-label input[type="radio"] {
+      margin-right: 15px;
+      margin-top: 2px;
+      cursor: pointer;
+      width: 18px;
+      height: 18px;
+    }
+
+    .option-label.selected {
+      background: #e8ecff;
+      border-color: #667eea;
+    }
+
+    .option-text {
+      flex: 1;
+      line-height: 1.5;
+    }
+
+    .controls {
+      display: flex;
+      gap: 10px;
+      margin-top: 30px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s;
+    }
+
+    .btn-primary {
+      background: #667eea;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #5568d3;
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: #f0f0f0;
+      color: #333;
+      border: 2px solid #ddd;
+    }
+
+    .btn-secondary:hover {
+      background: #e8e8e8;
+    }
+
+    .btn-danger {
+      background: #ff6b6b;
+      color: white;
+    }
+
+    .btn-danger:hover {
+      background: #ee5a52;
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .right-panel {
+      width: 280px;
+      background: white;
+      border-left: 1px solid #e0e0e0;
+      padding: 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .palette-title {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #333;
+    }
+
+    .question-palette {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .palette-btn {
+      width: 100%;
+      aspect-ratio: 1;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.3s;
+    }
+
+    .palette-btn.not-visited {
+      background: #f0f0f0;
+      color: #999;
+    }
+
+    .palette-btn.visited {
+      background: #ffcccc;
+      color: #d32f2f;
+    }
+
+    .palette-btn.answered {
+      background: #c8e6c9;
+      color: #2e7d32;
+    }
+
+    .palette-btn.marked {
+      background: #f3e5f5;
+      color: #7b1fa2;
+    }
+
+    .palette-btn.current {
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
+      border-color: #667eea;
+    }
+
+    /* Modal */
+    .submit-confirmation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .submit-confirmation.active {
+      display: flex;
+    }
+
+    .confirmation-modal {
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      text-align: center;
+      max-width: 400px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .confirmation-modal h2 {
+      color: #333;
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+    }
+
+    .confirmation-modal p {
+      color: #666;
+      margin-bottom: 30px;
+      font-size: 1rem;
+    }
+
+    .confirmation-buttons {
+      display: flex;
+      gap: 15px;
+    }
+
+    .confirmation-buttons button {
+      flex: 1;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s;
+    }
+
+    .btn-submit {
+      background: #667eea;
+      color: white;
+    }
+
+    .btn-submit:hover {
+      background: #5568d3;
+    }
+
+    .btn-cancel {
+      background: #f0f0f0;
+      color: #333;
+    }
+
+    .btn-cancel:hover {
+      background: #e0e0e0;
+    }
+
+    /* Result Page */
+    .result-page {
+      width: 100%;
+      height: 100%;
+      overflow-y: auto;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 40px 20px;
+    }
+
+    .result-container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .result-header {
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      text-align: center;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .result-header h1 {
+      font-size: 2.5rem;
+      color: #667eea;
+      margin-bottom: 10px;
+    }
+
+    .result-score {
+      font-size: 3rem;
+      color: #2e7d32;
+      font-weight: 700;
+      margin: 20px 0;
+    }
+
+    .result-percentage {
+      font-size: 1.5rem;
+      color: #666;
+    }
+
+    .result-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+      margin: 30px 0;
+    }
+
+    .stat-card {
+      background: #f8f9ff;
+      padding: 20px;
+      border-radius: 10px;
+      border-left: 5px solid #667eea;
+      text-align: center;
+    }
+
+    .stat-card h3 {
+      color: #667eea;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .stat-card .value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #333;
+    }
+
+    .stat-card.correct .value {
+      color: #2e7d32;
+    }
+
+    .stat-card.correct {
+      border-left-color: #2e7d32;
+    }
+
+    .stat-card.wrong .value {
+      color: #d32f2f;
+    }
+
+    .stat-card.wrong {
+      border-left-color: #d32f2f;
+    }
+
+    .detailed-report {
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+      margin-bottom: 30px;
+    }
+
+    .detailed-report h2 {
+      color: #333;
+      margin-bottom: 30px;
+      font-size: 1.8rem;
+    }
+
+    .answer-review {
+      margin-bottom: 25px;
+      padding: 20px;
+      border-left: 5px solid #e0e0e0;
+      background: #fafafa;
+      border-radius: 8px;
+    }
+
+    .answer-review.correct {
+      border-left-color: #2e7d32;
+      background: #f1f8f4;
+    }
+
+    .answer-review.wrong {
+      border-left-color: #d32f2f;
+      background: #fde7e7;
+    }
+
+    .answer-q-number {
+      color: #667eea;
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 8px;
+    }
+
+    .answer-q-text {
+      color: #333;
+      margin-bottom: 15px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    .answer-comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-top: 12px;
+    }
+
+    .answer-item {
+      padding: 12px;
+      background: white;
+      border-radius: 6px;
+      border: 1px solid #e0e0e0;
+    }
+
+    .answer-item.correct {
+      border-color: #2e7d32;
+      background: #f1f8f4;
+    }
+
+    .answer-item.wrong {
+      border-color: #d32f2f;
+      background: #fde7e7;
+    }
+
+    .answer-item-label {
+      font-size: 0.85rem;
+      color: #666;
+      font-weight: 600;
+      margin-bottom: 5px;
+      text-transform: uppercase;
+    }
+
+    .answer-item-value {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #333;
+    }
+
+    .answer-item.correct .answer-item-value {
+      color: #2e7d32;
+    }
+
+    .answer-item.wrong .answer-item-value {
+      color: #d32f2f;
+    }
+
+    .review-btn {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      margin-top: 20px;
+      transition: all 0.3s;
+    }
+
+    .review-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .download-section {
+      display: flex;
+      gap: 15px;
+      margin-top: 30px;
+      flex-wrap: wrap;
+    }
+
+    .download-btn {
+      background: #2e7d32;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s;
+    }
+
+    .download-btn:hover {
+      background: #1b5e20;
+      transform: translateY(-2px);
+    }
+
+    .download-btn i {
+      width: 18px;
+      height: 18px;
+    }
+
+    @media (max-width: 768px) {
+      .test-body {
+        flex-direction: column;
+      }
+
+      .right-panel {
+        width: 100%;
+        border-left: none;
+        max-height: 200px;
+      }
+
+      .answer-comparison {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body>
+  <div class="app-wrapper" id="app">
+   <!-- Landing Page -->
+   <div class="landing-page" id="landingPage">
+    <div class="landing-card">
+     <h1>CDS January Current Affairs Mock Test</h1>
+     <div class="test-details">
+      <div class="detail-item">
+       <span class="detail-label">Questions:</span> <span>100</span>
+      </div>
+      <div class="detail-item">
+       <span class="detail-label">Time:</span> <span>100 Minutes</span>
+      </div>
+      <div class="detail-item">
+       <span class="detail-label">Correct Answer:</span> <span>0.833 marks</span>
+      </div>
+      <div class="detail-item">
+       <span class="detail-label">Negative Marking:</span> <span>-0.33 marks</span>
+      </div>
+     </div><button class="start-btn" onclick="app.startTest()">START TEST</button>
+    </div>
+   </div><!-- Test Interface -->
+   <div class="test-interface" id="testInterface" style="display: none;">
+    <div class="header-top">
+     <div style="font-size: 1.2rem; font-weight: 700;">
+      Question <span id="currentQuestionNum">1</span>/100
+     </div>
+     <div class="timer" id="timer">
+      100:00
+     </div>
+    </div>
+    <div class="test-body">
+     <div class="question-panel">
+      <div class="question-block">
+       <div class="question-number" id="questionNum">
+        Q1
+       </div>
+       <div class="question-text" id="questionText"></div>
+       <div class="options-container" id="optionsContainer"></div>
+       <div class="controls">
+        <button class="btn btn-secondary" onclick="app.previousQuestion()" id="prevBtn" disabled>Previous</button> <button class="btn btn-secondary" onclick="app.toggleMark()">Mark for Review</button> <button class="btn btn-secondary" onclick="app.clearResponse()">Clear</button> <button class="btn btn-primary" onclick="app.nextQuestion()" id="nextBtn">Next</button> <button class="btn btn-danger" onclick="app.openSubmitModal()">Submit</button>
+       </div>
+      </div>
+     </div>
+     <div class="right-panel">
+      <div class="palette-title">
+       Question Palette
+      </div>
+      <div class="question-palette" id="palette"></div>
+     </div>
+    </div>
+   </div><!-- Result Page -->
+   <div class="result-page" id="resultPage" style="display: none;">
+    <div class="result-container">
+     <div class="result-header">
+      <h1>Test Completed!</h1>
+      <div class="result-score" id="resultScore">
+       0
+      </div>
+      <div class="result-percentage" id="resultPercentage">
+       0%
+      </div>
+      <div class="result-stats">
+       <div class="stat-card">
+        <h3>Total</h3>
+        <div class="value">
+         100
+        </div>
+       </div>
+       <div class="stat-card">
+        <h3>Attempted</h3>
+        <div class="value" id="statAttempted">
+         0
+        </div>
+       </div>
+       <div class="stat-card correct">
+        <h3>Correct</h3>
+        <div class="value" id="statCorrect">
+         0
+        </div>
+       </div>
+       <div class="stat-card wrong">
+        <h3>Wrong</h3>
+        <div class="value" id="statWrong">
+         0
+        </div>
+       </div>
+       <div class="stat-card">
+        <h3>Unanswered</h3>
+        <div class="value" id="statUnanswered">
+         0
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="detailed-report">
+      <h2>Answer Review</h2>
+      <div id="detailedAnswers"></div>
+      <div class="download-section">
+       <button class="download-btn" onclick="app.downloadReportPDF()"> <i data-lucide="download"></i> Download Report (PDF) </button>
+      </div><button class="review-btn" onclick="app.restartTest()">Take Test Again</button>
+     </div>
+    </div>
+   </div>
+  </div><!-- Submit Modal -->
+  <div class="submit-confirmation" id="submitModal">
+   <div class="confirmation-modal">
+    <h2>Submit Test?</h2>
+    <p>Are you sure? You cannot change answers after submission.</p>
+    <div class="confirmation-buttons">
+     <button class="btn-submit" onclick="app.submitTest()">Submit</button> <button class="btn-cancel" onclick="app.closeSubmitModal()">Cancel</button>
+    </div>
+   </div>
+  </div>
+  <script>
+    const questions = [
+      { number: 1, text: "The Jyoti–Bishnu International Art Centre has been inaugurated in:", options: ["Guwahati", "Jaipur", "Bhopal", "Lucknow"], correct: "A" },
+
+      { number: 2, text: "Consider the following statements regarding IAIRO:\n1.\tIt is established in Gujarat.\n2.\tIt is India's first AI research institution under PPP model.\n3.\tIt is located in GIFT City.\nWhich of the statements given above is/are correct?", options: ["1 only", "1 and 2 only", "2 and 3 only", "1, 2 and 3"], correct: "D" },
+
+      { number: 3, text: "India recently surpassed which country to become the world's fourth-largest economy?", options: ["Germany", "Japan", "UK", "France"], correct: "B" },
+
+      { number: 4, text: "Which state constituted its 8th State Pay Commission first in India?", options: ["Gujarat", "Assam", "Maharashtra", "Tamil Nadu"], correct: "B" },
+
+      { number: 5, text: "The 'e-Swasthya Samvad' initiative is associated with:", options: ["Education sector", "Health administration", "Agriculture reforms", "Transport system"], correct: "B" },
+
+      { number: 6, text: "India became the world's largest producer of:", options: ["Wheat", "Rice", "Sugar", "Cotton"], correct: "B" },
+
+      { number: 7, text: "The Bhoramdev Corridor Project is located in:", options: ["Odisha", "Jharkhand", "Chhattisgarh", "Madhya Pradesh"], correct: "C" },
+
+      { number: 8, text: "India’s first government hospital-based AI clinic was established in:", options: ["Delhi", "Lucknow", "Greater Noida", "Jaipur"], correct: "C" },
+
+      { number: 9, text: "The Sandalwood Leopard was sighted in:", options: ["Rajasthan", "Karnataka", "Kerala", "Odisha"], correct: "B" },
+
+      { number: 10, text: "Operation Milap is related to:", options: ["Cyber security", "Missing persons tracking", "Border surveillance", "Drug control"], correct: "B" },
+
+      { number: 11, text: "India’s first hydrogen-powered train will run between:", options: ["Delhi–Agra", "Jind–Sonipat", "Mumbai–Pune", "Chennai–Bangalore"], correct: "B" },
+
+      { number: 12, text: "The Aadhaar mascot 'Udai' was launched by:", options: ["UIDAI", "NITI Aayog", "MeitY", "ISRO"], correct: "A" },
+
+      { number: 13, text: "The National Textiles Ministers’ Conference 2026 was held in:", options: ["Delhi", "Mumbai", "Guwahati", "Ahmedabad"], correct: "C" },
+
+      { number: 14, text: "The Bhadrakali inscription is associated with:", options: ["Jagannath Temple", "Somnath Temple", "Meenakshi Temple", "Konark Temple"], correct: "B" },
+
+      { number: 15, text: "The Wangchhu Hydro Electricity Project is located in:", options: ["Nepal", "India", "Bhutan", "Myanmar"], correct: "C" },
+
+      { number: 16, text: "Sanskaar Shaala programme is aimed at:", options: ["Adult education", "Children's value education", "Skill development", "Women empowerment"], correct: "B" },
+
+      { number: 17, text: "PANKHUDI portal is related to:", options: ["Agriculture schemes", "Women and child development", "Defence services", "Urban planning"], correct: "B" },
+
+      { number: 18, text: "Bamanwas Kankar Panchayat is known for:", options: ["Smart city model", "Organic certification", "Tourism development", "Industrial zone"], correct: "B" },
+
+      { number: 19, text: "BHASHINI initiative focuses on:", options: ["Financial inclusion", "Language AI ecosystem", "Cyber security", "Defence communication"], correct: "B" },
+
+      { number: 20, text: "Telangana removed which restriction for local elections?", options: ["Age limit", "Reservation quota", "Two-child norm", "Educational qualification"], correct: "C" },
+
+      { number: 21, text: "Melghat Tiger Reserve is located in:", options: ["Gujarat", "Maharashtra", "Madhya Pradesh", "Odisha"], correct: "B" },
+
+      { number: 22, text: "Dong village is known for:", options: ["Highest rainfall", "Earliest sunrise", "Largest forest cover", "Longest river"], correct: "B" },
+
+      { number: 23, text: "Dulhasti Stage-II Hydel Project is located on which river?", options: ["Ganga", "Yamuna", "Chenab", "Brahmaputra"], correct: "C" },
+
+      { number: 24, text: "Goa’s new district headquarters will be at:", options: ["Panaji", "Margao", "Quepem", "Vasco"], correct: "C" },
+
+      { number: 25, text: "Rani Velu Nachiyar is known for:", options: ["Social reform", "War against British", "Literary works", "Economic reforms"], correct: "B" },
+
+      { number: 26, text: "India became first to commercially produce:", options: ["Green hydrogen", "Bio-bitumen", "Lithium batteries", "Solar panels"], correct: "B" },
+
+      { number: 27, text: "Boda Tyohar is associated with which tribe?", options: ["Gond", "Santhal", "Hatti", "Bhil"], correct: "C" },
+
+      { number: 28, text: "India’s first paperless district court is in:", options: ["Delhi", "Mumbai", "Wayanad", "Chennai"], correct: "C" },
+
+      { number: 29, text: "Nagauri Ashwagandha received:", options: ["UNESCO tag", "GI tag", "WHO approval", "ISO certification"], correct: "B" },
+
+      { number: 30, text: "India Energy Week 2026 was held in:", options: ["Mumbai", "Goa", "Delhi", "Kochi"], correct: "B" },
+
+      { number: 31, text: "The theme of Republic Day 2026 was:", options: ["Azadi ka Amrit Mahotsav", "Digital India", "150 Years of Vande Mataram", "Make in India"], correct: "C" },
+
+      { number: 32, text: "Project Dolphin was launched in:", options: ["2018", "2019", "2020", "2021"], correct: "C" },
+
+      { number: 33, text: "India’s first sleeper Vande Bharat connects:", options: ["Delhi–Mumbai", "Howrah–Guwahati", "Chennai–Hyderabad", "Bangalore–Mysore"], correct: "B" },
+
+      { number: 34, text: "Kokborok Day is celebrated in:", options: ["Assam", "Tripura", "Manipur", "Nagaland"], correct: "B" },
+
+      { number: 35, text: "India’s Sovereign AI Park will be established in:", options: ["Karnataka", "Tamil Nadu", "Gujarat", "Maharashtra"], correct: "B" },
+
+      { number: 36, text: "World’s largest green ammonia project in India will be set up in:", options: ["Vizag", "Kakinada", "Chennai", "Tuticorin"], correct: "B" },
+
+      { number: 37, text: "Living root bridges are found in:", options: ["Nagaland", "Meghalaya", "Mizoram", "Assam"], correct: "B" },
+
+      { number: 38, text: "Aame Padhiba Aama Bhasare scheme belongs to:", options: ["Odisha", "Bihar", "Jharkhand", "West Bengal"], correct: "A" },
+
+      { number: 39, text: "Bharat Rang Mahotsav is related to:", options: ["Music", "Theatre", "Dance", "Cinema"], correct: "B" },
+
+      { number: 40, text: "Which state introduced menopause clinics in government hospitals?", options: ["Kerala", "Tamil Nadu", "Maharashtra", "Punjab"], correct: "C" },
+
+      { number: 41, text: "Kerala declared which organism as its State Microbe?", options: ["E. coli", "Bacillus subtilis", "Lactobacillus", "Rhizobium"], correct: "B" },
+
+      { number: 42, text: "The Namo Laxmi Scheme is launched by which state?", options: ["Rajasthan", "Madhya Pradesh", "Gujarat", "Haryana"], correct: "C" },
+
+      { number: 43, text: "The 'Year of Agriculture 2026' has been declared by:", options: ["Punjab", "Uttar Pradesh", "Madhya Pradesh", "Bihar"], correct: "C" },
+
+      { number: 44, text: "Jeevan Raksha Padak Awards are related to:", options: ["Military bravery", "Saving lives", "Sports excellence", "Civil services"], correct: "B" },
+
+      { number: 45, text: "Battery Pack Aadhaar Number (BPAN) is associated with:", options: ["Mobile phones", "Electric vehicle batteries", "Bank accounts", "Aadhaar cards"], correct: "B" },
+
+      { number: 46, text: "Rare Earth Elements consist of how many elements?", options: ["10", "12", "17", "21"], correct: "C" },
+
+      { number: 47, text: "DGMS operates under which ministry?", options: ["Ministry of Mines", "Ministry of Labour & Employment", "Ministry of Industry", "Ministry of Energy"], correct: "B" },
+
+      { number: 48, text: "DGMS headquarters is located in:", options: ["Ranchi", "Dhanbad", "Bokaro", "Jamshedpur"], correct: "B" },
+
+      { number: 49, text: "53rd New Delhi World Book Fair theme was:", options: ["Digital India", "Indian Military History", "Vocal for Local", "Knowledge Economy"], correct: "B" },
+
+      { number: 50, text: "PESA Act mainly deals with:", options: ["Urban governance", "Tribal self-governance", "Industrial policy", "Banking reforms"], correct: "B" },
+
+      { number: 51, text: "PESA Act applies to which areas?", options: ["Urban areas", "Fifth Schedule areas", "Coastal zones", "Industrial zones"], correct: "B" },
+
+      { number: 52, text: "Which state implemented PESA rules recently?", options: ["Odisha", "Jharkhand", "Chhattisgarh", "Gujarat"], correct: "B" },
+
+      { number: 53, text: "Madhya Pradesh recorded highest tiger deaths in:", options: ["2023", "2024", "2025", "2026"], correct: "C" },
+
+      { number: 54, text: "‘Eti Koli Duti Paat’ scheme is associated with:", options: ["Farmers", "Tea workers", "Fishermen", "Artisans"], correct: "B" },
+
+      { number: 55, text: "PRAGATI platform was launched in:", options: ["2014", "2015", "2016", "2017"], correct: "B" },
+
+      { number: 56, text: "PRAGATI is related to:", options: ["Defence system", "Governance monitoring", "Banking reform", "Agriculture"], correct: "B" },
+
+      { number: 57, text: "Nimesulide is classified as:", options: ["Antibiotic", "NSAID", "Hormone", "Vaccine"], correct: "B" },
+
+      { number: 58, text: "Akasa Air became member of:", options: ["UNESCO", "IATA", "ICAO", "WTO"], correct: "B" },
+
+      { number: 59, text: "Indore faced outbreak due to:", options: ["Air pollution", "Water contamination", "Food poisoning", "Industrial waste"], correct: "B" },
+
+      { number: 60, text: "Lakkundi village is located in:", options: ["Tamil Nadu", "Karnataka", "Kerala", "Andhra Pradesh"], correct: "B" },
+
+      { number: 61, text: "Lakkundi is known as:", options: ["City of lakes", "Village of temples", "Village of hundred wells and temples", "Temple town"], correct: "C" },
+
+      { number: 62, text: "Padma Awards are announced on:", options: ["Independence Day", "Republic Day", "Gandhi Jayanti", "Army Day"], correct: "B" },
+
+      { number: 63, text: "Operation Sahyadri Checkmate is related to:", options: ["Defence exercise", "Anti-narcotics operation", "Cyber security", "Forest conservation"], correct: "B" },
+
+      { number: 64, text: "YJ-20 missile is developed by:", options: ["USA", "Russia", "China", "France"], correct: "C" },
+
+      { number: 65, text: "Mukalla city, recently in news, is in:", options: ["Iraq", "Yemen", "Iran", "Syria"], correct: "B" },
+
+      { number: 66, text: "Legal rights to stingless bees were granted by:", options: ["Brazil", "Peru", "Chile", "Argentina"], correct: "B" },
+
+      { number: 67, text: "QUAD includes which of the following countries?", options: ["India, China, Japan, USA", "India, USA, Australia, Japan", "India, UK, France, USA", "India, Russia, China, Japan"], correct: "B" },
+
+      { number: 68, text: "Global Buddhist Summit 2026 will be held in:", options: ["Varanasi", "New Delhi", "Bodh Gaya", "Sarnath"], correct: "B" },
+
+      { number: 69, text: "Operation Hawkeye Strike was conducted by:", options: ["Russia", "China", "USA", "France"], correct: "C" },
+
+      { number: 70, text: "International Spice Conference 2026 will be held in:", options: ["Kochi", "Mumbai", "Goa", "Chennai"], correct: "A" },
+
+      { number: 71, text: "Bulgaria adopted which currency recently?", options: ["Dollar", "Euro", "Pound", "Yen"], correct: "B" },
+
+      { number: 72, text: "Type 052D destroyer belongs to:", options: ["India", "USA", "China", "Japan"], correct: "C" },
+
+      { number: 73, text: "ADMM-Plus includes how many ASEAN members?", options: ["8", "10", "11", "12"], correct: "C" },
+
+      { number: 74, text: "Delcy Rodríguez became interim President of:", options: ["Brazil", "Venezuela", "Peru", "Chile"], correct: "B" },
+
+      { number: 75, text: "CAES power plant recently operationalised in:", options: ["India", "USA", "China", "Germany"], correct: "C" },
+
+      { number: 76, text: "South Korea passed which law for AI governance?", options: ["AI Regulation Act", "AI Basic Act", "Digital Act", "Tech Governance Act"], correct: "B" },
+
+      { number: 77, text: "India signed MoU with Bhutan for:", options: ["Trade", "Military training", "Judicial cooperation", "Tourism"], correct: "C" },
+
+      { number: 78, text: "Gulf Shield 2026 exercise was conducted in:", options: ["UAE", "Saudi Arabia", "Qatar", "Oman"], correct: "B" },
+
+      { number: 79, text: "Oldest rock art discovered recently is located in:", options: ["Australia", "Indonesia", "China", "Peru"], correct: "B" },
+
+      { number: 80, text: "Abla El Hawary is associated with:", options: ["Iran", "Egypt", "Turkey", "Jordan"], correct: "B" },
+
+      { number: 81, text: "International Solar Alliance (ISA) headquarters is located in:", options: ["New Delhi", "Gurugram", "Paris", "Mumbai"], correct: "B" },
+
+      { number: 82, text: "ISA was launched in which year?", options: ["2014", "2015", "2016", "2017"], correct: "B" },
+
+      { number: 83, text: "ISA was jointly launched by India and:", options: ["USA", "France", "Germany", "UK"], correct: "B" },
+
+      { number: 84, text: "BRICS Presidency 2026 logo is inspired by:", options: ["Ashoka Chakra", "Lotus", "Peacock", "Tricolour"], correct: "B" },
+
+      { number: 85, text: "BRICS originally consisted of how many countries?", options: ["3", "4", "5", "6"], correct: "C" },
+
+      { number: 86, text: "Iran is NOT a member of which organization?", options: ["OPEC", "SCO", "BRICS", "NATO"], correct: "D" },
+
+      { number: 87, text: "Justice Mission-2025 military drill was conducted by:", options: ["India", "China", "USA", "Russia"], correct: "B" },
+
+      { number: 88, text: "G7 was originally formed as G6 in:", options: ["1973", "1975", "1976", "1980"], correct: "B" },
+
+      { number: 89, text: "Which country joined G6 to form G7?", options: ["Japan", "Canada", "Italy", "Germany"], correct: "B" },
+
+      { number: 90, text: "Russia was expelled from G8 in:", options: ["2012", "2014", "2016", "2018"], correct: "B" },
+
+      { number: 91, text: "Pax Silica initiative is led by:", options: ["China", "USA", "EU", "Japan"], correct: "B" },
+
+      { number: 92, text: "Operation Absolute Resolve is related to:", options: ["Climate change", "Military operation", "Trade agreement", "Cyber security"], correct: "B" },
+
+      { number: 93, text: "Venezuela is known for:", options: ["Largest gold reserves", "Largest oil reserves", "Largest coal reserves", "Largest gas reserves"], correct: "B" },
+
+      { number: 94, text: "Angel Falls is located in:", options: ["Brazil", "Peru", "Venezuela", "Chile"], correct: "C" },
+
+      { number: 95, text: "MERCOSUR headquarters is located in:", options: ["Buenos Aires", "Brasilia", "Montevideo", "Lima"], correct: "C" },
+
+      { number: 96, text: "Chabahar Port is located in:", options: ["UAE", "Iran", "Oman", "Qatar"], correct: "B" },
+
+      { number: 97, text: "Greenland is controlled by:", options: ["USA", "Norway", "Denmark", "Canada"], correct: "C" },
+
+      { number: 98, text: "Greenland is rich in:", options: ["Oil only", "Gold only", "Rare earth elements", "Coal only"], correct: "C" },
+
+      { number: 99, text: "Jakobshavn Glacier is located in:", options: ["Antarctica", "Greenland", "Iceland", "Canada"], correct: "B" },
+
+      { number: 100, text: "Greenland is geographically located between:", options: ["Asia and Europe", "Africa and Europe", "North America and Europe", "Asia and Africa"], correct: "C" }
+];
+
+   const answerKey = [
+"A","D","B","B","B","B","C","C","B","B",
+"B","A","C","B","C","B","B","B","B","C",
+"B","B","C","C","B","B","C","C","B","B",
+"C","C","B","B","B","B","B","A","B","C",
+"B","C","C","B","B","C","B","B","B","B",
+"B","B","B","B","B","B","B","B","B","C",
+"B","B","B","B","B","B","B","B","B","C",
+"B","C","C","B","C","C","C","B","C","C",
+"B","B","C","C","B","C","C","B","C","C"
+];
+    const app = {
+      current: 0,
+      answers: new Array(100).fill(null),
+      marked: new Array(100).fill(false),
+      visited: new Array(100).fill(false),
+      timerInterval: null,
+      totalSeconds: 6000,
+
+      startTest() {
+        document.getElementById('landingPage').style.display = 'none';
+        document.getElementById('testInterface').style.display = 'flex';
+        this.createPalette();
+        this.loadQuestion(0);
+        this.startTimer();
+        lucide.createIcons();
+      },
+
+      startTimer() {
+        this.timerInterval = setInterval(() => {
+          this.totalSeconds--;
+          this.updateTimer();
+          if (this.totalSeconds <= 0) {
+            clearInterval(this.timerInterval);
+            this.submitTest();
+          }
+        }, 1000);
+      },
+
+      updateTimer() {
+        const mins = Math.floor(this.totalSeconds / 60);
+        const secs = this.totalSeconds % 60;
+        const timerEl = document.getElementById('timer');
+        timerEl.textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
+        if (this.totalSeconds <= 300) timerEl.classList.add('warning');
+      },
+
+      createPalette() {
+        const palette = document.getElementById('palette');
+        palette.innerHTML = '';
+        for (let i = 0; i < 100; i++) {
+          const btn = document.createElement('button');
+          btn.className = 'palette-btn not-visited';
+          btn.textContent = i + 1;
+          btn.onclick = () => this.loadQuestion(i);
+          palette.appendChild(btn);
+        }
+      },
+
+      loadQuestion(idx) {
+        this.current = idx;
+        this.visited[idx] = true;
+        const q = questions[idx];
+
+        document.getElementById('currentQuestionNum').textContent = idx + 1;
+        document.getElementById('questionNum').textContent = `Q${idx + 1}`;
+        document.getElementById('questionText').textContent = q.text;
+
+        const container = document.getElementById('optionsContainer');
+        container.innerHTML = '';
+        q.options.forEach((opt, i) => {
+          const label = document.createElement('label');
+          label.className = 'option-label';
+          const letter = String.fromCharCode(65 + i);
+
+          const radio = document.createElement('input');
+          radio.type = 'radio';
+          radio.name = `q${idx}`;
+          radio.value = letter;
+          radio.onchange = () => {
+            this.answers[idx] = letter;
+            this.updatePalette();
+          };
+
+          const span = document.createElement('span');
+          span.className = 'option-text';
+          span.textContent = `${letter}. ${opt}`;
+
+          if (this.answers[idx] === letter) {
+            radio.checked = true;
+            label.classList.add('selected');
+          }
+
+          label.appendChild(radio);
+          label.appendChild(span);
+          container.appendChild(label);
+        });
+
+        document.getElementById('prevBtn').disabled = idx === 0;
+        document.getElementById('nextBtn').textContent = idx === 99 ? 'Finish' : 'Next';
+        this.updatePalette();
+      },
+
+      updatePalette() {
+        const btns = document.querySelectorAll('.palette-btn');
+        btns.forEach((btn, i) => {
+          btn.className = 'palette-btn';
+          if (i === this.current) btn.classList.add('current');
+          if (!this.visited[i]) btn.classList.add('not-visited');
+          else if (this.marked[i]) btn.classList.add('marked');
+          else if (this.answers[i]) btn.classList.add('answered');
+          else btn.classList.add('visited');
+        });
+      },
+
+      toggleMark() {
+        this.marked[this.current] = !this.marked[this.current];
+        this.updatePalette();
+      },
+
+      clearResponse() {
+        this.answers[this.current] = null;
+        this.loadQuestion(this.current);
+      },
+
+      previousQuestion() {
+        if (this.current > 0) this.loadQuestion(this.current - 1);
+      },
+
+      nextQuestion() {
+        if (this.current < 99) this.loadQuestion(this.current + 1);
+        else this.openSubmitModal();
+      },
+
+      openSubmitModal() {
+        document.getElementById('submitModal').classList.add('active');
+      },
+
+      closeSubmitModal() {
+        document.getElementById('submitModal').classList.remove('active');
+      },
+
+      submitTest() {
+        clearInterval(this.timerInterval);
+        document.getElementById('submitModal').classList.remove('active');
+        document.getElementById('testInterface').style.display = 'none';
+        document.getElementById('resultPage').style.display = 'block';
+
+        // Calculate statistics with marking scheme
+        let correct = 0;
+        let wrong = 0;
+        let attempted = 0;
+        let totalScore = 0;
+        const correctMarks = 0.833;
+        const negativeMarks = -0.33;
+
+        for (let i = 0; i < 100; i++) {
+          if (this.answers[i] !== null && this.answers[i] !== undefined) {
+            attempted++;
+            if (this.answers[i] === answerKey[i]) {
+              correct++;
+              totalScore += correctMarks;
+            } else {
+              wrong++;
+              totalScore += negativeMarks;
+            }
+          }
+        }
+
+        const unanswered = 100 - attempted;
+        const maxScore = 100 * correctMarks;
+        const percentage = Math.round((totalScore / maxScore) * 100);
+
+        // Update result header
+        document.getElementById('resultScore').textContent = totalScore.toFixed(2);
+        document.getElementById('resultPercentage').textContent = percentage + '%';
+        document.getElementById('statAttempted').textContent = attempted;
+        document.getElementById('statCorrect').textContent = correct;
+        document.getElementById('statWrong').textContent = wrong;
+        document.getElementById('statUnanswered').textContent = unanswered;
+
+        // Generate detailed report - ONLY for answered questions
+        let reportHTML = '';
+        for (let i = 0; i < 100; i++) {
+          const question = questions[i];
+          const userAnswer = this.answers[i];
+          const correctAnswer = answerKey[i];
+          const isAnswered = userAnswer !== null && userAnswer !== undefined;
+          const isCorrect = isAnswered && userAnswer === correctAnswer;
+
+          // Skip unanswered questions
+          if (!isAnswered) {
+            continue;
+          }
+
+          // Determine answer review class
+          let reviewClass = isCorrect ? 'correct' : 'wrong';
+
+          // Get user answer display
+          const userOptionIndex = userAnswer.charCodeAt(0) - 65;
+          let userAnswerDisplay = userAnswer;
+          if (userOptionIndex >= 0 && userOptionIndex < question.options.length) {
+            userAnswerDisplay = `${userAnswer}. ${question.options[userOptionIndex]}`;
+          }
+
+          // Get correct answer display
+          const correctOptionIndex = correctAnswer.charCodeAt(0) - 65;
+          let correctAnswerDisplay = correctAnswer;
+          if (correctOptionIndex >= 0 && correctOptionIndex < question.options.length) {
+            correctAnswerDisplay = `${correctAnswer}. ${question.options[correctOptionIndex]}`;
+          }
+
+          // Build report HTML
+          reportHTML += `
+            <div class="answer-review ${reviewClass}">
+              <div class="answer-q-number">Q${i + 1}</div>
+              <div class="answer-q-text">${question.text}</div>
+              <div class="answer-comparison">
+                <div class="answer-item ${isCorrect ? 'correct' : 'wrong'}">
+                  <div class="answer-item-label">Your Answer</div>
+                  <div class="answer-item-value">${userAnswerDisplay}</div>
+                </div>
+                <div class="answer-item correct">
+                  <div class="answer-item-label">Correct Answer</div>
+                  <div class="answer-item-value">${correctAnswerDisplay}</div>
+                </div>
+              </div>
+            </div>
+          `;
+        }
+
+        document.getElementById('detailedAnswers').innerHTML = reportHTML;
+      },
+
+      restartTest() {
+        this.current = 0;
+        this.answers = new Array(100).fill(null);
+        this.marked = new Array(100).fill(false);
+        this.visited = new Array(100).fill(false);
+        this.totalSeconds = 6000;
+
+        document.getElementById('resultPage').style.display = 'none';
+        document.getElementById('testInterface').style.display = 'flex';
+        this.createPalette();
+        this.loadQuestion(0);
+        this.startTimer();
+      },
+
+      downloadReportPDF() {
+        let correct = 0;
+        let wrong = 0;
+        let attempted = 0;
+        let totalScore = 0;
+        const correctMarks = 0.833;
+        const negativeMarks = -0.33;
+
+        for (let i = 0; i < 100; i++) {
+          if (this.answers[i] !== null && this.answers[i] !== undefined) {
+            attempted++;
+            if (this.answers[i] === answerKey[i]) {
+              correct++;
+              totalScore += correctMarks;
+            } else {
+              wrong++;
+              totalScore += negativeMarks;
+            }
+          }
+        }
+
+        const unanswered = 100 - attempted;
+        const maxScore = 100 * correctMarks;
+        const percentage = Math.round((totalScore / maxScore) * 100);
+
+        // Create HTML content for PDF
+        let htmlContent = `
+          <div style="font-family: Arial, sans-serif; padding: 40px; color: #333;">
+            <h1 style="text-align: center; color: #667eea; margin-bottom: 30px; border-bottom: 3px solid #667eea; padding-bottom: 15px;">
+              CDS CURRENT AFFAIRS MOCK TEST - DETAILED REPORT
+            </h1>
+            
+            <div style="background: #f8f9ff; padding: 20px; border-radius: 8px; margin-bottom: 30px;">
+              <h2 style="color: #667eea; margin-bottom: 15px; font-size: 18px;">SCORE SUMMARY</h2>
+              <table style="width: 100%; border-collapse: collapse;">
+                <tr>
+                  <td style="padding: 8px; border-bottom: 1px solid #ddd;"><strong>Total Score:</strong></td>
+                  <td style="padding: 8px; border-bottom: 1px solid #ddd; text-align: right; color: #2e7d32; font-weight: bold;">${totalScore.toFixed(2)} / ${maxScore.toFixed(2)}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px; border-bottom: 1px solid #ddd;"><strong>Percentage:</strong></td>
+                  <td style="padding: 8px; border-bottom: 1px solid #ddd; text-align: right; color: #2e7d32; font-weight: bold;">${percentage}%</td>
+                </tr>
+              </table>
+            </div>
+
+            <div style="background: #f8f9ff; padding: 20px; border-radius: 8px; margin-bottom: 30px;">
+              <h2 style="color: #667eea; margin-bottom: 15px; font-size: 18px;">STATISTICS</h2>
+              <table style="width: 100%; border-collapse: collapse;">
+                <tr>
+                  <td style="padding: 8px; border-bottom: 1px solid #ddd;"><strong>Total Questions:</strong></td>
+                  <td style="padding: 8px; border-bottom: 1px solid #ddd; text-align: right;">100</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px; border-bottom: 1px solid #ddd;"><strong>Attempted:</strong></td>
+                  <td style="padding: 8px; border-bottom: 1px solid #ddd; text-align: right;">${attempted}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px; border-bottom: 1px solid #ddd;"><strong>Correct Answers:</strong></td>
+                  <td style="padding: 8px; border-bottom: 1px solid #ddd; text-align: right; color: #2e7d32; font-weight: bold;">${correct}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px; border-bottom: 1px solid #ddd;"><strong>Wrong Answers:</strong></td>
+                  <td style="padding: 8px; border-bottom: 1px solid #ddd; text-align: right; color: #d32f2f; font-weight: bold;">${wrong}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px;"><strong>Unanswered:</strong></td>
+                  <td style="padding: 8px; text-align: right;">${unanswered}</td>
+                </tr>
+              </table>
+            </div>
+
+            <div style="background: #f8f9ff; padding: 20px; border-radius: 8px; margin-bottom: 30px;">
+              <h2 style="color: #667eea; margin-bottom: 15px; font-size: 18px;">MARKING SCHEME</h2>
+              <table style="width: 100%; border-collapse: collapse;">
+                <tr>
+                  <td style="padding: 8px; border-bottom: 1px solid #ddd;"><strong>Correct Answer:</strong></td>
+                  <td style="padding: 8px; border-bottom: 1px solid #ddd; text-align: right;">+${correctMarks} marks</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px; border-bottom: 1px solid #ddd;"><strong>Wrong Answer:</strong></td>
+                  <td style="padding: 8px; border-bottom: 1px solid #ddd; text-align: right;">${negativeMarks} marks</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px;"><strong>Unanswered:</strong></td>
+                  <td style="padding: 8px; text-align: right;">0 marks</td>
+                </tr>
+              </table>
+            </div>
+
+            <div style="page-break-before: always; margin-top: 40px;">
+              <h2 style="color: #667eea; margin-bottom: 20px; font-size: 18px; border-bottom: 3px solid #667eea; padding-bottom: 10px;">DETAILED ANSWER REVIEW</h2>
+        `;
+
+        // Add detailed answers
+        for (let i = 0; i < 100; i++) {
+          const question = questions[i];
+          const userAnswer = this.answers[i];
+          const correctAnswer = answerKey[i];
+          const isAnswered = userAnswer !== null && userAnswer !== undefined;
+          const isCorrect = isAnswered && userAnswer === correctAnswer;
+
+          if (!isAnswered) continue;
+
+          const userOptionIndex = userAnswer.charCodeAt(0) - 65;
+          const correctOptionIndex = correctAnswer.charCodeAt(0) - 65;
+
+          const borderColor = isCorrect ? '#2e7d32' : '#d32f2f';
+          const bgColor = isCorrect ? '#f1f8f4' : '#fde7e7';
+          const textColor = isCorrect ? '#2e7d32' : '#d32f2f';
+
+          htmlContent += `
+            <div style="background: ${bgColor}; border-left: 5px solid ${borderColor}; padding: 15px; margin-bottom: 20px; border-radius: 4px;">
+              <div style="color: #667eea; font-weight: bold; margin-bottom: 8px; font-size: 14px;">Q${i + 1}</div>
+              <div style="margin-bottom: 15px; line-height: 1.6; font-size: 13px;">${question.text}</div>
+              <table style="width: 100%; border-collapse: collapse;">
+                <tr>
+                  <td style="padding: 10px; background: white; border: 1px solid #ddd; width: 50%; vertical-align: top;">
+                    <div style="font-weight: bold; color: #666; font-size: 12px; margin-bottom: 5px;">YOUR ANSWER</div>
+                    <div style="color: ${textColor}; font-weight: bold; font-size: 13px;">${userAnswer}. ${question.options[userOptionIndex]}</div>
+                  </td>
+                  <td style="padding: 10px; background: #f1f8f4; border: 1px solid #2e7d32; width: 50%; vertical-align: top;">
+                    <div style="font-weight: bold; color: #2e7d32; font-size: 12px; margin-bottom: 5px;">CORRECT ANSWER</div>
+                    <div style="color: #2e7d32; font-weight: bold; font-size: 13px;">${correctAnswer}. ${question.options[correctOptionIndex]}</div>
+                  </td>
+                </tr>
+              </table>
+              <div style="margin-top: 8px; text-align: right; font-weight: bold; color: ${textColor}; font-size: 12px;">
+                ${isCorrect ? '✓ CORRECT (+' + correctMarks + ')' : '✗ WRONG (' + negativeMarks + ')'}
+              </div>
+            </div>
+          `;
+        }
+
+        htmlContent += `
+            </div>
+            <div style="margin-top: 30px; text-align: center; font-size: 11px; color: #999; border-top: 1px solid #ddd; padding-top: 20px;">
+              Generated on ${new Date().toLocaleString()}
+            </div>
+          </div>
+        `;
+
+        // Create PDF using html2pdf
+        const element = document.createElement('div');
+        element.innerHTML = htmlContent;
+
+        const options = {
+          margin: 5,
+          filename: `CDS_Test_Report_${new Date().getTime()}.pdf`,
+          image: { type: 'jpeg', quality: 0.98 },
+          html2canvas: { scale: 2 },
+          jsPDF: { orientation: 'portrait', unit: 'mm', format: 'a4' }
+        };
+
+        html2pdf().set(options).from(element).save();
+      },
+    };
+
+    lucide.createIcons();
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9dc4d102d1a76ed7',t:'MTc3MzUwNzQzNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
