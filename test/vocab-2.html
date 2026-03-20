@@ -639,6 +639,90 @@
         grid-template-columns: 1fr;
       }
     }
+   /* =========================
+MOBILE RESPONSIVE FIX
+========================= */
+
+@media (max-width: 768px) {
+
+  /* Layout stacking */
+  .test-body {
+    flex-direction: column;
+  }
+
+  /* Question area */
+  .question-panel {
+    padding: 15px;
+  }
+
+  .question-block {
+    padding: 20px;
+  }
+
+  .question-text {
+    font-size: 1rem;
+  }
+
+  /* Options */
+  .option-label {
+    padding: 12px;
+  }
+
+  /* Buttons */
+  .controls {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  /* Right panel → move below */
+  .right-panel {
+    width: 100%;
+    max-height: 180px;
+    overflow-x: auto;
+  }
+
+  /* Palette → horizontal scroll */
+  .question-palette {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+  }
+
+  .palette-btn {
+    min-width: 40px;
+  }
+
+  /* Header */
+  .header-top {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .timer {
+    font-size: 1.2rem;
+  }
+
+}
+
+/* =========================
+TABLET FIX
+========================= */
+
+@media (max-width: 1024px) {
+
+  .right-panel {
+    width: 220px;
+  }
+
+  .question-panel {
+    padding: 20px;
+  }
+
+}
   </style>
   <style>body { box-sizing: border-box; }</style>
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
