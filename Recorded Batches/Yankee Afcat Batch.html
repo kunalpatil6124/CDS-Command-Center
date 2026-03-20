@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yankee Batch (CDS Journey) - AFCAT-2 2025 Batch</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #6a0dad; /* Deep Purple */
+            --secondary-color: #ff6f61; /* Coral */
+            --accent-color: #00bcd4; /* Cyan */
+            --text-color: #333;
+            --bg-color: #f4f7f6;
+            --card-bg: #ffffff;
+            --hover-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            --button-hover-bg: #5a0a9a;
+            --tab-active-bg: var(--primary-color);
+            --tab-active-text: white;
+            --tab-inactive-bg: #e0e0e0;
+            --tab-inactive-text: var(--text-color);
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #8a2be2 100%);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 10%, transparent 70%);
+            animation: rotateBg 20s linear infinite;
+        }
+
+        @keyframes rotateBg {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .main-title {
+            font-size: 3.5em;
+            font-weight: 700;
+            margin: 0;
+            letter-spacing: 2px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 1;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .subtitle {
+            font-size: 1.5em;
+            margin-top: 10px;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 30px 0;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .search-bar {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 12px 40px 12px 20px;
+            border: 2px solid var(--primary-color);
+            border-radius: 30px;
+            font-size: 1em;
+            outline: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-bar input:focus {
+            border-color: var(--secondary-color);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .search-bar i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-color);
+            font-size: 1.2em;
+        }
+
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 30px;
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            padding: 10px;
+            gap: 10px;
+        }
+
+        .tab-button {
+            background-color: var(--tab-inactive-bg);
+            color: var(--tab-inactive-text);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            flex-grow: 1;
+            text-align: center;
+            min-width: 120px;
+        }
+
+        .tab-button:hover {
+            background-color: #d0d0d0;
+            color: var(--primary-color);
+        }
+
+        .tab-button.active {
+            background-color: var(--tab-active-bg);
+            color: var(--tab-active-text);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .section-title {
+            font-size: 2.5em;
+            color: var(--primary-color);
+            text-align: center;
+            margin: 60px 0 40px;
+            position: relative;
+            animation: slideInLeft 1s ease-out;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary-color);
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -15px;
+            border-radius: 2px;
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-100px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .class-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 20px 0;
+        }
+
+        .class-card {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            padding: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            animation: fadeIn 1s ease-out forwards;
+            opacity: 0;
+        }
+
+        .class-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: var(--hover-shadow);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .class-card h3 {
+            color: var(--primary-color);
+            font-size: 1.6em;
+            margin-top: 0;
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
+        }
+
+        .class-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .class-card li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            font-size: 1.05em;
+        }
+
+        .class-card li::before {
+            content: '📚'; /* Book emoji */
+            margin-right: 10px;
+            font-size: 1.2em;
+            animation: bounceIn 0.8s ease-out;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            70% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+
+        .class-button {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 15px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 10px rgba(255, 111, 97, 0.3);
+            text-align: center;
+            width: calc(100% - 50px); /* Adjust for padding */
+            align-self: center;
+        }
+
+        .class-button:hover {
+            background-color: var(--button-hover-bg);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(255, 111, 97, 0.5);
+        }
+
+        .class-button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 5px rgba(255, 111, 97, 0.3);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2.5em;
+            }
+            .subtitle {
+                font-size: 1.2em;
+            }
+            .section-title {
+                font-size: 2em;
+            }
+            .class-card {
+                padding: 20px;
+            }
+            .class-card h3 {
+                font-size: 1.4em;
+            }
+            .class-card li {
+                font-size: 1em;
+            }
+            .tabs {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .tab-button {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-title {
+                font-size: 2em;
+            }
+            .subtitle {
+                font-size: 1em;
+            }
+            .section-title {
+                font-size: 1.8em;
+            }
+            .class-grid {
+                grid-template-columns: 1fr;
+            }
+            .search-bar {
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="main-title">Yankee Batch (CDS Journey)</h1>
+            <p class="subtitle">AFCAT-2 2025 Batch - Your Journey to Success!</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="controls">
+            <div class="search-bar">
+                <input type="text" id="searchInput" onkeyup="filterClasses()" placeholder="Search for classes...">
+                <i class="fas fa-search"></i>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-button active" onclick="openSubject(event, 'All')">All Classes</button>
+            <button class="tab-button" onclick="openSubject(event, 'Baatcheet')">Baatcheet</button>
+            <button class="tab-button" onclick="openSubject(event, 'Reasoning and Military Aptitude')">Reasoning & Aptitude</button>
+            <button class="tab-button" onclick="openSubject(event, 'General Awareness')">General Awareness</button>
+            <button class="tab-button" onclick="openSubject(event, 'AFCAT Current Affairs')">Current Affairs</button>
+            <button class="tab-button" onclick="openSubject(event, 'English')">English</button>
+            <button class="tab-button" onclick="openSubject(event, 'Maths')">Maths</button>
+            <button class="tab-button" onclick="openSubject(event, 'Antim Pag')">Antim Pag</button>
+        </div>
+
+        <div id="All" class="tab-content active">
+            <h2 class="section-title">All Classes</h2>
+            <div class="class-grid" id="allClassesGrid">
+                <!-- All classes will be loaded here by JavaScript -->
+            </div>
+        </div>
+
+        <div id="Baatcheet" class="tab-content">
+            <h2 class="section-title">Baatcheet</h2>
+            <div class="class-grid">
+                <div class="class-card" data-title="Introduction Class">
+                    <h3>Introduction Class</h3>
+                    <ul>
+                        <li>Get started with the batch.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/VJOUyVTh1Wi1_Z1dsJ5aOBXxpC4HRWe0iOxsUc74reGHBnamOUrqLr8eY1_knud6.ZIeSc_P8AyfiOa_C" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="The Final Push">
+                    <h3>The Final Push</h3>
+                    <ul>
+                        <li>Strategies for the last phase of preparation.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/RFG2iULE7ps1gN9uAdtICaS7bvoMyOS5Xco4KmRqcRGlMf20exI5ytR0RNVLOaH2.RyEVWcQTvycejHfz" target="_blank" class="class-button">Watch Class</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="Reasoning and Military Aptitude" class="tab-content">
+            <h2 class="section-title">Reasoning and Military Aptitude</h2>
+            <div class="class-grid">
+                <div class="class-card" data-title="Seating arrangement">
+                    <h3>Seating arrangement</h3>
+                    <ul>
+                        <li>Mastering seating arrangement problems.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/1jOSpiktR6iBNQurda09GYzvdUO8RzwgVySfo4026wzpZ6pOY_BAw3mNQiv3T7-O.8dvHMxkXjaWtSA0M" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="Ranking Class 1">
+                    <h3>Ranking Class 1</h3>
+                    <ul>
+                        <li>Introduction to ranking concepts.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/dNJ8vmOmwSaUhAVo7PQ9VZM-NH_H-miMCzqNSyQecAMfVFjMEYuP_VqKBG1BcUl3.kkZ0ZYsEzfuOLGJ4" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="Ranking Class 2 - High level">
+                    <h3>Ranking Class 2 - High level</h3>
+                    <ul>
+                        <li>Advanced ranking problems and strategies.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/SJCAkqD4CiinvOLGsOKrGIdL_KZwEHgCJEHsP-pJWmd57cg37e9jTSqEFtCve5G2.LeQ1E0llItwJ9lnS" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="Khooni Rishta">
+                    <h3>Khooni Rishta (Blood Relations)</h3>
+                    <ul>
+                        <li>Solving blood relation puzzles.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/jw6phNPXMHGc_NE1fQF_sId6rij7pj5ju3gPlmweZKgSvXwoQtq40TyAUFHrtgG9.wz9DDsOLIjS8zyPg" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="Missing numbers">
+                    <h3>Missing numbers</h3>
+                    <ul>
+                        <li>Techniques for finding missing numbers in series.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/06-keio81agKug_2fRW7gfQhgiajY1Rl7jNKdaUu9nufFs48xpnV_G73-NIo08Cd.7rwjhYzC0HnHNfkz" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="Coding Decoding Class 1">
+                    <h3>Coding Decoding Class 1</h3>
+                    <ul>
+                        <li>Basics of coding and decoding.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/V8MNsoMgZ9wvtHQcInsVxQk_DrC8Lw0QOB3hcXo-OSVdNHN-Q_xTUkd7juoXqEBk.etBz6HKmeo9hPn6c" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="Jumbled word">
+                    <h3>Jumbled word</h3>
+                    <ul>
+                        <li>Strategies for solving jumbled word problems.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/MsvKRHW7KQiGY1La84XrdnQ4gQk2rozGloFFSa9IsksiXqFC4oivqJ0RtWoTdI8.U1YuFhYdE3rnRfo-" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="Venn diagram - Class 1">
+                    <h3>Venn diagram - Class 1</h3>
+                    <ul>
+                        <li>Introduction to Venn diagrams.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/G2RnQK8NWgT2-4S1BHYGNNZ1_kRB2Z0DCg06Le1z-atxAX5oPoSdFoDymlyztGu5.5oKtswWaj319xIOK?startTime=1749829290000" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="Syllogism">
+                    <h3>Syllogism</h3>
+                    <ul>
+                        <li>Understanding and solving syllogism questions.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/8P7TTqOHfPUgPZQlEgfhFvB7YRAS9_c3gtfxwWqxWDJhuyZ_t5yBWDjZXZ7-6Hql.cvFj4sZNnfoeIC4j" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="Shakuni mama ki dice">
+                    <h3>Shakuni mama ki dice</h3>
+                    <ul>
+                        <li>Dice-based reasoning problems.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/X3UgFTHSOdr_EdaEFmIQsVTHYNUoO5nTCH55im-R_uTiHvU-ymTa3UcLCHK4Qe4H.FK-cWdm2OZzeDtQM" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="Direction based questions">
+                    <h3>Direction based questions</h3>
+                    <ul>
+                        <li>Solving problems related to directions.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/LA5WkYfrA-RQYW0LSbc1Ox8B5oxXXh6rx3kynOMJTD4eoAI-ME5bq1yaxXkg6I_G.vcKrxYoSOK13buoG" target="_blank" class="class-button">Watch Class</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="General Awareness" class="tab-content">
+            <h2 class="section-title">General Awareness</h2>
+            <div class="class-grid">
+                <div class="class-card" data-title="Science Most Asked Questions">
+                    <h3>Science Most Asked Questions</h3>
+                    <ul>
+                        <li>Key science questions for AFCAT.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/prFZWuwKIXyp9tafXytuKWWUOYbS4n_10JiCK6Gnp6VOhOI9VWtiG7cZmd8DGz8c.zW49iBZ31XR6nlQF" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="Defence Class 1">
+                    <h3>Defence Class 1</h3>
+                    <ul>
+                        <li>Introduction to defence-related GK.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/To2C3qw9NEUMG01UhfdtYwxpuuYXQncYS0TmHWw9FCUHHuwsUsag_GLE0iq1FebW.bx7-6_nzTcx-EWFR" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="Defence Class 2">
+                    <h3>Defence Class 2</h3>
+                    <ul>
+                        <li>Advanced topics in defence GK.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/bu7VW6Q4nNAkkGrb6UcFUNEIXE7LrHCerzmLYN7SOGL2hhNk58UKuZqrUsf5BNNn.kISoKDBnxuQINv19" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="Environment">
+                    <h3>Environment</h3>
+                    <ul>
+                        <li>Important environmental topics.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/pWt8VJlopDI2xeccf1xju4iAQ0Z6h1k1OLMnsmRqD2SPp2myipAsq4HKuGQmDekV.x18Y-eB2rOaKPehI" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="History most repeated questions - Class 1">
+                    <h3>History most repeated questions - Class 1</h3>
+                    <ul>
+                        <li>Frequently asked history questions.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/K1mhAq9jNGG0cnMqUo7cvRV0RWRkZKuDK94BsyUdy6-U9132ZQ5vVihnO9rnZR81.9KEQe_5o1m5Si0Cu" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="History Khatam">
+                    <h3>History Khatam (History Concluded)</h3>
+                    <ul>
+                        <li>Comprehensive review of history topics.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/xSjdsTHMdYB-qQ6BzgKJs5iS1wMBbM3FIBIgvl5Kh1M0qV8Gj2DawmPtXH1w2d_w.eUYw8XtZNC0HUNH9" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="500 expected GK for AFCAT 2 2025">
+                    <h3>500 expected GK for AFCAT 2 2025</h3>
+                    <ul>
+                        <li>Part 1 of 500 expected General Knowledge questions.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/xV7VTMXVuBE0W_-nm0V9wgQs0HOeD5nGby9cjYmIxSUJ_AaI67tP6JsaLGcV9no6.qPapeLhmLMB8MG9W" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="500 expected GK for AFCAT 2 2025 - part 2">
+                    <h3>500 expected GK for AFCAT 2 2025 - part 2</h3>
+                    <ul>
+                        <li>Part 2 of 500 expected General Knowledge questions.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/y1sMryweVnxZh0Ehp36AGBCjpLrK8DTRz71sZj635LYNQUB2bnT7HcwaN2PW_OR8.nobP7UIKxEAWywlg" target="_blank" class="class-button">Watch Class</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="AFCAT Current Affairs" class="tab-content">
+            <h2 class="section-title">AFCAT Current Affairs</h2>
+            <div class="class-grid">
+                <div class="class-card" data-title="CA (Feb - March)">
+                    <h3>CA (Feb - March)</h3>
+                    <ul>
+                        <li>Current Affairs from February to March.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/5GLzNgBbJLidLGM6r4dSt12SjtqoM9u-mQw7-En6NHzlaq5j1hVYthj5do4inNL0.bLTRiMqFLlsbT4Wt" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="March CA one liners">
+                    <h3>March CA one liners</h3>
+                    <ul>
+                        <li>Quick review of March Current Affairs.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/jXU4dvvBfIEZcNhZAQk-RvIuwyVXK3vyWCLqss3FfIeULbO65sSBEcLYFA6t7p3b._ecyXFM5Z-A9bQjS" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="April + May Current Affairs">
+                    <h3>April + May Current Affairs</h3>
+                    <ul>
+                        <li>Current Affairs for April and May.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/lgwa8p5IJmQI_JSSBqEc8B1gPvptL7DZOq46A2K6vAV_u_pjJ1xlcrgbfS9wugWw.ZIEjAW1oDXEoSP4e" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="June + July Current Affairs">
+                    <h3>June + July Current Affairs</h3>
+                    <ul>
+                        <li>Current Affairs for June and July.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/rfkXt91cmsRKwOwJA-4G0GjPl308ZczKoAS2nErVXqwhZJSIn1DDcvO7B3zDXSNu.zI8RzL0fgSHiMkQQ" target="_blank" class="class-button">Watch Class</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="English" class="tab-content">
+            <h2 class="section-title">English</h2>
+            <div class="class-grid">
+                <div class="class-card" data-title="Idioms Class 1">
+                    <h3>Idioms Class 1</h3>
+                    <ul>
+                        <li>Introduction to idioms and their usage.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/Ia6jpwXvoiIMbE85QWHJCCDq0H01DKBkon3TXhSWzXXpnbMrN7lXIk5H6yH08Z6v.UsqYYFlZiGuAWumk" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="One word substitution">
+                    <h3>One word substitution</h3>
+                    <ul>
+                        <li>Learning one-word substitutions.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/rSVEUREDQ58pYBBs3clc5k7qRpbLteaW96_u6YCi6tEdAvFDPPGFLJrdG-rPAN42.Pa7pc1XIV55r2Jpy" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="100 most asked English grammar">
+                    <h3>100 most asked English grammar</h3>
+                    <ul>
+                        <li>Part 1 of frequently asked grammar questions.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/ni3rM3Xux1Qd4v40orz65hssZszS_D3u1mTNUWra04htRSh7StqE18WwAm8EQgBa.8-UE3zqZyfem8VRn" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="100 most asked English grammar - Class 2">
+                    <h3>100 most asked English grammar - Class 2</h3>
+                    <ul>
+                        <li>Part 2 of frequently asked grammar questions.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/kYO4mjPKTHfqocx5wd8lNX-TpD7ICY5enbRzksN5SpGYXewtkL5AYs4NBo_M6vy-.s3Ca3lyCoDze-7TS" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="100 most asked English grammar - Class 3">
+                    <h3>100 most asked English grammar - Class 3</h3>
+                    <ul>
+                        <li>Part 3 of frequently asked grammar questions.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/9I4rJgwQeG-3Mc5odbBbc38owu-2PxIjGiCGX_m0bpKGCK8zAv1_nPKXzSNJz5dB.-2WUQwBqXvQTk57A" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="100 most asked English grammar - Class 4">
+                    <h3>100 most asked English grammar - Class 4</h3>
+                    <ul>
+                        <li>Part 4 of frequently asked grammar questions.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/gAmy8PZdssob127nn8PGo0MlOVohDlLHlE9UPEMVqKa7DqyyvEMGHHqSYRwMZ_OA.NcDpdurb3aPIzGFt?startTime=1750952032000" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="100 most asked English grammar - Class 5">
+                    <h3>100 most asked English grammar - Class 5</h3>
+                    <ul>
+                        <li>Part 5 of frequently asked grammar questions.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/sbQ3rOHr7-CB7bGuWFGzuo4soS3IyC2YLg8giactF425l4dtYDyct5fEWtpvem8i.jtzEahSyETYMo5fb" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="100 most asked English grammar - Class 6">
+                    <h3>100 most asked English grammar - Class 6</h3>
+                    <ul>
+                        <li>Part 6 of frequently asked grammar questions.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/2QIjOwC5fBhXAAkoIJy6zRnDgQQdG42qGPo-pVsn91hyKs6wlUM_wX56ZEppsuSL.YyKJy_qlhd0mhxBU" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="50 error based MCQs">
+                    <h3>50 error based MCQs</h3>
+                    <ul>
+                        <li>Practice with 50 error detection MCQs.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/gOmK_81Qf_-Ib6wSYx0bJSmsc7N1BEDe8xE48wyKtgv-EYAs5U0CmoxQ_qa4tfJD.Q2qzRGhu6JXg-TOC" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="Fixed preposition + Phrasal verb">
+                    <h3>Fixed preposition + Phrasal verb</h3>
+                    <ul>
+                        <li>Understanding fixed prepositions and phrasal verbs.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/cvxKAsn0aP-xniJ2OlOPNo4yhTEynJrfjPDFhJbd1Nu4s12orV30WVed8nHEcDtY.twNQHKvr31mWgvoo" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="Synonyms & Idioms - elimination">
+                    <h3>Synonyms & Idioms - elimination</h3>
+                    <ul>
+                        <li>Techniques for solving synonyms and idioms.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/g7I4PB_oYWVYiPu6Nw62sR9O-w3cSVc9Kfco-PYqvMIL0bo0x7JqxvEzIZdTTzV_.d3eCgXYR67VXBZR-" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="Root Words QP - Class 1">
+                    <h3>Root Words QP - Class 1</h3>
+                    <ul>
+                        <li>Learning English through root words, Part 1.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/Xf0pInp5_b9Ta9Lq0HAR4ILV4fEe6nt7Klbtx95ei7OMc_oZkr9xvN8nB17TeWXy.xiIHi83OSnmx2Nsq" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="Root Words QP - Class 2">
+                    <h3>Root Words QP - Class 2</h3>
+                    <ul>
+                        <li>Learning English through root words, Part 2.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/LX-kvFSOuzY4D_z84tYL8gVTrC0HFfObaw3G3Y7memnb1eA4gmTv20lF1lND1yHg.4IBLdNRIKIfzu05S" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="English expected paper 1">
+                    <h3>English expected paper 1</h3>
+                    <ul>
+                        <li>Practice with an expected English paper.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/MUEOBUX444ZicxVBZ_6_o95-CRgtweZ1WbgdEwkfDOcduh_CSQoF7Ylpn73ZNUUv.SiK3Undx0MAwqjus" target="_blank" class="class-button">Watch Class</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="Maths" class="tab-content">
+            <h2 class="section-title">Maths</h2>
+            <div class="class-grid">
+                <div class="class-card" data-title="SDT ka basics">
+                    <h3>SDT ka basics (Speed, Distance, Time basics)</h3>
+                    <ul>
+                        <li>Fundamental concepts of Speed, Distance, and Time.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/QD20dQyOlmrQSSh8JjRuK1Dpq8rI2rDk6A1PzHOSMOFAW-XoGj4id3unWfpEdQU7.TRUkJA9uLHGlcK69" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="SDT type 2 doubts + type 3">
+                    <h3>SDT type 2 doubts + type 3</h3>
+                    <ul>
+                        <li>Solving doubts and advanced problems in SDT.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/8CzuMEg_mbYbkhhFE8WoI2IHxy_zrb3ulEFjjdkZWI4CqX8-gArEW3mpJik_2Ftu.cOMDAGWiA1vkRibr" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="SDT type 3 doubts + Boat basics">
+                    <h3>SDT type 3 doubts + Boat basics</h3>
+                    <ul>
+                        <li>Further SDT doubts and introduction to boat problems.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/FVA8wO9Trq1NTsWIBXeVaT5kw94942EowyP4X1X0ea2Vlpa1xQFeI1_Nh9Ssadg_.SrYliM4EhdqgQvzi" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="Train based high level questions">
+                    <h3>Train based high level questions</h3>
+                    <ul>
+                        <li>Advanced problems involving trains.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/qNG_JZIZQR-dqFQBngBHa3_4EXskOnz5Zs3W4pNHs4M6MtZGjszQXacZb5mtKjg-.7jmIItrDeOrFbZv9" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="Time and work - type 1 & 2">
+                    <h3>Time and work - type 1 & 2</h3>
+                    <ul>
+                        <li>Basic and intermediate time and work problems.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/wxs4EuEPLsvGA8E4Yi5ua67BSAWiEd-i8A9SlSoDE5x5aCAkZqzHorg-VOpbQu81.CLl7qHscfpxz1bYb" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="Time and work - Type 2 doubts + Type 3">
+                    <h3>Time and work - Type 2 doubts + Type 3</h3>
+                    <ul>
+                        <li>Advanced time and work problems and doubt clearing.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/e2IKH3z0wGO9RhuId_R7-EbZT5mzSWUYQ4Y7NLr6ueV-U8OS9n2NRHep6Mfz_4w_.JFyKe0No8vdISJCj" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="Time and work final doubts + HW">
+                    <h3>Time and work final doubts + HW</h3>
+                    <ul>
+                        <li>Final review and homework for time and work.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/748OF9dz5zVy5yjla_1WLXpzVpiIrZP1tpW1KWEIE7hj6PdraQNJv9KUxLwGezD_.c1lD2V6MvaMc6w3Z" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="Clock ji - Class 1">
+                    <h3>Clock ji - Class 1</h3>
+                    <ul>
+                        <li>Introduction to clock problems.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/dUAF7AVOpr82L7pNiJj9tlZewUeCz8cfASZwE43WyxTAx54Dze-xzz-BF5DZZ4Ow.bby1AUh-NbBUkLcv" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="Clock high level">
+                    <h3>Clock high level</h3>
+                    <ul>
+                        <li>Advanced clock problems.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/yeVey0vzu7iAF00iBVG2obR16XUAjuHeEZNeLG6rGIyllnMMiE86Bi5sopgx1pUW.J04ctrzbtXNpw_-b" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="Percentage Basics">
+                    <h3>Percentage Basics</h3>
+                    <ul>
+                        <li>Fundamental concepts of percentages.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/xdTIL8YRWa-TTb4kXG6xv4LNp3R-eikxI3eEfyQzqsVpkHoxebiOtgLitO6uKzP6.ceE0kExbeSXM26_r" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="Percentage - Class 2">
+                    <h3>Percentage - Class 2</h3>
+                    <ul>
+                        <li>Further topics in percentages.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/GuSxxtA8zfo1BPgfWRbQCmm6WfXq5IQ6Vgmhi6XKEvHutKkTvL0AiwR9m3z1nCcy.jBy0eXM8HVzQH-0G" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="Percentage doubts + Profit & Loss type 1">
+                    <h3>Percentage doubts + Profit & Loss type 1</h3>
+                    <ul>
+                        <li>Percentage doubts and introduction to Profit & Loss.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/gF2VeOZLnXP25u2JEOUEk_3Pg6amLEmd6KJtkNRk8cw1_Q37GF1C5qmpcSnux2oQ.Jh0aE_xeuqz-NgQj" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="Profit & Loss type 2">
+                    <h3>Profit & Loss type 2</h3>
+                    <ul>
+                        <li>Intermediate Profit & Loss problems.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/HYW-ZQKhLFvU_qnSvnuq4rA-AKWw6RJOV1GK9nwMvE6esBru8d8EKGgExTGZ7VNR.FJCkN97A73DM8osn" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="Profit & Loss - Discount">
+                    <h3>Profit & Loss - Discount</h3>
+                    <ul>
+                        <li>Understanding discounts in Profit & Loss.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/T0Nx6z36j7OJpHmdELAZyaI0N1T8Z9TZ7k5EAX_SP3UkIqclMkeKZtfOAwB-hThi.B5xF3rQTQJMdgPIn" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="Beimaan Dukaandaar">
+                    <h3>Beimaan Dukaandaar (Dishonest Shopkeeper)</h3>
+                    <ul>
+                        <li>Problems related to dishonest dealings.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/vJsweMyaFIPQU8GIaY7b-KlcMPHGTUHjXrpoHHL4PP2paYQ1t5ZkiasdhZh3dcRC.OMinifoIwqIxU7eq" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="Na umr ki seema ho, na pyar ka ho bandhan">
+                    <h3>Na umr ki seema ho, na pyar ka ho bandhan (Age-based problems)</h3>
+                    <ul>
+                        <li>Solving age-related mathematical problems.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/phufno2m6qkMEDuCQ5qg6MxU3x29BdTVIc4P62fdXs4LummmD_vvtk74aaiZbyM1.QoM4370wPbWw12Zb" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="Probability ji">
+                    <h3>Probability ji</h3>
+                    <ul>
+                        <li>Introduction to probability.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/B9MkfkYuC_Wz9dSRt1Wqs2-M_zwJ9EmjA0MJ_5eR3-OC7tTZVGHL_xOuzAH8mKTL.P1luDlMmpZHIx00V" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="Probability Class 2">
+                    <h3>Probability Class 2</h3>
+                    <ul>
+                        <li>Advanced topics in probability.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/G7mTjAvlb21Goohuhb4A6lP-Ovlrga0KzK2EGKNgw6QB75A8SazAUYKsrHfM1bbY.yzRcl4NyQUGpA4x9" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="Simple interest class 1">
+                    <h3>Simple interest class 1</h3>
+                    <ul>
+                        <li>Basics of simple interest.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/TkiOCT36nUydDpq5tkwKCwbaZ9QOB758lniRNW94I0RVlxhRFYCv-nGkpAtNh4mX.GNNYPr1Yb4NrR5Fn" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="SI khatam + CI basics">
+                    <h3>SI khatam + CI basics (Simple Interest concluded + Compound Interest basics)</h3>
+                    <ul>
+                        <li>Concluding simple interest and starting compound interest.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/1pLCc-4gMTZKjxtPY3phFNtGdwWFh-yQk0x_l7C_E4SdrDmyWV2z6aRnDkLkSrw.sjiRFklSp7DHTXfT" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="CI khatam">
+                    <h3>CI khatam (Compound Interest concluded)</h3>
+                    <ul>
+                        <li>Comprehensive coverage of compound interest.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/MeZB6vCTal9hX7rSjIB06aYlgOYaoukEgf2BQFXq_o1NR4u2Qbh4n3GcyL0efpcB.WmeAn4SSCa3yyVyT" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="Mensuration for AFCAT">
+                    <h3>Mensuration for AFCAT</h3>
+                    <ul>
+                        <li>Mensuration topics relevant for AFCAT.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/1HVt4tPhz3Jxf2fsgFGlJ8GgQ3whKLHufIo7zdzOf-wJn-A9WaZEiThXYFie3ELd.qoEoAYBLAX65YfXD" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="Mixture - every possible type">
+                    <h3>Mixture - every possible type</h3>
+                    <ul>
+                        <li>All types of mixture problems.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/BCv8zWaLLCQwJ6EkKq0ps7gkTz5ekBPREtGRS2Gq8PGj2ozqRpa2kROvB7Sv_FP_.CFiBVanUm2UHyJlA" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="Math final revision - 1">
+                    <h3>Math final revision - 1</h3>
+                    <ul>
+                        <li>First session of final math revision.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/9KnB8qlftxPuLBTNBBYPOSDQqtyDjDOCGaJrY1tbPOlkMa-zatBuyYlkTd8oZmi_.NCpMjWCFMe-Hi7Du" target="_blank" class="class-button">Watch Class</a>
+                </div>
+                <div class="class-card" data-title="Math final revision - 2">
+                    <h3>Math final revision - 2</h3>
+                    <ul>
+                        <li>Second session of final math revision.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/CFgnyGXEvsM5M7hSUTXp7ONSh3fF9M4Rj1NXpO_L0Tn9HhS2qMqdgiB_XalOoQZt._uWWdeEfKInc9eeM" target="_blank" class="class-button">Watch Class</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="Antim Pag" class="tab-content">
+            <h2 class="section-title">Antim Pag (Final Step)</h2>
+            <div class="class-grid">
+                <div class="class-card" data-title="Farewell">
+                    <h3>Farewell</h3>
+                    <ul>
+                        <li>A concluding session for the batch.</li>
+                    </ul>
+                    <a href="https://us06web.zoom.us/rec/share/wqx03ZKICfGJ9ZlMItf9iO-FdAtzif62jhxP70cJSVu0ilwQ27Ar78p9fEWSw_nU.nht1RsI0xSalI3Zl" target="_blank" class="class-button">Watch Class</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const allClassData = [
+            { subject: "Baatcheet", title: "Introduction Class", description: "Get started with the batch.", link: "https://us06web.zoom.us/rec/share/VJOUyVTh1Wi1_Z1dsJ5aOBXxpC4HRWe0iOxsUc74reGHBnamOUrqLr8eY1_knud6.ZIeSc_P8AyfiOa_C" },
+            { subject: "Baatcheet", title: "The Final Push", description: "Strategies for the last phase of preparation.", link: "https://us06web.zoom.us/rec/share/RFG2iULE7ps1gN9uAdtICaS7bvoMyOS5Xco4KmRqcRGlMf20exI5ytR0RNVLOaH2.RyEVWcQTvycejHfz" },
+            { subject: "Reasoning and Military Aptitude", title: "Seating arrangement", description: "Mastering seating arrangement problems.", link: "https://us06web.zoom.us/rec/share/1jOSpiktR6iBNQurda09GYzvdUO8RzwgVySfo4026wzpZ6pOY_BAw3mNQiv3T7-O.8dvHMxkXjaWtSA0M" },
+            { subject: "Reasoning and Military Aptitude", title: "Ranking Class 1", description: "Introduction to ranking concepts.", link: "https://us06web.zoom.us/rec/share/dNJ8vmOmwSaUhAVo7PQ9VZM-NH_H-miMCzqNSyQecAMfVFjMEYuP_VqKBG1BcUl3.kkZ0ZYsEzfuOLGJ4" },
+            { subject: "Reasoning and Military Aptitude", title: "Ranking Class 2 - High level", description: "Advanced ranking problems and strategies.", link: "https://us06web.zoom.us/rec/share/SJCAkqD4CiinvOLGsOKrGIdL_KZwEHgCJEHsP-pJWmd57cg37e9jTSqEFtCve5G2.LeQ1E0llItwJ9lnS" },
+            { subject: "Reasoning and Military Aptitude", title: "Khooni Rishta", description: "Solving blood relation puzzles.", link: "https://us06web.zoom.us/rec/share/jw6phNPXMHGc_NE1fQF_sId6rij7pj5ju3gPlmweZKgSvXwoQtq40TyAUFHrtgG9.wz9DDsOLIjS8zyPg" },
+            { subject: "Reasoning and Military Aptitude", title: "Missing numbers", description: "Techniques for finding missing numbers in series.", link: "https://us06web.zoom.us/rec/share/06-keio81agKug_2fRW7gfQhgiajY1Rl7jNKdaUu9nufFs48xpnV_G73-NIo08Cd.7rwjhYzC0HnHNfkz" },
+            { subject: "Reasoning and Military Aptitude", title: "Coding Decoding Class 1", description: "Basics of coding and decoding.", link: "https://us06web.zoom.us/rec/share/V8MNsoMgZ9wvtHQcInsVxQk_DrC8Lw0QOB3hcXo-OSVdNHN-Q_xTUkd7juoXqEBk.etBz6HKmeo9hPn6c" },
+            { subject: "Reasoning and Military Aptitude", title: "Jumbled word", description: "Strategies for solving jumbled word problems.", link: "https://us06web.zoom.us/rec/share/MsvKRHW7KQiGY1La84XrdnQ4gQk2rozGloFFSa9IsksiXqFC4oivqJ0RtWoTdI8.U1YuFhYdE3rnRfo-" },
+            { subject: "Reasoning and Military Aptitude", title: "Venn diagram - Class 1", description: "Introduction to Venn diagrams.", link: "https://us06web.zoom.us/rec/share/G2RnQK8NWgT2-4S1BHYGNNZ1_kRB2Z0DCg06Le1z-atxAX5oPoSdFoDymlyztGu5.5oKtswWaj319xIOK?startTime=1749829290000" },
+            { subject: "Reasoning and Military Aptitude", title: "Syllogism", description: "Understanding and solving syllogism questions.", link: "https://us06web.zoom.us/rec/share/8P7TTqOHfPUgPZQlEgfhFvB7YRAS9_c3gtfxwWqxWDJhuyZ_t5yBWDjZXZ7-6Hql.cvFj4sZNnfoeIC4j" },
+            { subject: "Reasoning and Military Aptitude", title: "Shakuni mama ki dice", description: "Dice-based reasoning problems.", link: "https://us06web.zoom.us/rec/share/X3UgFTHSOdr_EdaEFmIQsVTHYNUoO5nTCH55im-R_uTiHvU-ymTa3UcLCHK4Qe4H.FK-cWdm2OZzeDtQM" },
+            { subject: "Reasoning and Military Aptitude", title: "Direction based questions", description: "Solving problems related to directions.", link: "https://us06web.zoom.us/rec/share/LA5WkYfrA-RQYW0LSbc1Ox8B5oxXXh6rx3kynOMJTD4eoAI-ME5bq1yaxXkg6I_G.vcKrxYoSOK13buoG" },
+            { subject: "General Awareness", title: "Science Most Asked Questions", description: "Key science questions for AFCAT.", link: "https://us06web.zoom.us/rec/share/prFZWuwKIXyp9tafXytuKWWUOYbS4n_10JiCK6Gnp6VOhOI9VWtiG7cZmd8DGz8c.zW49iBZ31XR6nlQF" },
+            { subject: "General Awareness", title: "Defence Class 1", description: "Introduction to defence-related GK.", link: "https://us06web.zoom.us/rec/share/To2C3qw9NEUMG01UhfdtYwxpuuYXQncYS0TmHWw9FCUHHuwsUsag_GLE0iq1FebW.bx7-6_nzTcx-EWFR" },
+            { subject: "General Awareness", title: "Defence Class 2", description: "Advanced topics in defence GK.", link: "https://us06web.zoom.us/rec/share/bu7VW6Q4nNAkkGrb6UcFUNEIXE7LrHCerzmLYN7SOGL2hhNk58UKuZqrUsf5BNNn.kISoKDBnxuQINv19" },
+            { subject: "General Awareness", title: "Environment", description: "Important environmental topics.", link: "https://us06web.zoom.us/rec/share/pWt8VJlopDI2xeccf1xju4iAQ0Z6h1k1OLMnsmRqD2SPp2myipAsq4HKuGQmDekV.x18Y-eB2rOaKPehI" },
+            { subject: "General Awareness", title: "History most repeated questions - Class 1", description: "Frequently asked history questions.", link: "https://us06web.zoom.us/rec/share/K1mhAq9jNGG0cnMqUo7cvRV0RWRkZKuDK94BsyUdy6-U9132ZQ5vVihnO9rnZR81.9KEQe_5o1m5Si0Cu" },
+            { subject: "General Awareness", title: "History Khatam", description: "Comprehensive review of history topics.", link: "https://us06web.zoom.us/rec/share/xSjdsTHMdYB-qQ6BzgKJs5iS1wMBbM3FIBIgvl5Kh1M0qV8Gj2DawmPtXH1w2d_w.eUYw8XtZNC0HUNH9" },
+            { subject: "General Awareness", title: "500 expected GK for AFCAT 2 2025", description: "Part 1 of 500 expected General Knowledge questions.", link: "https://us06web.zoom.us/rec/share/xV7VTMXVuBE0W_-nm0V9wgQs0HOeD5nGby9cjYmIxSUJ_AaI67tP6JsaLGcV9no6.qPapeLhmLMB8MG9W" },
+            { subject: "General Awareness", title: "500 expected GK for AFCAT 2 2025 - part 2", description: "Part 2 of 500 expected General Knowledge questions.", link: "https://us06web.zoom.us/rec/share/y1sMryweVnxZh0Ehp36AGBCjpLrK8DTRz71sZj635LYNQUB2bnT7HcwaN2PW_OR8.nobP7UIKxEAWywlg" },
+            { subject: "AFCAT Current Affairs", title: "CA (Feb - March)", description: "Current Affairs from February to March.", link: "https://us06web.zoom.us/rec/share/5GLzNgBbJLidLGM6r4dSt12SjtqoM9u-mQw7-En6NHzlaq5j1hVYthj5do4inNL0.bLTRiMqFLlsbT4Wt" },
+            { subject: "AFCAT Current Affairs", title: "March CA one liners", description: "Quick review of March Current Affairs.", link: "https://us06web.zoom.us/rec/share/jXU4dvvBfIEZcNhZAQk-RvIuwyVXK3vyWCLqss3FpIeULbO65sSBEcLYFA6t7p3b._ecyXFM5Z-A9bQjS" },
+            { subject: "AFCAT Current Affairs", title: "April + May Current Affairs", description: "Current Affairs for April and May.", link: "https://us06web.zoom.us/rec/share/lgwa8p5IJmQI_JSSBqEc8B1gPvptL7DZOq46A2K6vAV_u_pjJ1xlcrgbfS9wugWw.ZIEjAW1oDXEoSP4e" },
+            { subject: "AFCAT Current Affairs", title: "June + July Current Affairs", description: "Current Affairs for June and July.", link: "https://us06web.zoom.us/rec/share/rfkXt91cmsRKwOwJA-4G0GjPl308ZczKoAS2nErVXqwhZJSIn1DDcvO7B3zDXSNu.zI8RzL0fgSHiMkQQ" },
+            { subject: "English", title: "Idioms Class 1", description: "Introduction to idioms and their usage.", link: "https://us06web.zoom.us/rec/share/Ia6jpwXvoiIMbE85QWHJCCDq0H01DKBkon3TXhSWzXXpnbMrN7lXIk5H6yH08Z6v.UsqYYFlZiGuAWumk" },
+            { subject: "English", title: "One word substitution", description: "Learning one-word substitutions.", link: "https://us06web.zoom.us/rec/share/rSVEUREDQ58pYBBs3clc5k7qRpbLteaW96_u6YCi6tEdAvFDPPGFLJrdG-rPAN42.Pa7pc1XIV55r2Jpy" },
+            { subject: "English", title: "100 most asked English grammar", description: "Part 1 of frequently asked grammar questions.", link: "https://us06web.zoom.us/rec/share/ni3rM3Xux1Qd4v40orz65hssZszS_D3u1mTNUWra04htRSh7StqE18WwAm8EQgBa.8-UE3zqZyfem8VRn" },
+            { subject: "English", title: "100 most asked English grammar - Class 2", description: "Part 2 of frequently asked grammar questions.", link: "https://us06web.zoom.us/rec/share/kYO4mjPKTHfqocx5wd8lNX-TpD7ICY5enbRzksN5SpGYXewtkL5AYs4NBo_M6vy-.s3Ca3lyCoDze-7TS" },
+            { subject: "English", title: "100 most asked English grammar - Class 3", description: "Part 3 of frequently asked grammar questions.", link: "https://us06web.zoom.us/rec/share/9I4rJgwQeG-3Mc5odbBbc38owu-2PxIjGiCGX_m0bpKGCK8zAv1_nPKXzSNJz5dB.-2WUQwBqXvQTk57A" },
+            { subject: "English", title: "100 most asked English grammar - Class 4", description: "Part 4 of frequently asked grammar questions.", link: "https://us06web.zoom.us/rec/share/gAmy8PZdssob127nn8PGo0MlOVohDlLHlE9UPEMVqKa7DqyyvEMGHHqSYRwMZ_OA.NcDpdurb3aPIzGFt?startTime=1750952032000" },
+            { subject: "English", title: "100 most asked English grammar - Class 5", description: "Part 5 of frequently asked grammar questions.", link: "https://us06web.zoom.us/rec/share/sbQ3rOHr7-CB7bGuWFGzuo4soS3IyC2YLg8giactF425l4dtYDyct5fEWtpvem8i.jtzEahSyETYMo5fb" },
+            { subject: "English", title: "100 most asked English grammar - Class 6", description: "Part 6 of frequently asked grammar questions.", link: "https://us06web.zoom.us/rec/share/2QIjOwC5fBhXAAkoIJy6zRnDgQQdG42qGPo-pVsn91hyKs6wlUM_wX56ZEppsuSL.YyKJy_qlhd0mhxBU" },
+            { subject: "English", title: "50 error based MCQs", description: "Practice with 50 error detection MCQs.", link: "https://us06web.zoom.us/rec/share/gOmK_81Qf_-Ib6wSYx0bJSmsc7N1BEDe8xE48wyKtgv-EYAs5U0CmoxQ_qa4tfJD.Q2qzRGhu6JXg-TOC" },
+            { subject: "English", title: "Fixed preposition + Phrasal verb", description: "Understanding fixed prepositions and phrasal verbs.", link: "https://us06web.zoom.us/rec/share/cvxKAsn0aP-xniJ2OlOPNo4yhTEynJrfjPDFhJbd1Nu4s12orV30WVed8nHEcDtY.twNQHKvr31mWgvoo" },
+            { subject: "English", title: "Synonyms & Idioms - elimination", description: "Techniques for solving synonyms and idioms.", link: "https://us06web.zoom.us/rec/share/g7I4PB_oYWVYiPu6Nw62sR9O-w3cSVc9Kfco-PYqvMIL0bo0x7JqxvEzIZdTTzV_.d3eCgXYR67VXBZR-" },
+            { subject: "English", title: "Root Words QP - Class 1", description: "Learning English through root words, Part 1.", link: "https://us06web.zoom.us/rec/share/Xf0pInp5_b9Ta9Lq0HAR4ILV4fEe6nt7Klbtx95ei7OMc_oZkr9xvN8nB17TeWXy.xiIHi83OSnmx2Nsq" },
+            { subject: "English", title: "Root Words QP - Class 2", description: "Learning English through root words, Part 2.", link: "https://us06web.zoom.us/rec/share/LX-kvFSOuzY4D_z84tYL8gVTrC0HFfObaw3G3Y7memnb1eA4gmTv20lF1lND1yHg.4IBLdNRIKIfzu05S" },
+            { subject: "English", title: "English expected paper 1", description: "Practice with an expected English paper.", link: "https://us06web.zoom.us/rec/share/MUEOBUX444ZicxVBZ_6_o95-CRgtweZ1WbgdEwkfDOcduh_CSQoF7Ylpn73ZNUUv.SiK3Undx0MAwqjus" },
+            { subject: "Maths", title: "SDT ka basics", description: "Fundamental concepts of Speed, Distance, and Time.", link: "https://us06web.zoom.us/rec/share/QD20dQyOlmrQSSh8JjRuK1Dpq8rI2rDk6A1PzHOSMOFAW-XoGj4id3unWfpEdQU7.TRUkJA9uLHGlcK69" },
+            { subject: "Maths", title: "SDT type 2 doubts + type 3", description: "Solving doubts and advanced problems in SDT.", link: "https://us06web.zoom.us/rec/share/8CzuMEg_mbYbkhhFE8WoI2IHxy_zrb3ulEFjjdkZWI4CqX8-gArEW3mpJik_2Ftu.cOMDAGWiA1vkRibr" },
+            { subject: "Maths", title: "SDT type 3 doubts + Boat basics", description: "Further SDT doubts and introduction to boat problems.", link: "https://us06web.zoom.us/rec/share/FVA8wO9Trq1NTsWIBXeVaT5kw94942EowyP4X1X0ea2Vlpa1xQFeI1_Nh9Ssadg_.SrYliM4EhdqgQvzi" },
+            { subject: "Maths", title: "Train based high level questions", description: "Advanced problems involving trains.", link: "https://us06web.zoom.us/rec/share/qNG_JZIZQR-dqFQBngBHa3_4EXskOnz5Zs3W4pNHs4M6MtZGjszQXacZb5mtKjg-.7jmIItrDeOrFbZv9" },
+            { subject: "Maths", title: "Time and work - type 1 & 2", description: "Basic and intermediate time and work problems.", link: "https://us06web.zoom.us/rec/share/wxs4EuEPLsvGA8E4Yi5ua67BSAWiEd-i8A9SlSoDE5x5aCAkZqzHorg-VOpbQu81.CLl7qHscfpxz1bYb" },
+            { subject: "Maths", title: "Time and work - Type 2 doubts + Type 3", description: "Advanced time and work problems and doubt clearing.", link: "https://us06web.zoom.us/rec/share/e2IKH3z0wGO9RhuId_R7-EbZT5mzSWUYQ4Y7NLr6ueV-U8OS9n2NRHep6Mfz_4w_.JFyKe0No8vdISJCj" },
+            { subject: "Maths", title: "Time and work final doubts + HW", description: "Final review and homework for time and work.", link: "https://us06web.zoom.us/rec/share/748OF9dz5zVy5yjla_1WLXpzVpiIrZP1tpW1KWEIE7hj6PdraQNJv9KUxLwGezD_.c1lD2V6MvaMc6w3Z" },
+            { subject: "Maths", title: "Clock ji - Class 1", description: "Introduction to clock problems.", link: "https://us06web.zoom.us/rec/share/dUAF7AVOpr82L7pNiJj9tlZewUeCz8cfASZwE43WyxTAx54Dze-xzz-BF5DZZ4Ow.bby1AUh-NbBUkLcv" },
+            { subject: "Maths", title: "Clock high level", description: "Advanced clock problems.", link: "https://us06web.zoom.us/rec/share/yeVey0vzu7iAF00iBVG2obR16XUAjuHeEZNeLG6rGIyllnMMiE86Bi5sopgx1pUW.J04ctrzbtXNpw_-b" },
+            { subject: "Maths", title: "Percentage Basics", description: "Fundamental concepts of percentages.", link: "https://us06web.zoom.us/rec/share/xdTIL8YRWa-TTb4kXG6xv4LNp3R-eikxI3eEfyQzqsVpkHoxebiOtgLitO6uKzP6.ceE0kExbeSXM26_r" },
+            { subject: "Maths", title: "Percentage - Class 2", description: "Further topics in percentages.", link: "https://us06web.zoom.us/rec/share/GuSxxtA8zfo1BPgfWRbQCmm6WfXq5IQ6Vgmhi6XKEvHutKkTvL0AiwR9m3z1nCcy.jBy0eXM8HVzQH-0G" },
+            { subject: "Maths", title: "Percentage doubts + Profit & Loss type 1", description: "Percentage doubts and introduction to Profit & Loss.", link: "https://us06web.zoom.us/rec/share/gF2VeOZLnXP25u2JEOUEk_3Pg6amLEmd6KJtkNRk8cw1_Q37GF1C5qmpcSnux2oQ.Jh0aE_xeuqz-NgQj" },
+            { subject: "Maths", title: "Profit & Loss type 2", description: "Intermediate Profit & Loss problems.", link: "https://us06web.zoom.us/rec/share/HYW-ZQKhLFvU_qnSvnuq4rA-AKWw6RJOV1GK9nwMvE6esBru8d8EKGgExTGZ7VNR.FJCkN97A73DM8osn" },
+            { subject: "Maths", title: "Profit & Loss - Discount", description: "Understanding discounts in Profit & Loss.", link: "https://us06web.zoom.us/rec/share/T0Nx6z36j7OJpHmdELAZyaI0N1T8Z9TZ7k5EAX_SP3UkIqclMkeKZtfOAwB-hThi.B5xF3rQTQJMdgPIn" },
+            { subject: "Maths", title: "Beimaan Dukaandaar", description: "Problems related to dishonest dealings.", link: "https://us06web.zoom.us/rec/share/vJsweMyaFIPQU8GIaY7b-KlcMPHGTUHjXrpoHHL4PP2paYQ1t5ZkiasdhZh3dcRC.OMinifoIwqIxU7eq" },
+            { subject: "Maths", title: "Na umr ki seema ho, na pyar ka ho bandhan", description: "Solving age-related mathematical problems.", link: "https://us06web.zoom.us/rec/share/phufno2m6qkMEDuCQ5qg6MxU3x29BdTVIc4P62fdXs4LummmD_vvtk74aaiZbyM1.QoM4370wPbWw12Zb" },
+            { subject: "Maths", title: "Probability ji", description: "Introduction to probability.", link: "https://us06web.zoom.us/rec/share/B9MkfkYuC_Wz9dSRt1Wqs2-M_zwJ9EmjA0MJ_5eR3-OC7tTZVGHL_xOuzAH8mKTL.P1luDlMmpZHIx00V" },
+            { subject: "Maths", title: "Probability Class 2", description: "Advanced topics in probability.", link: "https://us06web.zoom.us/rec/share/G7mTjAvlb21Goohuhb4A6lP-Ovlrga0KzK2EGKNgw6QB75A8SazAUYKsrHfM1bbY.yzRcl4NyQUGpA4x9" },
+            { subject: "Maths", title: "Simple interest class 1", description: "Basics of simple interest.", link: "https://us06web.zoom.us/rec/share/TkiOCT36nUydDpq5tkwKCwbaZ9QOB758lniRNW94I0RVlxhRFYCv-nGkpAtNh4mX.GNNYPr1Yb4NrR5Fn" },
+            { subject: "Maths", title: "SI khatam + CI basics", description: "Concluding simple interest and starting compound interest.", link: "https://us06web.zoom.us/rec/share/1pLCc-4gMTZKjxtPY3phFNtGdwWFh-yQk0x_l7C_E4SdrDmyWV2z6aRnDkLkSrw.sjiRFklSp7DHTXfT" },
+            { subject: "Maths", title: "CI khatam", description: "Comprehensive coverage of compound interest.", link: "https://us06web.zoom.us/rec/share/MeZB6vCTal9hX7rSjIB06aYlgOYaoukEgf2BQFXq_o1NR4u2Qbh4n3GcyL0efpcB.WmeAn4SSCa3yyVyT" },
+            { subject: "Maths", title: "Mensuration for AFCAT", description: "Mensuration topics relevant for AFCAT.", link: "https://us06web.zoom.us/rec/share/1HVt4tPhz3Jxf2fsgFGlJ8GgQ3whKLHufIo7zdzOf-wJn-A9WaZEiThXYFie3ELd.qoEoAYBLAX65YfXD" },
+            { subject: "Maths", title: "Mixture - every possible type", description: "All types of mixture problems.", link: "https://us06web.zoom.us/rec/share/BCv8zWaLLCQwJ6EkKq0ps7gkTz5ekBPREtGRS2Gq8PGj2ozqRpa2kROvB7Sv_FP_.CFiBVanUm2UHyJlA" },
+            { subject: "Maths", title: "Math final revision - 1", description: "First session of final math revision.", link: "https://us06web.zoom.us/rec/share/9KnB8qlftxPuLBTNBBYPOSDQqtyDjDOCGaJrY1tbPOlkMa-zatBuyYlkTd8oZmi_.NCpMjWCFMe-Hi7Du" },
+            { subject: "Maths", title: "Math final revision - 2", description: "Second session of final math revision.", link: "https://us06web.zoom.us/rec/share/CFgnyGXEvsM5M7hSUTXp7ONSh3fF9M4Rj1NXpO_L0Tn9HhS2qMqdgiB_XalOoQZt._uWWdeEfKInc9eeM" },
+            { subject: "Antim Pag", title: "Farewell", description: "A concluding session for the batch.", link: "https://us06web.zoom.us/rec/share/wqx03ZKICfGJ9ZlMItf9iO-FdAtzif62jhxP70cJSVu0ilwQ27Ar78p9fEWSw_nU.nht1RsI0xSalI3Zl" }
+        ];
+
+        function createClassCard(classItem) {
+            return `
+                <div class="class-card" data-title="${classItem.title.toLowerCase()}" data-subject="${classItem.subject.toLowerCase()}">
+                    <h3>${classItem.title}</h3>
+                    <ul>
+                        <li>${classItem.description}</li>
+                    </ul>
+                    <a href="${classItem.link}" target="_blank" class="class-button">Watch Class</a>
+                </div>
+            `;
+        }
+
+        function loadAllClasses() {
+            const allClassesGrid = document.getElementById('allClassesGrid');
+            allClassesGrid.innerHTML = '';
+            allClassData.forEach(classItem => {
+                allClassesGrid.innerHTML += createClassCard(classItem);
+            });
+        }
+
+        function openSubject(evt, subjectName) {
+            let i, tabcontent, tabbuttons;
+
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].classList.remove("active");
+            }
+
+            tabbuttons = document.getElementsByClassName("tab-button");
+            for (i = 0; i < tabbuttons.length; i++) {
+                tabbuttons[i].classList.remove("active");
+            }
+
+            document.getElementById(subjectName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+
+            // Reset search when changing tabs
+            document.getElementById('searchInput').value = '';
+            filterClasses();
+        }
+
+        function filterClasses() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toLowerCase();
+            const activeTab = document.querySelector('.tab-content.active');
+            const classCards = activeTab.querySelectorAll('.class-card');
+
+            classCards.forEach(card => {
+                const title = card.getAttribute('data-title');
+                if (title.includes(filter)) {
+                    card.style.display = "";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+
+        // Initial load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadAllClasses();
+            // Ensure the "All Classes" tab is active by default
+            document.querySelector('.tab-button').click();
+        });
+    </script>
+</body>
+</html>
