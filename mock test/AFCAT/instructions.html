@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instructions - CDS Command Center</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="app-header">
+        <div class="header-left">
+            <h1 class="logo">CDS Command Center</h1>
+            <span class="subject-badge">General Instructions</span>
+        </div>
+        <div class="header-right">
+            <div class="candidate-info">
+                <span class="candidate-name" id="candidateName">John Doe</span>
+                <span class="candidate-id" id="candidateId">Roll: CDS2026-9876</span>
+            </div>
+            <div class="profile-image">
+                <img src="https://ui-avatars.com/api/?name=John+Doe&background=0D8ABC&color=fff" alt="Profile">
+            </div>
+        </div>
+    </header>
+
+    <main class="instructions-layout">
+        <div class="instructions-content">
+            <h2>Please read the instructions carefully</h2>
+            
+            <div class="instruction-list">
+                <h3>General Instructions:</h3>
+                <ol>
+                    <li>Total duration of examination is <strong>120 minutes</strong>.</li>
+                    <li>The clock will be set at the server. The countdown timer in the top right corner of screen will display the remaining time available for you to complete the examination. When the timer reaches zero, the examination will end by itself. You will not be required to end or submit your examination.</li>
+                    <li>The Question Palette displayed on the right side of screen will show the status of each question using one of the following symbols:
+                        <ul class="legend-list">
+                            <li><span class="legend-box not-visited"></span> You have not visited the question yet.</li>
+                            <li><span class="legend-box not-answered"></span> You have not answered the question.</li>
+                            <li><span class="legend-box answered"></span> You have answered the question.</li>
+                            <li><span class="legend-box marked"></span> You have NOT answered the question, but have marked the question for review.</li>
+                            <li><span class="legend-box answered-marked"></span> The question(s) "Answered and Marked for Review" will be considered for evaluation.</li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <h3>Answering a Question:</h3>
+                <ol>
+                    <li>To completely deselect your chosen answer, click on the <strong>Clear Response</strong> button.</li>
+                    <li>To save your answer, you MUST click on the <strong>Save & Next</strong> button.</li>
+                    <li>To mark the question for review, click on the <strong>Mark for Review & Next</strong> button.</li>
+                </ol>
+
+                <h3>Marking Scheme:</h3>
+                <ul>
+                    <li><strong>+3 Marks</strong> for each correct answer.</li>
+                    <li><strong>-1 Mark</strong> for each incorrect answer (Negative Marking).</li>
+                    <li><strong>0 Marks</strong> for unattempted questions.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="candidate-panel">
+            <div class="profile-large">
+                <img src="https://ui-avatars.com/api/?name=John+Doe&background=0D8ABC&color=fff&size=150" alt="Profile">
+                <h3 id="panelName">John Doe</h3>
+                <p id="panelId">CDS2026-9876</p>
+            </div>
+            
+            <div class="action-area">
+                <label class="agreement-checkbox">
+                    <input type="checkbox" id="agreeCheck" onchange="toggleStartButton()">
+                    <span>I have read and understood the instructions. All computer hardware allotted to me are in proper working condition. I declare that I am not in possession of / not wearing / not carrying any prohibited gadget like mobile phone, bluetooth devices etc.</span>
+                </label>
+                
+                <button id="startBtn" class="btn btn-primary btn-block btn-lg" disabled onclick="startTest()">
+                    I am ready to begin
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const name = localStorage.getItem('cds_candidate_name') || 'John Doe';
+            const roll = localStorage.getItem('cds_candidate_roll') || 'CDS2026-9876';
+            
+            document.getElementById('candidateName').textContent = name;
+            document.getElementById('panelName').textContent = name;
+            
+            document.getElementById('candidateId').textContent = `Roll: ${roll}`;
+            document.getElementById('panelId').textContent = roll;
+            
+            // Generate avatar dynamically based on name to match profile images
+            const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=0D8ABC&color=fff`;
+            document.querySelectorAll('img[alt="Profile"]').forEach(img => {
+                if(img.parentElement.classList.contains('profile-large')) {
+                     img.src = `${avatarUrl}&size=150`;
+                } else {
+                     img.src = avatarUrl;
+                }
+            });
+        });
+
+        function toggleStartButton() {
+            const cb = document.getElementById('agreeCheck');
+            const startBtn = document.getElementById('startBtn');
+            startBtn.disabled = !cb.checked;
+        }
+
+        function startTest() {
+            // Setup test start time
+            localStorage.setItem('cds_test_start_time', Date.now());
+            // Clear old test data if any
+            localStorage.removeItem('cds_test_answers');
+            window.location.href = 'test.html';
+        }
+    </script>
+</body>
+</html>

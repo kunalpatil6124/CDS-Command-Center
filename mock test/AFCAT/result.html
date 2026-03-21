@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Result - CDS Command Center</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .result-layout {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            overflow-y: auto;
+            height: calc(100vh - 70px); /* header height */
+        }
+        
+        .result-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .result-header h2 {
+            font-size: 2rem;
+            color: var(--navy-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .score-card {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .total-score {
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--blue-accent);
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+
+        .score-max {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .stat-box {
+            background: var(--bg-main);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Progress Bars */
+        .visual-analysis {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 2rem;
+        }
+
+        .progress-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .progress-bar-bg {
+            height: 12px;
+            background: var(--bg-main);
+            border-radius: 6px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            transition: width 1s ease-in-out;
+        }
+
+        .fill-correct { background-color: var(--status-answered); }
+        .fill-wrong { background-color: var(--status-not-answered); }
+        .fill-unattempted { background-color: var(--text-muted); }
+
+        /* Detailed Review */
+        .detailed-review {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 2rem;
+        }
+
+        .filters {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1rem;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border-color);
+            background: white;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .filter-btn.active {
+            background: var(--navy-primary);
+            color: white;
+            border-color: var(--navy-primary);
+        }
+
+        .review-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .review-card {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            border-bottom: 1px dashed var(--border-color);
+            padding-bottom: 1rem;
+        }
+
+        .badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .badge-correct { background: #c6f6d5; color: #22543d; }
+        .badge-wrong { background: #fed7d7; color: #822727; }
+        .badge-unattempted { background: #e2e8f0; color: #4a5568; }
+
+        .review-question {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-size: 1.125rem;
+        }
+
+        .review-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .review-option {
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .review-option.is-correct {
+            background-color: rgba(56, 161, 105, 0.1);
+            border-color: var(--status-answered);
+            font-weight: 600;
+        }
+
+        .review-option.is-wrong {
+            background-color: rgba(229, 62, 62, 0.1);
+            border-color: var(--status-not-answered);
+        }
+
+        .nav-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        /* Responsive Overrides for Result Dashboard */
+        @media (max-width: 1024px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .result-layout { height: auto; overflow: visible; padding: 1.5rem; }
+        }
+        @media (max-width: 768px) {
+            .stats-grid { grid-template-columns: 1fr; gap: 1rem; margin-top: 1.5rem; }
+            .filters { flex-wrap: wrap; gap: 0.5rem; padding-bottom: 0.5rem; }
+            .filter-btn { flex: 1; min-width: 45%; text-align: center; }
+            .review-header { flex-direction: column; gap: 0.75rem; }
+            .nav-actions { flex-direction: column; width: 100%; gap: 1rem; margin-bottom: 2rem; }
+            .nav-actions .btn { width: 100%; }
+            .total-score { font-size: 3rem; }
+            .result-header h2 { font-size: 1.5rem; }
+            .review-card { padding: 1rem; }
+            .score-card, .visual-analysis, .detailed-review { padding: 1.5rem; margin-bottom: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="app-header">
+        <div class="header-left">
+            <h1 class="logo">CDS Command Center</h1>
+            <span class="subject-badge">Performance Dashboard</span>
+        </div>
+
+        <button class="hamburger-btn" onclick="toggleMenu()">☰</button>
+
+        <div class="header-right" id="mobileMenu">
+            <div class="candidate-info">
+                <span class="candidate-name" id="resName">Candidate Name</span>
+                <span class="candidate-id" id="resRoll">Roll No</span>
+            </div>
+            <div class="profile-image">
+                <img id="resAvatar" src="" alt="Profile">
+            </div>
+        </div>
+    </header>
+
+    <main class="result-layout">
+        <div class="result-header">
+            <h2>Examination Performance Report</h2>
+            <p class="subtitle">System Generated Analysis</p>
+        </div>
+
+        <div class="score-card">
+            <div class="total-score">
+                <span id="finalScore">0</span>
+                <span class="score-max"> / <span id="maxScore">30</span></span>
+            </div>
+            <div class="stat-label">Total Score</div>
+
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-value" id="statAttempted">0</div>
+                    <div class="stat-label">Attempted</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" style="color: var(--status-answered);" id="statCorrect">0</div>
+                    <div class="stat-label">Correct</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" style="color: var(--status-not-answered);" id="statWrong">0</div>
+                    <div class="stat-label">Wrong</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="statAccuracy">0%</div>
+                    <div class="stat-label">Accuracy</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="visual-analysis">
+            <h3 style="margin-bottom: 1.5rem;">Performance Distribution</h3>
+            
+            <div class="progress-item">
+                <div class="progress-header">
+                    <span>Correct (<span id="pctCorrectTxt">0%</span>)</span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill fill-correct" id="barCorrect" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <div class="progress-item">
+                <div class="progress-header">
+                    <span>Incorrect (<span id="pctWrongTxt">0%</span>)</span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill fill-wrong" id="barWrong" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <div class="progress-item">
+                <div class="progress-header">
+                    <span>Unattempted (<span id="pctUnattemptedTxt">0%</span>)</span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill fill-unattempted" id="barUnattempted" style="width: 0%"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="detailed-review">
+            <h3 style="margin-bottom: 1rem;">Question-wise Analysis</h3>
+            <div class="filters">
+                <button class="filter-btn active" onclick="filterReview('all')">All</button>
+                <button class="filter-btn" onclick="filterReview('correct')">Correct</button>
+                <button class="filter-btn" onclick="filterReview('wrong')">Wrong</button>
+                <button class="filter-btn" onclick="filterReview('unattempted')">Unattempted</button>
+            </div>
+
+            <div class="review-list" id="reviewList">
+                <!-- Injected via JS -->
+            </div>
+        </div>
+
+        <div class="nav-actions">
+            <button class="btn btn-secondary btn-lg" onclick="downloadPDF()">Download PDF Report</button>
+            <button class="btn btn-primary btn-lg" onclick="logout()">Logout / Return Home</button>
+        </div>
+    </main>
+
+    <!-- Dedicated Print Container -->
+    <div id="pdfReport" style="display:none; width: 100%; max-width: 800px; margin: 0 auto; background: white;"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="js/questions.js"></script>
+    <script src="js/result.js"></script>
+</body>
+</html>

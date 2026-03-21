@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Interface - CDS Command Center</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Test specific styles that can append to main style.css */
+        .test-layout {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            background: white;
+            height: calc(100vh - 140px);
+            /* Account for header and footer */
+        }
+
+        .test-left-panel {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .question-number-badge {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--navy-primary);
+        }
+
+        .marks-info {
+            font-size: 0.875rem;
+            color: var(--status-answered);
+            font-weight: 600;
+        }
+
+        .marks-info.negative {
+            color: var(--status-not-answered);
+        }
+
+        .question-text {
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: center;
+            padding: 1.25rem;
+            /* Larger touch target for mobile */
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1.125rem;
+        }
+
+        .option-label:hover {
+            background-color: var(--bg-main);
+            border-color: #a0aec0;
+        }
+
+        .option-label input[type="radio"] {
+            margin-right: 1rem;
+            transform: scale(1.5);
+            /* Larger radio buttons */
+        }
+
+        .option-label.selected {
+            background-color: rgba(49, 130, 206, 0.05);
+            border-color: var(--blue-accent);
+        }
+
+        .test-right-panel {
+            width: 350px;
+            background: var(--bg-main);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .status-summary {
+            padding: 1.5rem;
+            background: white;
+            border-bottom: 1px solid var(--border-color);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+        }
+
+        .status-item .count {
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .palette-container {
+            padding: 1.5rem;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .palette-header {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--navy-primary);
+        }
+
+        .question-palette {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.5rem;
+        }
+
+        .palette-btn {
+            aspect-ratio: 1;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.875rem;
+        }
+
+        .palette-btn:hover {
+            filter: brightness(0.95);
+        }
+
+        .test-footer {
+            height: 70px;
+            background: white;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1.5rem;
+            box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .footer-left,
+        .footer-right {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .submit-btn {
+            margin-left: auto;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: var(--shadow-lg);
+            transform: translateY(20px);
+            transition: transform 0.3s;
+        }
+
+        .modal-overlay.active .modal-card {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--navy-primary);
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1rem;
+        }
+
+        .modal-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .modal-stat {
+            background: var(--bg-main);
+            padding: 1rem;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .modal-stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--navy-primary);
+        }
+
+        .modal-stat-label {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+        }
+
+        /* Responsive Layout Overrides */
+        .mobile-panel-toggle {
+            display: none;
+        }
+
+        @media (max-width: 1024px) {
+            .test-layout {
+                flex-direction: column;
+                overflow-y: auto;
+                height: auto;
+            }
+
+            .test-left-panel {
+                border-right: none;
+                overflow-y: visible;
+                padding: 1.5rem;
+            }
+
+            .test-right-panel {
+                width: 100%;
+                border-top: 1px solid var(--border-color);
+                /* separation line for tablet stack */
+                height: auto;
+            }
+
+            .status-summary {
+                grid-template-columns: repeat(4, 1fr);
+                padding: 1rem;
+            }
+
+            .palette-container {
+                padding: 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .test-footer {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+                height: auto;
+            }
+
+            .footer-left,
+            .footer-right {
+                width: 100%;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                gap: 0.5rem;
+            }
+
+            .test-footer .btn {
+                flex: 1;
+                min-width: 48%;
+                padding: 1rem;
+                /* Thumb friendly */
+            }
+
+            .submit-btn {
+                min-width: 100%;
+                margin-top: 0.5rem;
+            }
+
+            /* Mobile Tab View for Panels */
+            .mobile-panel-toggle {
+                display: flex;
+                width: 100%;
+                border-bottom: 1px solid var(--border-color);
+                background: white;
+                position: sticky;
+                top: 0;
+                z-index: 5;
+            }
+
+            .mobile-panel-toggle button {
+                flex: 1;
+                padding: 1rem;
+                border: none;
+                background: none;
+                font-weight: 600;
+                font-size: 1rem;
+                color: var(--text-muted);
+                border-bottom: 3px solid transparent;
+            }
+
+            .mobile-panel-toggle button.active {
+                color: var(--navy-primary);
+                border-bottom-color: var(--blue-accent);
+            }
+
+            /* Toggling Logic CSS */
+            .test-right-panel {
+                display: none;
+            }
+
+            /* Default hidden on mobile */
+            .test-left-panel.hidden-mobile {
+                display: none;
+            }
+
+            .test-right-panel.active-mobile {
+                display: flex;
+            }
+
+            .status-summary {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .status-item[style] {
+                grid-column: span 2 !important;
+                /* Force override for answered & marked */
+            }
+
+            .modal-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="app-header">
+        <div class="header-left">
+            <h1 class="logo">CDS Command Center</h1>
+            <span class="subject-badge">AFCAT Mock Test</span>
+        </div>
+
+        <div class="timer-container">
+            <div class="timer-box" id="timerDisplay">
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <span id="timeRemaining">120:00</span>
+            </div>
+        </div>
+
+        <button class="hamburger-btn" onclick="toggleMenu()">☰</button>
+
+        <div class="header-right" id="mobileMenu">
+            <div class="candidate-info">
+                <span class="candidate-name" id="headerName">Candidate Name</span>
+                <span class="candidate-id" id="headerRoll">Roll No</span>
+            </div>
+            <div class="profile-image">
+                <img id="headerAvatar" src="" alt="Profile">
+            </div>
+        </div>
+    </header>
+
+    <main class="test-layout">
+        <!-- Mobile View Toggle -->
+        <div class="mobile-panel-toggle" id="mobileToggle">
+            <button class="active" id="tabQuestions" onclick="toggleMobilePanel('questions')">Questions</button>
+            <button id="tabPalette" onclick="toggleMobilePanel('palette')">Question Palette</button>
+        </div>
+
+        <div class="test-left-panel" id="leftPanel">
+            <div class="question-header">
+                <div class="question-number-badge" id="qNumBadge">Question 1</div>
+                <div>
+                    <span class="marks-info">+3 Marks</span>
+                    <span class="marks-info negative">-1 Marks</span>
+                </div>
+            </div>
+            <div class="question-text" id="qText">
+                Loading question...
+            </div>
+            <div class="options-container" id="cmdOptions">
+                <!-- Options injected via JS -->
+            </div>
+        </div>
+
+        <div class="test-right-panel" id="rightPanel">
+            <div class="status-summary">
+                <div class="status-item">
+                    <span class="legend-box answered"></span>
+                    <div><span class="count" id="countAnswered">0</span> Answered</div>
+                </div>
+                <div class="status-item">
+                    <span class="legend-box not-answered"></span>
+                    <div><span class="count" id="countNotAnswered">0</span> Not Answered</div>
+                </div>
+                <div class="status-item">
+                    <span class="legend-box not-visited"></span>
+                    <div><span class="count" id="countNotVisited">10</span> Not Visited</div>
+                </div>
+                <div class="status-item">
+                    <span class="legend-box marked"></span>
+                    <div><span class="count" id="countMarked">0</span> Marked</div>
+                </div>
+                <div class="status-item" style="grid-column: span 2;">
+                    <span class="legend-box answered-marked"></span>
+                    <div><span class="count" id="countAnsMarked">0</span> Answered & Marked for Review</div>
+                </div>
+            </div>
+
+            <div class="palette-container">
+                <div class="palette-header">Question Palette</div>
+                <div class="question-palette" id="qPalette">
+                    <!-- Buttons injected via JS -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="test-footer">
+        <div class="footer-left">
+            <button class="btn btn-secondary" onclick="markForReviewAndNext()">Mark for Review & Next</button>
+            <button class="btn btn-secondary" onclick="clearResponse()">Clear Response</button>
+        </div>
+        <div class="footer-right">
+            <button class="btn btn-secondary" id="btnPrev" onclick="navigate(-1)">Previous</button>
+            <button class="btn btn-primary" id="btnNext" onclick="saveAndNext()">Save & Next</button>
+            <button class="btn btn-success submit-btn" onclick="showSubmitModal()">Submit Test</button>
+        </div>
+    </footer>
+
+    <!-- Submit Confirmation Modal -->
+    <div class="modal-overlay" id="submitModal">
+        <div class="modal-card">
+            <div class="modal-header">Submit Examination</div>
+            <p style="margin-bottom: 1.5rem;">Are you sure you want to submit the examination? Once submitted, you will
+                not be able to return to the test.</p>
+
+            <div class="modal-grid">
+                <div class="modal-stat">
+                    <div class="modal-stat-value" id="modalTotal">10</div>
+                    <div class="modal-stat-label">Total Questions</div>
+                </div>
+                <div class="modal-stat">
+                    <div class="modal-stat-value" style="color: var(--status-answered);" id="modalAttempted">0</div>
+                    <div class="modal-stat-label">Attempted</div>
+                </div>
+                <div class="modal-stat">
+                    <div class="modal-stat-value" style="color: var(--status-not-answered);" id="modalUnattempted">10
+                    </div>
+                    <div class="modal-stat-label">Unattempted</div>
+                </div>
+                <div class="modal-stat">
+                    <div class="modal-stat-value" style="color: var(--status-marked);" id="modalMarked">0</div>
+                    <div class="modal-stat-label">Marked for Review</div>
+                </div>
+            </div>
+
+            <div class="modal-actions">
+                <button class="btn btn-secondary" onclick="hideSubmitModal()">Resume Test</button>
+                <button class="btn btn-success" onclick="finishTest()">Confirm Submission</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/questions.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/timer.js"></script>
+</body>
+
+</html>

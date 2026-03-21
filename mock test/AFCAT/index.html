@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - CDS Command Center</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="login-bg">
+    <header class="app-header">
+        <div class="header-left">
+            <h1 class="logo">CDS Command Center</h1>
+            <span class="subject-badge">AFCAT Mock Test</span>
+        </div>
+        <div class="header-right">
+            <!-- Candidate info hidden on login screen until authenticated -->
+        </div>
+    </header>
+
+    <main class="login-container">
+        <div class="login-card">
+            <h2>System Login</h2>
+            <p class="subtitle">Enter your credentials to access the test</p>
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="candidateName">Full Name</label>
+                    <input type="text" id="candidateName" placeholder="e.g. Rahul Kumar" required autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="username">Roll Number</label>
+                    <input type="text" id="username" placeholder="e.g. CDS2026-9876" required autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password (DOB)</label>
+                    <input type="password" id="password" placeholder="DDMMYYYY" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+            </form>
+            <div class="system-status">
+                <span class="status-dot"></span> All systems operational
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function handleLogin(e) {
+            e.preventDefault();
+            const fullName = document.getElementById('candidateName').value;
+            const username = document.getElementById('username').value;
+            // Store credentials securely in local storage
+            localStorage.setItem('cds_candidate_name', fullName);
+            localStorage.setItem('cds_candidate_roll', username);
+            window.location.href = 'instructions.html';
+        }
+    </script>
+</body>
+
+</html>
